@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.AttentionMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Attention" >
+    <id column="ATTENTION_NOTICERID" property="attentionNoticerid" jdbcType="BIGINT" />
+    <id column="ATTENTION_BENOTICEDID" property="attentionBenoticedid" jdbcType="BIGINT" />
+    <result column="ATTENTION_DATETIME" property="attentionDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ATTENTION_NOTICERID, ATTENTION_BENOTICEDID, ATTENTION_DATETIME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.jaybill.billblog.pojo.AttentionKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from attention
+    where ATTENTION_NOTICERID = #{attentionNoticerid,jdbcType=BIGINT}
+      and ATTENTION_BENOTICEDID = #{attentionBenoticedid,jdbcType=BIGINT}
+  </select>
+  <!-- 计算粉丝的总数 -->
+  <select id="selectFansSum" parameterType="long" resultType="int">
+  	select COUNT(ATTENTION_NOTICERID) from attention where ATTENTION_BENOTICEDID = #{attentionBenoticedid}
+  </select>
+  <!-- 计算关注的人总数 -->
+  <select id="selectBenoticedSum" parameterType="long" resultType="int">
+  	select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = #{attentionNoticerid}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.jaybill.billblog.pojo.AttentionKey" >
+    delete from attention
+    where ATTENTION_NOTICERID = #{attentionNoticerid,jdbcType=BIGINT}
+      and ATTENTION_BENOTICEDID = #{attentionBenoticedid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Attention" >
+    insert into attention (ATTENTION_NOTICERID, ATTENTION_BENOTICEDID, 
+      ATTENTION_DATETIME)
+    values (#{attentionNoticerid,jdbcType=BIGINT}, #{attentionBenoticedid,jdbcType=BIGINT}, 
+      #{attentionDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Attention" >
+    insert into attention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attentionNoticerid != null" >
+        ATTENTION_NOTICERID,
+      </if>
+      <if test="attentionBenoticedid != null" >
+        ATTENTION_BENOTICEDID,
+      </if>
+      <if test="attentionDatetime != null" >
+        ATTENTION_DATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attentionNoticerid != null" >
+        #{attentionNoticerid,jdbcType=BIGINT},
+      </if>
+      <if test="attentionBenoticedid != null" >
+        #{attentionBenoticedid,jdbcType=BIGINT},
+      </if>
+      <if test="attentionDatetime != null" >
+        #{attentionDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Attention" >
+    update attention
+    <set >
+      <if test="attentionDatetime != null" >
+        ATTENTION_DATETIME = #{attentionDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ATTENTION_NOTICERID = #{attentionNoticerid,jdbcType=BIGINT}
+      and ATTENTION_BENOTICEDID = #{attentionBenoticedid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Attention" >
+    update attention
+    set ATTENTION_DATETIME = #{attentionDatetime,jdbcType=TIMESTAMP}
+    where ATTENTION_NOTICERID = #{attentionNoticerid,jdbcType=BIGINT}
+      and ATTENTION_BENOTICEDID = #{attentionBenoticedid,jdbcType=BIGINT}
+  </update>
+</mapper>

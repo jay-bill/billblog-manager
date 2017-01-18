@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.ForwardMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Forward" >
+    <result column="FORWORD_ID" property="forwordId" jdbcType="BIGINT" />
+    <result column="BEFORWARD_ID" property="beforwardId" jdbcType="BIGINT" />
+    <result column="FORWARD_PEOPLEID" property="forwardPeopleid" jdbcType="BIGINT" />
+    <result column="FORWARD_CONTENT" property="forwardContent" jdbcType="VARCHAR" />
+    <result column="FORWARD_DATETIME" property="forwardDatetime" jdbcType="TIMESTAMP" />
+    <result column="FORWARD_STATE" property="forwardState" jdbcType="TINYINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Forward" >
+    insert into forward (FORWORD_ID, BEFORWARD_ID, FORWARD_PEOPLEID, 
+      FORWARD_CONTENT, FORWARD_DATETIME, FORWARD_STATE
+      )
+    values (#{forwordId,jdbcType=BIGINT}, #{beforwardId,jdbcType=BIGINT}, #{forwardPeopleid,jdbcType=BIGINT}, 
+      #{forwardContent,jdbcType=VARCHAR}, #{forwardDatetime,jdbcType=TIMESTAMP}, #{forwardState,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Forward" >
+    insert into forward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="forwordId != null" >
+        FORWORD_ID,
+      </if>
+      <if test="beforwardId != null" >
+        BEFORWARD_ID,
+      </if>
+      <if test="forwardPeopleid != null" >
+        FORWARD_PEOPLEID,
+      </if>
+      <if test="forwardContent != null" >
+        FORWARD_CONTENT,
+      </if>
+      <if test="forwardDatetime != null" >
+        FORWARD_DATETIME,
+      </if>
+      <if test="forwardState != null" >
+        FORWARD_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="forwordId != null" >
+        #{forwordId,jdbcType=BIGINT},
+      </if>
+      <if test="beforwardId != null" >
+        #{beforwardId,jdbcType=BIGINT},
+      </if>
+      <if test="forwardPeopleid != null" >
+        #{forwardPeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="forwardContent != null" >
+        #{forwardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardDatetime != null" >
+        #{forwardDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="forwardState != null" >
+        #{forwardState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

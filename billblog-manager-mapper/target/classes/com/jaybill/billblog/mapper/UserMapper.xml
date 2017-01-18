@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.User" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="USER_IDENTITY" property="userIdentity" jdbcType="TINYINT" />
+    <result column="USER_STATE" property="userState" jdbcType="TINYINT" />
+    <result column="USER_DATETIME" property="userDatetime" jdbcType="TIMESTAMP" />
+    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_ACCOUNT, USER_PASSWORD, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+
+  
+  <select id="selectByUserAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from user where USER_ACCOUNT = #{userAccount}
+  </select>
+  <select id="selectByAccountAndPword" resultMap="BaseResultMap" parameterType="com.jaybill.billblog.pojo.User">
+  	select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME from user where USER_ACCOUNT = #{userAccount} and USER_PASSWORD = #{userPassword}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.User" >
+    insert into user (USER_ACCOUNT, USER_PASSWORD, 
+      USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME
+      )
+    values (#{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userIdentity,jdbcType=TINYINT}, #{userState,jdbcType=TINYINT}, #{userDatetime,jdbcType=TIMESTAMP},
+      #{userHeadimage,jdbcType=VARCHAR},#{userNickname,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT,
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD,
+      </if>
+      <if test="userIdentity != null" >
+        USER_IDENTITY,
+      </if>
+      <if test="userState != null" >
+        USER_STATE,
+      </if>
+      <if test="userDatetime != null" >
+        USER_DATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentity != null" >
+        #{userIdentity,jdbcType=TINYINT},
+      </if>
+      <if test="userState != null" >
+        #{userState,jdbcType=TINYINT},
+      </if>
+      <if test="userDatetime != null" >
+        #{userDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.User" >
+    update user
+    <set >
+      <if test="userAccount != null" >
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentity != null" >
+        USER_IDENTITY = #{userIdentity,jdbcType=TINYINT},
+      </if>
+      <if test="userState != null" >
+        USER_STATE = #{userState,jdbcType=TINYINT},
+      </if>
+      <if test="userDatetime != null" >
+        USER_DATETIME = #{userDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.User" >
+    update user
+    set USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      USER_IDENTITY = #{userIdentity,jdbcType=TINYINT},
+      USER_STATE = #{userState,jdbcType=TINYINT},
+      USER_DATETIME = #{userDatetime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

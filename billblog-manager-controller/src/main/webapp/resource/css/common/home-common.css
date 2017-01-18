@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+	/*home页面的公共部分css*/
+	body{
+		background:url(/billblog/resource/image/backpwd_bg.jpg) top repeat-x,url(/billblog/resource/image/bgColor.png) bottom repeat;
+		background-attachment:fixed;
+	}
+	
+	#top-bg-div{
+		background:url(/billblog/resource/image/back_img.png) repeat-x;
+		margin-top:50px;
+		height:310px;
+	}
+	
+	#top-bg-div>:first-child{
+		height:100px;
+		width:100px;
+		margin:0 auto;
+		border-radius:100px;
+		margin-top:50px;
+	}
+	
+	#top-bg-div>:first-child img{
+		border-radius:100px;
+		width:100px;
+		height:100px;
+	}
+	
+	#top-bg-div>:nth-child(2){
+		text-align:center;
+		font-family:"微软雅黑";
+		color:white;
+	}
+	
+	.func-select-div{
+		text-align:center;		
+		background:#fff;
+	}
+	
+	.func-select-div div div{
+		padding:10px;
+	}
+	
+	

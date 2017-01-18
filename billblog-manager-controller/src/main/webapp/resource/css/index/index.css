@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";	
+	#right-div{
+		margin-top:30px;
+		background:#fff;
+		border-radius:1px;
+		padding:10px;
+		height:260px;
+	}
+	#center-div>:nth-child(1){
+		margin-top:30px;
+	}
+	
+	/*手机设备，背景图片不显示*/
+	@media(max-width:450px){
+		#main-con{
+			background:none;
+		}
+	}
+	/*平板设备，背景不显示*/
+	@media(max-width:992px){
+		#main-con{
+			background:none;
+		}
+	}

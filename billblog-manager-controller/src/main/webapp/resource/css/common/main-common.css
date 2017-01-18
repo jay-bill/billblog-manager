@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+	#content-outer{
+		margin:0px;
+		padding:0px;
+		margin-top:30px;
+	}
+	#input-text-under{
+		padding:0px;
+		line-height:30px;
+	}
+	#input-text-under div{
+		padding:0px;
+	}
+	.content{
+		padding-bottom:5px;
+	}
+	.content-head{
+		float:left;
+		width:50px;
+	}
+	.content-head img{
+		border-radius:50px;
+	}
+	.content-text{
+		float:left;
+		margin-bottom:10px;
+		line-height:23px;
+	}
+	.text-bottom-div{
+		padding:0px;
+		border-top:1px solid #f2f2f5;
+		margin:0px -19px;
+	}
+	.text-bottom-div div{
+		text-align:center;
+		border-right:1px solid #f2f2f5;
+		margin:5px 0px;
+	}
+	.text-bottom-div>:last-child{
+		border:0px;
+	}
+	
+	h4{
+		margin-top:0px;
+		font-family:"微软雅黑";
+	}
+	
+	/*手机设备*/
+	@media(max-width:450px){
+		#main-outer,#main-outer>div{
+			padding:0px;
+		}
+	}
+	/*平板设备*/
+	@media(max-width:768px){
+		
+	}

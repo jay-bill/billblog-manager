@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Userinfo" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+    <result column="USER_SEX" property="userSex" jdbcType="TINYINT" />
+    <result column="USER_BIRTHDAY" property="userBirthday" jdbcType="DATE" />
+    <result column="USER_SCHOOL" property="userSchool" jdbcType="VARCHAR" />
+    <result column="USER_POSITION" property="userPosition" jdbcType="VARCHAR" />
+    <result column="USER_LOVESTATE" property="userLovestate" jdbcType="TINYINT" />
+    <result column="USER_SIGNATURE" property="userSignature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NICKNAME, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, 
+    USER_SIGNATURE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userinfo
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Userinfo" >
+    insert into userinfo (USER_ID, USER_NICKNAME, USER_SEX, 
+      USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, 
+      USER_LOVESTATE, USER_SIGNATURE)
+    values (#{userId,jdbcType=BIGINT}, #{userNickname,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT}, 
+      #{userBirthday,jdbcType=DATE}, #{userSchool,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, 
+      #{userLovestate,jdbcType=TINYINT}, #{userSignature,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Userinfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userNickname != null" >
+        USER_NICKNAME,
+      </if>
+      <if test="userSex != null" >
+        USER_SEX,
+      </if>
+      <if test="userBirthday != null" >
+        USER_BIRTHDAY,
+      </if>
+      <if test="userSchool != null" >
+        USER_SCHOOL,
+      </if>
+      <if test="userPosition != null" >
+        USER_POSITION,
+      </if>
+      <if test="userLovestate != null" >
+        USER_LOVESTATE,
+      </if>
+      <if test="userSignature != null" >
+        USER_SIGNATURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=TINYINT},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userSchool != null" >
+        #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null" >
+        #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userLovestate != null" >
+        #{userLovestate,jdbcType=TINYINT},
+      </if>
+      <if test="userSignature != null" >
+        #{userSignature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Userinfo" >
+    update userinfo
+    <set >
+      <if test="userNickname != null" >
+        USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null" >
+        USER_SEX = #{userSex,jdbcType=TINYINT},
+      </if>
+      <if test="userBirthday != null" >
+        USER_BIRTHDAY = #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userSchool != null" >
+        USER_SCHOOL = #{userSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null" >
+        USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userLovestate != null" >
+        USER_LOVESTATE = #{userLovestate,jdbcType=TINYINT},
+      </if>
+      <if test="userSignature != null" >
+        USER_SIGNATURE = #{userSignature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Userinfo" >
+    update userinfo
+    set USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=TINYINT},
+      USER_BIRTHDAY = #{userBirthday,jdbcType=DATE},
+      USER_SCHOOL = #{userSchool,jdbcType=VARCHAR},
+      USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      USER_LOVESTATE = #{userLovestate,jdbcType=TINYINT},
+      USER_SIGNATURE = #{userSignature,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

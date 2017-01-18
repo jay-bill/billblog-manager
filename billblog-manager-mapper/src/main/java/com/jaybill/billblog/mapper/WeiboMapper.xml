@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.WeiboMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Weibo" >
+    <id column="WEIBO_ID" property="weiboId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="WEIBO_CONTENT" property="weiboContent" jdbcType="VARCHAR" />
+    <result column="WEIBO_PUBLISHTIME" property="weiboPublishtime" jdbcType="TIMESTAMP" />
+    <result column="WEIBO_STATE" property="weiboState" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jaybill.billblog.pojo.Weibo" extends="BaseResultMap" >
+    <result column="WEIBO_IMAGE" property="weiboImage" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WEIBO_ID, USER_ID, WEIBO_CONTENT, WEIBO_PUBLISHTIME, WEIBO_STATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    WEIBO_IMAGE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from weibo
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from weibo
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Weibo" >
+    insert into weibo (WEIBO_ID, USER_ID, WEIBO_CONTENT, 
+      WEIBO_PUBLISHTIME, WEIBO_STATE, WEIBO_IMAGE
+      )
+    values (#{weiboId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{weiboContent,jdbcType=VARCHAR}, 
+      #{weiboPublishtime,jdbcType=TIMESTAMP}, #{weiboState,jdbcType=TINYINT}, #{weiboImage,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Weibo" >
+    insert into weibo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        WEIBO_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="weiboContent != null" >
+        WEIBO_CONTENT,
+      </if>
+      <if test="weiboPublishtime != null" >
+        WEIBO_PUBLISHTIME,
+      </if>
+      <if test="weiboState != null" >
+        WEIBO_STATE,
+      </if>
+      <if test="weiboImage != null" >
+        WEIBO_IMAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        #{weiboId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="weiboContent != null" >
+        #{weiboContent,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboPublishtime != null" >
+        #{weiboPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weiboState != null" >
+        #{weiboState,jdbcType=TINYINT},
+      </if>
+      <if test="weiboImage != null" >
+        #{weiboImage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Weibo" >
+    update weibo
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="weiboContent != null" >
+        WEIBO_CONTENT = #{weiboContent,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboPublishtime != null" >
+        WEIBO_PUBLISHTIME = #{weiboPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weiboState != null" >
+        WEIBO_STATE = #{weiboState,jdbcType=TINYINT},
+      </if>
+      <if test="weiboImage != null" >
+        WEIBO_IMAGE = #{weiboImage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jaybill.billblog.pojo.Weibo" >
+    update weibo
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      WEIBO_CONTENT = #{weiboContent,jdbcType=VARCHAR},
+      WEIBO_PUBLISHTIME = #{weiboPublishtime,jdbcType=TIMESTAMP},
+      WEIBO_STATE = #{weiboState,jdbcType=TINYINT},
+      WEIBO_IMAGE = #{weiboImage,jdbcType=LONGVARCHAR}
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Weibo" >
+    update weibo
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      WEIBO_CONTENT = #{weiboContent,jdbcType=VARCHAR},
+      WEIBO_PUBLISHTIME = #{weiboPublishtime,jdbcType=TIMESTAMP},
+      WEIBO_STATE = #{weiboState,jdbcType=TINYINT}
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+/*主页和登陆页页面布局相同的部分*/
+	body{
+		background:url(/billblog-manager-controller/resource/image/bgColor.png) repeat;
+		background-attachment:fixed;
+	}
+	#nav{
+		background:#fff;
+		margin:0px;
+		height:50px;
+	}
+	#nav-con{
+		height:50px;
+	}
+	#logo{
+		margin:5px 0px 0px 0px;
+	}
+	#search-div{
+		margin:8px 0px 0px 0px;
+		height:36px;
+		width:400px;
+		background:#f2f2f5;
+		border:1px solid gray;
+	}
+	#search-div input{
+		background:#f2f2f5;
+		width:360px;
+		height:34px;
+		border:0px;
+		outline:none;
+	}
+	#search-div img{
+		width:30px;
+		background:#f2f2f5;
+	}
+	.nav-right{
+		padding:15px 0px;
+	}
+	#main-outer{
+		margin-top:50px;
+		margin-bottom:10px;
+	}
+	#main-con{
+		background:rgba(36,61,89,0.25);
+		padding:0px;
+	}
+	
+	#left-ul{
+		list-style:none;
+		padding:0px;
+		margin:30px auto;
+		text-align:center;
+		color:white;
+		font-weight:bold;
+	}
+	#left-ul li{
+		margin:15px 0px;
+	}
+	#left-ul li a{
+		color:#fff;
+	}
+	
+	.content{
+		background:#fff;
+		margin:0px 0px 10px 0px;
+		padding:20px;
+		border-radius:3px;
+	}
+	
+	footer{
+		padding:30px 0px;
+		box-shadow:0 0 1px 0px rgba(0,0,0,0.15);
+		background:#f2f2f5;
+	}
+	footer div{
+		text-align:center;
+	}
+	footer div span{
+		margin:auto 10px;
+	}
+	.float{
+		clear:both;
+	}
+	.spe-nav-right{
+		height:34px;
+		overflow:hidden;
+		word-break:break-all;
+		word-wrap:break-word;
+	}

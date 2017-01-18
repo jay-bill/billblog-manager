@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+/*相册页面的css，我的相册和别人的相册共用一个css*/
+	*{
+		font-family:"微软雅黑";
+	}
+	.func-select-div div >:nth-child(2){
+		border-bottom:2px solid red;
+	}
+	.func-select-div div>:first-child{
+		border:none;
+	}
+	
+	#photo-nav{
+		margin-top:20px;
+		z-index:3;
+	}
+	
+	#photo-nav nav{
+		background:#fff;
+		margin-bottom:0px;
+		border:1px;
+		border-radius:4px 4px 0px 0px;
+		border-bottom:1px solid #28fc66;
+	}
+	
+	#photo-main-div{
+	}
+	
+	#photo-main-div>:first-child{
+		background:#fff;
+	}
+	
+	#photo-main-div>:first-child,.photo-list-div{
+		padding:0px;
+	}
+	
+	.photo-list-div div{
+		overflow:hidden;
+		padding:0px 10px 10px 10px;
+	}
+	
+	.photo-list-div div img{
+		padding-top:5px;
+		margin-right:5px;
+	}
+	
+	p{
+		padding:10px;
+		margin-bottom:0px;
+	}
+	
+	@media(min-width:992px){
+		.photo-list-div div img{
+			width:200px;
+			height:200px;
+		}	
+	}
+	
+	@media(min-width:772px) and (max-width:991px){
+		.photo-list-div div img{
+			width:160px;
+			height:160px;
+		}	
+	}
+	
+	@media(min-width:448px) and (max-width:771px){
+		.photo-list-div div img{
+			width:120px;
+			height:120px;
+		}	
+	}
+	
+	@media(max-width:448px){
+		.photo-list-div div img{
+			width:80px;
+			height:80px;
+		}	
+	}

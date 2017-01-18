@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Message" >
+    <id column="MESSAGE_ID" property="messageId" jdbcType="BIGINT" />
+    <result column="MESSAGE_PEOPLEID" property="messagePeopleid" jdbcType="BIGINT" />
+    <result column="BEMESSAGE_PEOPLEID" property="bemessagePeopleid" jdbcType="BIGINT" />
+    <result column="MESSAGE_CONTENT" property="messageContent" jdbcType="VARCHAR" />
+    <result column="MESSAGE_DATETIME" property="messageDatetime" jdbcType="TIMESTAMP" />
+    <result column="MESSAGE_STATE" property="messageState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MESSAGE_ID, MESSAGE_PEOPLEID, BEMESSAGE_PEOPLEID, MESSAGE_CONTENT, MESSAGE_DATETIME, 
+    MESSAGE_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where MESSAGE_ID = #{messageId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from message
+    where MESSAGE_ID = #{messageId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Message" >
+    insert into message (MESSAGE_ID, MESSAGE_PEOPLEID, BEMESSAGE_PEOPLEID, 
+      MESSAGE_CONTENT, MESSAGE_DATETIME, MESSAGE_STATE
+      )
+    values (#{messageId,jdbcType=BIGINT}, #{messagePeopleid,jdbcType=BIGINT}, #{bemessagePeopleid,jdbcType=BIGINT}, 
+      #{messageContent,jdbcType=VARCHAR}, #{messageDatetime,jdbcType=TIMESTAMP}, #{messageState,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        MESSAGE_ID,
+      </if>
+      <if test="messagePeopleid != null" >
+        MESSAGE_PEOPLEID,
+      </if>
+      <if test="bemessagePeopleid != null" >
+        BEMESSAGE_PEOPLEID,
+      </if>
+      <if test="messageContent != null" >
+        MESSAGE_CONTENT,
+      </if>
+      <if test="messageDatetime != null" >
+        MESSAGE_DATETIME,
+      </if>
+      <if test="messageState != null" >
+        MESSAGE_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=BIGINT},
+      </if>
+      <if test="messagePeopleid != null" >
+        #{messagePeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="bemessagePeopleid != null" >
+        #{bemessagePeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="messageContent != null" >
+        #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDatetime != null" >
+        #{messageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageState != null" >
+        #{messageState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Message" >
+    update message
+    <set >
+      <if test="messagePeopleid != null" >
+        MESSAGE_PEOPLEID = #{messagePeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="bemessagePeopleid != null" >
+        BEMESSAGE_PEOPLEID = #{bemessagePeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="messageContent != null" >
+        MESSAGE_CONTENT = #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="messageDatetime != null" >
+        MESSAGE_DATETIME = #{messageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageState != null" >
+        MESSAGE_STATE = #{messageState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where MESSAGE_ID = #{messageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Message" >
+    update message
+    set MESSAGE_PEOPLEID = #{messagePeopleid,jdbcType=BIGINT},
+      BEMESSAGE_PEOPLEID = #{bemessagePeopleid,jdbcType=BIGINT},
+      MESSAGE_CONTENT = #{messageContent,jdbcType=VARCHAR},
+      MESSAGE_DATETIME = #{messageDatetime,jdbcType=TIMESTAMP},
+      MESSAGE_STATE = #{messageState,jdbcType=TINYINT}
+    where MESSAGE_ID = #{messageId,jdbcType=BIGINT}
+  </update>
+</mapper>

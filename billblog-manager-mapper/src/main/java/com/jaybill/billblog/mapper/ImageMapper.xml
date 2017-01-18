@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.ImageMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Image" >
+    <id column="IMAGE_ID" property="imageId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="IMAGE_ALBUM" property="imageAlbum" jdbcType="VARCHAR" />
+    <result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR" />
+    <result column="IMAGE_DATETIME" property="imageDatetime" jdbcType="TIMESTAMP" />
+    <result column="IMAGE_STATE" property="imageState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    IMAGE_ID, USER_ID, IMAGE_ALBUM, IMAGE_PATH, IMAGE_DATETIME, IMAGE_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from image
+    where IMAGE_ID = #{imageId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from image
+    where IMAGE_ID = #{imageId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Image" >
+    insert into image (IMAGE_ID, USER_ID, IMAGE_ALBUM, 
+      IMAGE_PATH, IMAGE_DATETIME, IMAGE_STATE
+      )
+    values (#{imageId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{imageAlbum,jdbcType=VARCHAR}, 
+      #{imagePath,jdbcType=VARCHAR}, #{imageDatetime,jdbcType=TIMESTAMP}, #{imageState,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Image" >
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        IMAGE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="imageAlbum != null" >
+        IMAGE_ALBUM,
+      </if>
+      <if test="imagePath != null" >
+        IMAGE_PATH,
+      </if>
+      <if test="imageDatetime != null" >
+        IMAGE_DATETIME,
+      </if>
+      <if test="imageState != null" >
+        IMAGE_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="imageAlbum != null" >
+        #{imageAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDatetime != null" >
+        #{imageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageState != null" >
+        #{imageState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Image" >
+    update image
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="imageAlbum != null" >
+        IMAGE_ALBUM = #{imageAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null" >
+        IMAGE_PATH = #{imagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDatetime != null" >
+        IMAGE_DATETIME = #{imageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageState != null" >
+        IMAGE_STATE = #{imageState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where IMAGE_ID = #{imageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Image" >
+    update image
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      IMAGE_ALBUM = #{imageAlbum,jdbcType=VARCHAR},
+      IMAGE_PATH = #{imagePath,jdbcType=VARCHAR},
+      IMAGE_DATETIME = #{imageDatetime,jdbcType=TIMESTAMP},
+      IMAGE_STATE = #{imageState,jdbcType=TINYINT}
+    where IMAGE_ID = #{imageId,jdbcType=BIGINT}
+  </update>
+</mapper>

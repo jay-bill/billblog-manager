@@ -1,0 +1,12 @@
+com\jaybill\billblog\pojo\Forward.class
+com\jaybill\billblog\pojo\AttentionKey.class
+com\jaybill\billblog\pojo\Comments.class
+com\jaybill\billblog\pojo\Weibo.class
+com\jaybill\billblog\pojo\Attention.class
+com\jaybill\billblog\pojo\LikeitKey.class
+com\jaybill\billblog\pojo\Image.class
+com\jaybill\billblog\pojo\Message.class
+com\jaybill\billblog\pojo\Collection.class
+com\jaybill\billblog\pojo\User.class
+com\jaybill\billblog\pojo\Userinfo.class
+com\jaybill\billblog\pojo\Diary.class

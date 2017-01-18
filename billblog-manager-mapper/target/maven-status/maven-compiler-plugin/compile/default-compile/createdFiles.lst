@@ -1,0 +1,11 @@
+com\jaybill\billblog\mapper\UserMapper.class
+com\jaybill\billblog\mapper\AttentionMapper.class
+com\jaybill\billblog\mapper\CollectionMapper.class
+com\jaybill\billblog\mapper\LikeitMapper.class
+com\jaybill\billblog\mapper\DiaryMapper.class
+com\jaybill\billblog\mapper\CommentsMapper.class
+com\jaybill\billblog\mapper\WeiboMapper.class
+com\jaybill\billblog\mapper\UserinfoMapper.class
+com\jaybill\billblog\mapper\ImageMapper.class
+com\jaybill\billblog\mapper\ForwardMapper.class
+com\jaybill\billblog\mapper\MessageMapper.class

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.LikeitMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.LikeitKey" >
+    <id column="LIKE_PEOPELEID" property="likePeopeleid" jdbcType="BIGINT" />
+    <id column="BELIKE_ID" property="belikeId" jdbcType="BIGINT" />
+    <id column="LIKE_DATETIME" property="likeDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.jaybill.billblog.pojo.LikeitKey" >
+    delete from likeit
+    where LIKE_PEOPELEID = #{likePeopeleid,jdbcType=BIGINT}
+      and BELIKE_ID = #{belikeId,jdbcType=BIGINT}
+      and LIKE_DATETIME = #{likeDatetime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.LikeitKey" >
+    insert into likeit (LIKE_PEOPELEID, BELIKE_ID, LIKE_DATETIME
+      )
+    values (#{likePeopeleid,jdbcType=BIGINT}, #{belikeId,jdbcType=BIGINT}, #{likeDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.LikeitKey" >
+    insert into likeit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="likePeopeleid != null" >
+        LIKE_PEOPELEID,
+      </if>
+      <if test="belikeId != null" >
+        BELIKE_ID,
+      </if>
+      <if test="likeDatetime != null" >
+        LIKE_DATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="likePeopeleid != null" >
+        #{likePeopeleid,jdbcType=BIGINT},
+      </if>
+      <if test="belikeId != null" >
+        #{belikeId,jdbcType=BIGINT},
+      </if>
+      <if test="likeDatetime != null" >
+        #{likeDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

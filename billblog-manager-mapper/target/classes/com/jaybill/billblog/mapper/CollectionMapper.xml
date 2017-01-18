@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.CollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Collection" >
+    <id column="COLLECTION_ID" property="collectionId" jdbcType="BIGINT" />
+    <result column="COLLECTION_PEOPLEID" property="collectionPeopleid" jdbcType="BIGINT" />
+    <result column="BECOLLECTION_ID" property="becollectionId" jdbcType="BIGINT" />
+    <result column="COLLECTION_DATETIME" property="collectionDatetime" jdbcType="TIMESTAMP" />
+    <result column="COLLECTION_STATE" property="collectionState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COLLECTION_ID, COLLECTION_PEOPLEID, BECOLLECTION_ID, COLLECTION_DATETIME, COLLECTION_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from collection
+    where COLLECTION_ID = #{collectionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from collection
+    where COLLECTION_ID = #{collectionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Collection" >
+    insert into collection (COLLECTION_ID, COLLECTION_PEOPLEID, BECOLLECTION_ID, 
+      COLLECTION_DATETIME, COLLECTION_STATE)
+    values (#{collectionId,jdbcType=BIGINT}, #{collectionPeopleid,jdbcType=BIGINT}, #{becollectionId,jdbcType=BIGINT}, 
+      #{collectionDatetime,jdbcType=TIMESTAMP}, #{collectionState,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Collection" >
+    insert into collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        COLLECTION_ID,
+      </if>
+      <if test="collectionPeopleid != null" >
+        COLLECTION_PEOPLEID,
+      </if>
+      <if test="becollectionId != null" >
+        BECOLLECTION_ID,
+      </if>
+      <if test="collectionDatetime != null" >
+        COLLECTION_DATETIME,
+      </if>
+      <if test="collectionState != null" >
+        COLLECTION_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionPeopleid != null" >
+        #{collectionPeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="becollectionId != null" >
+        #{becollectionId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionDatetime != null" >
+        #{collectionDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionState != null" >
+        #{collectionState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Collection" >
+    update collection
+    <set >
+      <if test="collectionPeopleid != null" >
+        COLLECTION_PEOPLEID = #{collectionPeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="becollectionId != null" >
+        BECOLLECTION_ID = #{becollectionId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionDatetime != null" >
+        COLLECTION_DATETIME = #{collectionDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionState != null" >
+        COLLECTION_STATE = #{collectionState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where COLLECTION_ID = #{collectionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Collection" >
+    update collection
+    set COLLECTION_PEOPLEID = #{collectionPeopleid,jdbcType=BIGINT},
+      BECOLLECTION_ID = #{becollectionId,jdbcType=BIGINT},
+      COLLECTION_DATETIME = #{collectionDatetime,jdbcType=TIMESTAMP},
+      COLLECTION_STATE = #{collectionState,jdbcType=TINYINT}
+    where COLLECTION_ID = #{collectionId,jdbcType=BIGINT}
+  </update>
+</mapper>

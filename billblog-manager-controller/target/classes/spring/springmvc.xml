@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.jaybill.billblog.controller" />
+	<context:component-scan base-package="com.jaybill.billbog.interceptors" />
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 异常处理 -->
+	<bean id="exceptionHandler" class="com.jaybill.billblog.exception.BillblogExceptionHandler"/>  
+	<!-- 资源映射 -->
+	<mvc:annotation-driven /> 
+	<mvc:resources location="/resource/css/" mapping="/resource/css/**"/>
+	<mvc:resources location="/resource/js/" mapping="/resource/js/**"/>
+	<mvc:resources location="/resource/fonts/" mapping="/resource/fonts/**"/>
+	<mvc:resources location="/resource/image/" mapping="/resource/image/**"/>
+	<mvc:resources location="/resource/verifyCode/" mapping="/resource/verifyCode/**"/>
+	<!-- 拦截器 -->
+	<!-- 拦截所有.do结尾的链接 -->		
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*.do"/> 	
+			<bean class="com.jaybill.billblog.interceptors.UserIdInterceptor"/> 			
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

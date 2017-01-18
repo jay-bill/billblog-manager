@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.CommentsMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Comments" >
+    <id column="COMMENT_ID" property="commentId" jdbcType="BIGINT" />
+    <result column="BECOMMENT_ID" property="becommentId" jdbcType="BIGINT" />
+    <result column="COMMENT_REVIEWERID" property="commentReviewerid" jdbcType="BIGINT" />
+    <result column="COMMENT_CONTENT" property="commentContent" jdbcType="VARCHAR" />
+    <result column="COMMENT_DATETIME" property="commentDatetime" jdbcType="TIMESTAMP" />
+    <result column="COMENT_STATE" property="comentState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMMENT_ID, BECOMMENT_ID, COMMENT_REVIEWERID, COMMENT_CONTENT, COMMENT_DATETIME, 
+    COMENT_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from comments
+    where COMMENT_ID = #{commentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from comments
+    where COMMENT_ID = #{commentId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Comments" >
+    insert into comments (COMMENT_ID, BECOMMENT_ID, COMMENT_REVIEWERID, 
+      COMMENT_CONTENT, COMMENT_DATETIME, COMENT_STATE
+      )
+    values (#{commentId,jdbcType=BIGINT}, #{becommentId,jdbcType=BIGINT}, #{commentReviewerid,jdbcType=BIGINT}, 
+      #{commentContent,jdbcType=VARCHAR}, #{commentDatetime,jdbcType=TIMESTAMP}, #{comentState,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Comments" >
+    insert into comments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        COMMENT_ID,
+      </if>
+      <if test="becommentId != null" >
+        BECOMMENT_ID,
+      </if>
+      <if test="commentReviewerid != null" >
+        COMMENT_REVIEWERID,
+      </if>
+      <if test="commentContent != null" >
+        COMMENT_CONTENT,
+      </if>
+      <if test="commentDatetime != null" >
+        COMMENT_DATETIME,
+      </if>
+      <if test="comentState != null" >
+        COMENT_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="becommentId != null" >
+        #{becommentId,jdbcType=BIGINT},
+      </if>
+      <if test="commentReviewerid != null" >
+        #{commentReviewerid,jdbcType=BIGINT},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDatetime != null" >
+        #{commentDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comentState != null" >
+        #{comentState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Comments" >
+    update comments
+    <set >
+      <if test="becommentId != null" >
+        BECOMMENT_ID = #{becommentId,jdbcType=BIGINT},
+      </if>
+      <if test="commentReviewerid != null" >
+        COMMENT_REVIEWERID = #{commentReviewerid,jdbcType=BIGINT},
+      </if>
+      <if test="commentContent != null" >
+        COMMENT_CONTENT = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDatetime != null" >
+        COMMENT_DATETIME = #{commentDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comentState != null" >
+        COMENT_STATE = #{comentState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where COMMENT_ID = #{commentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Comments" >
+    update comments
+    set BECOMMENT_ID = #{becommentId,jdbcType=BIGINT},
+      COMMENT_REVIEWERID = #{commentReviewerid,jdbcType=BIGINT},
+      COMMENT_CONTENT = #{commentContent,jdbcType=VARCHAR},
+      COMMENT_DATETIME = #{commentDatetime,jdbcType=TIMESTAMP},
+      COMENT_STATE = #{comentState,jdbcType=TINYINT}
+    where COMMENT_ID = #{commentId,jdbcType=BIGINT}
+  </update>
+</mapper>

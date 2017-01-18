@@ -1,0 +1,13 @@
+com\jaybill\billblog\controller\RegistController.class
+com\jaybill\billblog\interceptors\UserIdInterceptor.class
+com\jaybill\billblog\controller\CommentController.class
+com\jaybill\billblog\controller\CollectionController.class
+com\jaybill\billblog\controller\DeletionController.class
+com\jaybill\billblog\controller\LoginController.class
+com\jaybill\billblog\controller\LikeController.class
+com\jaybill\billblog\controller\WeiboController.class
+com\jaybill\billblog\controller\ForWardController.class
+com\jaybill\billblog\controller\RecommandController.class
+com\jaybill\billblog\controller\ImageController.class
+com\jaybill\billblog\controller\SearchController.class
+com\jaybill\billblog\controller\MessageController.class

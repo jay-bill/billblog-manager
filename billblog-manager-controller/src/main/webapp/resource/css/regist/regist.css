@@ -1,0 +1,229 @@
+@CHARSET "UTF-8";
+	*{
+	  font-family:微软雅黑,Arial,Helvetica,sans-serif;
+	}
+	body{
+	  background:#F5F5F5;
+	}
+   	#mainDiv{
+   	  position:relative;
+   	  top:50px;
+   	  width:70%;
+   	  height:500px;
+   	  margin:0 auto;
+   	  background:white;
+   	  border-radius:8px;
+   	  border:1px gray solid;
+   	  margin-bottom:50px;
+   	}
+   	#mainTop{
+   	  height:70px;
+   	}
+   	.topCont{
+   	  display:inline-block;
+	  padding:25px 0px 22px 60px;	 
+	   margin:0px;
+   	}
+   	.topCont a{
+   	  font-family:微软雅黑,Arial,Helvetica,sans-serif;
+   	  font-size:22px;
+   	  font-weight:normal;
+   	}
+   	#mainLeft{
+   	  width:60%;
+   	  height:80%;	 
+   	  float:left;  	  
+   	}
+   	#mainLeftDiv{
+   	  position:relative;
+   	  left:80px;
+   	  top:50px;
+   	}
+   	.tag{
+   	  display:inline-block;
+   	  text-align:right;
+   	  width:80px;
+   	}
+   	.line{
+   	  margin-bottom:10px;
+   	}
+   	input{
+   	  border-radius:4px;
+   	  width:200px;
+   	  height:30px;
+   	  outline-style:none;
+   	  border:1px solid gray;
+   	  font-size:14px;
+   	}
+   	.line4 p{
+   		margin:0px;
+   	}
+   	
+   	#mainRight{
+   		float:left;
+   		width:40%;
+   		height:70%;
+   		border-left:1px solid gray;
+   	}
+   	#mainRight div{
+   		margin:50px 0px 10px 30px;
+   		width:80%;
+   		border-bottom:1px dashed gray;
+   	}
+   	#mainRight #help-div{
+   		margin-top:10px;
+   		border:0px;
+   	}
+   	footer{
+   		width:70%;margin:0px auto;position:relative;top:10px;color:#6e9ab8;
+   	}
+   	/*手机页面*/
+   	 #navbar{
+ 	      height:36px;
+ 	      background:#FAFAFA;
+ 	      width:100%;
+ 	      margin-bottom:15px;
+ 	      border-bottom:1px #D1D1D1 solid;
+   	  }
+	#navbar:nth-child(2){
+	  height:36px;
+	  text-align:center;
+	  line-height:36px;
+	  font-size:17px;
+	}
+	.model{
+	  margin:5px 0px;
+	}
+	.model1{
+	  background:gray;
+	  text-align:center;
+	  border:1px solid gray;
+	  border-right:0px;
+	  border-radius:3px 0px 0px 3px;
+	  color:white;
+	  padding:3px;
+	}
+	.model2{
+	  text-align:center;
+	  border:1px solid gray;
+	  border-left:0px;
+	  border-radius:0px 3px 3px 0px;
+	  padding:3px;
+	}
+	#form-div{
+	  margin-top:30px;
+	}
+	#mb-form-div{
+	  margin-top:30px;
+	  display:none;
+	}
+	.mb-prefix1{
+	  height:35px;
+	  text-align:center;
+	  line-height:35px;
+	  margin:0px;
+	  padding:0px;
+	  border-left:1px solid #d1d1d1;
+	}
+	.mb-prefix2{
+	  height:35px;
+	  text-align:center;
+	  line-height:35px;
+	  border-left:1px solid #d1d1d1;
+	  margin:0px 0px 15px 0px;
+	  padding:0px 0px 15px 0px;
+	  font-family:微软雅黑;
+	  letter-spacing:4px;
+	}
+	.mb-prefix3{
+	  height:35px;
+	  text-align:center;
+	  line-height:35px;
+	  margin:0px;
+	  padding:0px;
+	  border-right:1px solid #d1d1d1;
+	  color:#d1d1d1;
+	}
+	.mb-prefix{
+	   background:#FAFAFA;
+	   border-top:1px solid #d1d1d1;
+	   border-bottom:1px solid #d1d1d1;
+	}
+	input[type="radio"]{
+		width:13px;
+		height:13px;
+	}
+	#area-div{
+		position:absolute;
+		width:270px;
+		height:360px;
+		top:40px;
+		background:white;
+		overflow:auto;
+		display:none;
+	}
+	ul{
+		list-style:none;
+		padding:0px;
+	}
+	li{
+	   display:block;
+	   height:36px;
+	   border-bottom:1px solid #d1d1d1;
+	   margin:0px 5px;
+	   line-height:36px;
+	   padding-left:10px;
+	}
+	#area-div ul li input{
+		float:right;
+		margin-right:10px;
+	}
+	#area-div div{
+		position:fixed;
+		top:0px;
+		width:270px;
+		height:80px;
+		top:400px;
+		background:white;
+	}
+	#area-div div button{
+		height:30px;
+		width:110px;
+		margin-top:25px;
+		margin-left:13px;
+	}
+   	@media (min-width:450px){
+   	  	body{
+	   	  background:url('/billblog-manager-controller/resource/image/20111225102132493.jpg');
+		  background-size:cover;
+   		}
+   		#firstDiv{
+	   	  width:100px;
+	   	  height:88px;
+	   	  background:url('/billblog-manager-controller/resource/image/sinaweibo.png');
+	   	  margin:0 auto;
+	   	  margin-top:50px;
+	   	}
+	   	#navbar,.model{
+   	      display:none;
+   	    }
+   	    #form-div,#mb-form-div{
+   	      display:none;
+   	    }
+   	    footer{
+   	   	  display:block;
+   	    }
+   	}
+   	
+   	
+   	@media (max-width:450px){
+   	   #mainTop{
+   	      display:none;
+   	   }
+   	   #mainDiv{
+   	      display:none;
+   	   }
+   	   footer{
+   	   	  display:none;
+   	   }
+   	}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.DiaryMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Diary" >
+    <id column="DIARY_ID" property="diaryId" jdbcType="BIGINT" />
+    <result column="DIARY_PEOPLEID" property="diaryPeopleid" jdbcType="BIGINT" />
+    <result column="DIARY_DATETIME" property="diaryDatetime" jdbcType="TIMESTAMP" />
+    <result column="DIARY_STATE" property="diaryState" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jaybill.billblog.pojo.Diary" extends="BaseResultMap" >
+    <result column="DIARY_CONTENT" property="diaryContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DIARY_ID, DIARY_PEOPLEID, DIARY_DATETIME, DIARY_STATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    DIARY_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from diary
+    where DIARY_ID = #{diaryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from diary
+    where DIARY_ID = #{diaryId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Diary" >
+    insert into diary (DIARY_ID, DIARY_PEOPLEID, DIARY_DATETIME, 
+      DIARY_STATE, DIARY_CONTENT)
+    values (#{diaryId,jdbcType=BIGINT}, #{diaryPeopleid,jdbcType=BIGINT}, #{diaryDatetime,jdbcType=TIMESTAMP}, 
+      #{diaryState,jdbcType=TINYINT}, #{diaryContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Diary" >
+    insert into diary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="diaryId != null" >
+        DIARY_ID,
+      </if>
+      <if test="diaryPeopleid != null" >
+        DIARY_PEOPLEID,
+      </if>
+      <if test="diaryDatetime != null" >
+        DIARY_DATETIME,
+      </if>
+      <if test="diaryState != null" >
+        DIARY_STATE,
+      </if>
+      <if test="diaryContent != null" >
+        DIARY_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="diaryId != null" >
+        #{diaryId,jdbcType=BIGINT},
+      </if>
+      <if test="diaryPeopleid != null" >
+        #{diaryPeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="diaryDatetime != null" >
+        #{diaryDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diaryState != null" >
+        #{diaryState,jdbcType=TINYINT},
+      </if>
+      <if test="diaryContent != null" >
+        #{diaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Diary" >
+    update diary
+    <set >
+      <if test="diaryPeopleid != null" >
+        DIARY_PEOPLEID = #{diaryPeopleid,jdbcType=BIGINT},
+      </if>
+      <if test="diaryDatetime != null" >
+        DIARY_DATETIME = #{diaryDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diaryState != null" >
+        DIARY_STATE = #{diaryState,jdbcType=TINYINT},
+      </if>
+      <if test="diaryContent != null" >
+        DIARY_CONTENT = #{diaryContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where DIARY_ID = #{diaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jaybill.billblog.pojo.Diary" >
+    update diary
+    set DIARY_PEOPLEID = #{diaryPeopleid,jdbcType=BIGINT},
+      DIARY_DATETIME = #{diaryDatetime,jdbcType=TIMESTAMP},
+      DIARY_STATE = #{diaryState,jdbcType=TINYINT},
+      DIARY_CONTENT = #{diaryContent,jdbcType=LONGVARCHAR}
+    where DIARY_ID = #{diaryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Diary" >
+    update diary
+    set DIARY_PEOPLEID = #{diaryPeopleid,jdbcType=BIGINT},
+      DIARY_DATETIME = #{diaryDatetime,jdbcType=TIMESTAMP},
+      DIARY_STATE = #{diaryState,jdbcType=TINYINT}
+    where DIARY_ID = #{diaryId,jdbcType=BIGINT}
+  </update>
+</mapper>
