@@ -1,10 +1,11 @@
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\interceptors\UserIdInterceptor.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\CommentController.java
+E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\UserInfoController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\DeletionController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\SearchController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\CollectionController.java
-E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\LoginController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\ImageController.java
+E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\LoginController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\RegistController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\LikeController.java
 E:\eclipse_workplace\billblog-manager\billblog-manager-controller\src\main\java\com\jaybill\billblog\controller\WeiboController.java

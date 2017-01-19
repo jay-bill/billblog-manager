@@ -1,38 +1,49 @@
 package com.jaybill.billblog.pojo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Userinfo {
     private Long userId;
 
-    private String userNickname;
-
     private Byte userSex;
 
-    private Timestamp userBirthday;
+    private String userBirthday;  
 
-    private String userSchool;
+    private String userSchool; //毕业学校
 
-    private String userPosition;
+    private String userPosition;  //工作
 
-    private Byte userLovestate;
+    private Byte userLovestate;   //恋爱状态，0表示单身，1表示恋爱中，2表示已婚，3表示离异
 
-    private String userSignature;
+    private String userSignature;  //个性签名
 
-    public Long getUserId() {
+    private String userAddress;	  //住址
+    
+    private byte userTropism; //取向，0表示异性恋，1表示双性恋，2表示同性恋
+    
+    
+    public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public byte getUserTropism() {
+		return userTropism;
+	}
+
+	public void setUserTropism(byte userTropism) {
+		this.userTropism = userTropism;
+	}
+
+	public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname == null ? null : userNickname.trim();
     }
 
     public Byte getUserSex() {
@@ -43,11 +54,11 @@ public class Userinfo {
         this.userSex = userSex;
     }
 
-    public Timestamp getUserBirthday() {
+    public String getUserBirthday() {
         return userBirthday;
     }
 
-    public void setUserBirthday(Timestamp userBirthday) {
+    public void setUserBirthday(String userBirthday) {
         this.userBirthday = userBirthday;
     }
 

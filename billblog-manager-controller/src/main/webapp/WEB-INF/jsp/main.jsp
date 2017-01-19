@@ -56,7 +56,7 @@
 						<span><a href="#" class="dropdown-toggle">昵称</a></span>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">设置</a>
+						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">设置</a>
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 						<div></div>
 						<!-- 用户头像 -->
 						<div>
-							<img src="/billblog-manager-controller/resource/image/headimage.jpg">
+							<a href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${user_base_info.userId}"><img src="${user_base_info.userHeadimage}"></a>
 						</div>
 						
 						<div style="margin-top:-30px;text-align:center;">
@@ -175,7 +175,7 @@
 									<div>粉丝</div>
 								</div>
 								<div class="col-xs-4 nums-div">
-									<div>0</div>
+									<div>${weibo_sum}</div>
 									<div>微博</div>
 								</div>
 							</div>

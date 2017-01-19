@@ -25,6 +25,10 @@
     from weibo
     where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
   </select>
+  <!-- 计算微博总数 -->
+  <select id="selectWeiboSum" parameterType="long" resultType="int">
+  	 select COUNT(USER_ID) from weibo where USER_ID=#{userId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from weibo
     where WEIBO_ID = #{weiboId,jdbcType=BIGINT}

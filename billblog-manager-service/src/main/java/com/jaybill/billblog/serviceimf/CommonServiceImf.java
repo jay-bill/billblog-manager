@@ -74,8 +74,16 @@ public class CommonServiceImf implements CommonService {
 	 */
 	@Override
 	public int getWeiboSum(long userId) {
-		return 0;
+		int sum = weiboMapper.selectWeiboSum(userId);
+		return sum;
 	}
 
-
+	/**
+	 * 更新用户信息
+	 */
+	@Override
+	public void updateUserInfo(User user,Userinfo userInfo) {
+		infoMapper.updateByPrimaryKey(userInfo);
+		userMapper.updateByPrimaryKeySelective(user);
+	}
 }

@@ -107,7 +107,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<span><a href=\"#\" class=\"dropdown-toggle\">昵称</a></span>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\">设置</a>\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/logincontroller/loginout\" class=\"dropdown-toggle\">设置</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -211,7 +211,11 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<div></div>\r\n");
       out.write("\t\t\t\t\t\t<!-- 用户头像 -->\r\n");
       out.write("\t\t\t\t\t\t<div>\r\n");
-      out.write("\t\t\t\t\t\t\t<img src=\"/billblog-manager-controller/resource/image/headimage.jpg\">\r\n");
+      out.write("\t\t\t\t\t\t\t<a href=\"/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\"><img src=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userHeadimage}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\"></a>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t<div style=\"margin-top:-30px;text-align:center;\">\r\n");
@@ -232,7 +236,9 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t\t\t<div>粉丝</div>\r\n");
       out.write("\t\t\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"col-xs-4 nums-div\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<div>0</div>\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t<div>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${weibo_sum}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("</div>\r\n");
       out.write("\t\t\t\t\t\t\t\t\t<div>微博</div>\r\n");
       out.write("\t\t\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");

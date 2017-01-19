@@ -48,4 +48,20 @@ public class LoginController {
 		//因为是post方式提交，所以重定向到tomainpage方法
 		return "redirect:/weibocontroller/tomainpage.do";
 	}
+	
+	/**
+	 * 登出，判断当前浏览器是否有session，若没有，直接返回登录页面；
+	 * 若有，除移属性，再返回index页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="loginout")
+	public String loginOut(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		if(session==null)
+			return "redirect:/index.jsp";
+		//除移用户唯一标识
+		session.removeAttribute("user_id");
+		return "redirect:/index.jsp";
+	}
 }

@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 	/*home页面的公共部分css*/
 	body{
-		background:url(/billblog/resource/image/backpwd_bg.jpg) top repeat-x,url(/billblog/resource/image/bgColor.png) bottom repeat;
+		background:url(/billblog-manager-controller/resource/image/backpwd_bg.jpg) top repeat-x,url(/billblog-manager-controller/resource/image/bgColor.png) bottom repeat;
 		background-attachment:fixed;
 	}
 	
 	#top-bg-div{
-		background:url(/billblog/resource/image/back_img.png) repeat-x;
+		background:url(/billblog-manager-controller/resource/image/back_img.png) repeat-x;
 		margin-top:50px;
 		height:310px;
 	}

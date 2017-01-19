@@ -1,5 +1,7 @@
 package com.jaybill.billblog.service;
 
+import com.jaybill.billblog.pojo.Userinfo;
+
 /**
  * 注册接口
  * @author jaybill
@@ -19,4 +21,9 @@ public interface RegistService {
 	 * @return
 	 */
 	boolean isAccountExisted(String userAccount);
+	
+	/**
+	 * 初始化用户信息
+	 */
+	void addUserinfo(Userinfo userInfo);
 }

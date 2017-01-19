@@ -1,6 +1,7 @@
 com\jaybill\billblog\controller\RegistController.class
 com\jaybill\billblog\interceptors\UserIdInterceptor.class
 com\jaybill\billblog\controller\CommentController.class
+com\jaybill\billblog\controller\UserInfoController.class
 com\jaybill\billblog\controller\CollectionController.class
 com\jaybill\billblog\controller\DeletionController.class
 com\jaybill\billblog\controller\LoginController.class

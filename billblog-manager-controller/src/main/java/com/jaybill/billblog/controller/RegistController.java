@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jaybill.billblog.email.EmailUtil;
 import com.jaybill.billblog.exception.UserAccountException;
 import com.jaybill.billblog.exception.UserAccountExistedException;
+import com.jaybill.billblog.pojo.Userinfo;
 import com.jaybill.billblog.service.RegistService;
 import com.jaybill.billblog.validate.DeleteVerifyCodeUtils;
 import com.jaybill.billblog.validate.VerifyCodeUtils;
@@ -87,10 +88,10 @@ public class RegistController {
 	 * @throws Exception 
 	 */
 	@ResponseBody
-	@RequestMapping(value="submitemail")
+	@RequestMapping(value="submitemail",produces={"application/json;charset=utf-8"})
 	public String[] submitEmail(@RequestParam("userAccount") String userAccount,
-			@RequestParam("userPassword") String userPassword,HttpServletRequest request,
-			Map<String,Object> map){
+			@RequestParam("userPassword") String userPassword,HttpServletRequest request
+			){
 		
 		//用户账户抛出异常(因为此处是ajax，抛出异常也跳转不到)
 		if(userAccount==null||userAccount.length()<=0){
@@ -142,6 +143,10 @@ public class RegistController {
 			request.getSession().removeAttribute("user_password");
 			//将用户的id保存到session
 			request.getSession().setAttribute("user_id",userId);
+			//将用户id插入到Userinfo中
+			Userinfo userInfo = new Userinfo();
+			userInfo.setUserId(userId);
+			service.addUserinfo(userInfo);
 			//为了防止用户刷新页面报错，重定向到安全页面
 			//在同一个应用程序内，重定向不会使得session失效
 			return "redirect:/weibocontroller/tomainpage.do";

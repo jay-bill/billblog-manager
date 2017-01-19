@@ -24,6 +24,7 @@
 	<mvc:resources location="/resource/fonts/" mapping="/resource/fonts/**"/>
 	<mvc:resources location="/resource/image/" mapping="/resource/image/**"/>
 	<mvc:resources location="/resource/verifyCode/" mapping="/resource/verifyCode/**"/>
+	<mvc:resources location="/resource/test/" mapping="/resource/test/**"/>
 	<!-- 拦截器 -->
 	<!-- 拦截所有.do结尾的链接 -->		
 	<mvc:interceptors>

@@ -17,7 +17,18 @@ public class User {
     
     private String userHeadimage;
     
-    private String userNickname;
+    private String userNickname; //默认使用注册账号
+    
+    private byte userLevel;  //账号等级，默认0级
+    
+
+	public byte getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(byte userLevel) {
+		this.userLevel = userLevel;
+	}
 
 	public String getUserNickname() {
 		return userNickname;

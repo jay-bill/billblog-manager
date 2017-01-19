@@ -16,4 +16,9 @@ public interface WeiboMapper {
     int updateByPrimaryKeyWithBLOBs(Weibo record);
 
     int updateByPrimaryKey(Weibo record);
+    
+    /**
+     * 计算微博总数
+     */
+    int selectWeiboSum(long userId);
 }

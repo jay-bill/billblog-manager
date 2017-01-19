@@ -33,4 +33,8 @@ public interface CommonService {
 	 */
 	int getWeiboSum(long userId);
 	
+	/**
+	 * 更新用户的详细信息
+	 */
+	void updateUserInfo(User user,Userinfo userInfo);
 }

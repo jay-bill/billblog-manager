@@ -8,10 +8,13 @@
     <result column="USER_IDENTITY" property="userIdentity" jdbcType="TINYINT" />
     <result column="USER_STATE" property="userState" jdbcType="TINYINT" />
     <result column="USER_DATETIME" property="userDatetime" jdbcType="TIMESTAMP" />
+    <result column="USER_HEADIMAGE" property="userHeadimage" jdbcType="VARCHAR" />
     <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+    <result column="USER_LEVEL" property="userLevel" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    USER_ID, USER_ACCOUNT, USER_PASSWORD, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME
+    USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME,
+    USER_LEVEL
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -103,6 +106,9 @@
       </if>
       <if test="userDatetime != null" >
         USER_DATETIME = #{userDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNickname != null" >
+        USER_NICKNAME = #{userNickname,jdbcType=TIMESTAMP},
       </if>
     </set>
     where USER_ID = #{userId,jdbcType=BIGINT}

@@ -27,7 +27,10 @@ public class UserIdInterceptor implements HandlerInterceptor {
 		}
 		long userId = (long)session.getAttribute("user_id");
 		if(userId<=0){ //如果userId不存在，
-			//重定向到index.jsp
+			//重定向到index.jsp：使用servlet原生方法时，
+			//重定向的根目录是localhost:8080/
+			//使用springmvc时，
+			//转发和重定向的根目录都是当前工程，如localhost:8080/billblog-manager-controller/
 			response.sendRedirect("/billblog-manager-controller/index.jsp");
 			return false;
 		}

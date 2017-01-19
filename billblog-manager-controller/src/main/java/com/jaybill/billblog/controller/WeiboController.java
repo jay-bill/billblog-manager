@@ -45,10 +45,13 @@ public class WeiboController {
 		int userFansSum = commonService.getFansSum(userId);
 		//获取关注的人的数目
 		int userNoticedSum = commonService.getBeNoticeSum(userId);
+		//计算微博总数
+		int weiboSum = commonService.getWeiboSum(userId);
 		//传给页面
 		map.put("user_base_info", userBaseInfo);
 		map.put("user_fans_sum", userFansSum);
 		map.put("user_noticed_sum", userNoticedSum);
+		map.put("weibo_sum", weiboSum);
 		return "main";//首页
 	}
 }

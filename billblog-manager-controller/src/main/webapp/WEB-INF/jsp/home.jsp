@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<link rel="SHORTCUT ICON" href="resource/image/s_blog.ico">
-<link rel="BOOKMARK" href="resource/image/s_blog.ico">
-<link rel="stylesheet" href="resource/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resource/css/common/common.css"></link>
-<link rel="stylesheet" href="resource/css/common/main-common.css">
-<link rel="stylesheet" href="resource/css/home/home.css">
-<link rel="stylesheet" href="resource/css/common/home-common.css">
+<link rel="SHORTCUT ICON" href="/billblog-manager-controller/resource/image/s_blog.ico">
+<link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/home/home.css">
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
 <title>孙悟空的微博</title>
 </head>
 <body>
@@ -20,13 +21,13 @@
 		<div class="container" id="nav-con">
 			<!-- logo -->
 			<div class="col-md-2 col-xs-9" id="logo">
-				<img alt="" src="resource/image/s_weibo.png">
+				<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
 			</div>
 			<!-- 输入栏 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div id="search-div">
 					<input>
-					<img alt="" src="resource/image/搜索.png">
+					<img alt="" src="/billblog-manager-controller/resource/image/search.png">
 				</div>
 			</div>
 			<!-- 右边的菜单,中等屏幕时显示 -->
@@ -105,12 +106,21 @@
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" id="top-bg-div">
 				<!-- 头像 -->
 				<div>
-					<img src="resource/image/头像.jpg">
+					<img src="${user_base_info.userHeadimage}">
 				</div>
 				<!-- 昵称 -->
 				<div>
-					<h3>孙悟空</h3>
-					<p>长生不老与天同寿非我愿</p>
+					<h3>${user_base_info.userNickname}</h3>
+					<p>
+						<c:set var="flagSignature" value="0"></c:set>
+						<c:if test="${user_info.userSignature eq null}">
+							<c:set var="flagSignature" value="1"></c:set>
+							编辑您的个性签名
+						</c:if>
+						<c:if test="${flagAddress eq 0}">
+							${user_info.userSignature}
+						</c:if>							
+					</p>
 				</div>
 			</div>
 		</div>
@@ -133,37 +143,82 @@
 				<div class="container-fluid">
 					<div class="col-xs-4">
 						<div>粉丝</div>
-						<div>888</div>
+						<div>${user_fans_sum}</div>
 					</div>
 					<div class="col-xs-4">
 						<div>关注</div>
-						<div>212</div>
+						<div>${user_noticed_sum}</div>
 					</div>
 					<div class="col-xs-4">
 						<div>微博</div>
-						<div>869</div>
+						<div>${weibo_sum}</div>
 					</div>
 				</div>
 				<!-- 个人信息 -->
 				<div class="container-fluid">
 					<div>
 						<a>申请认证</a>
-						<span>等级9</span>
+						<span>等级${user_base_info.userLevel}</span>
 					</div>
 					<div class="info-div">
-						广西钦州
+						<c:set var="flagSex" value="0"></c:set>
+						<c:if test="${user_info.userSex eq null}">
+							<c:set var="flagSex" value="1"></c:set>
+							您的性别是？
+						</c:if>
+						<c:if test="${flagSex eq 0}">
+							${user_info.userSex}
+						</c:if>						
 					</div>
 					<div class="info-div">
-						毕业于钦州市第二中学
+						<c:set var="flagAddress" value="0"></c:set>
+						<c:if test="${user_info.userAddress eq null}">
+							<c:set var="flagAddress" value="1"></c:set>
+							您的住址是？
+						</c:if>
+						<c:if test="${flagAddress eq 0}">
+							${user_info.userAddress}
+						</c:if>						
 					</div>
 					<div class="info-div">
-						异性恋
+						<c:set var="flagSchool" value="0"></c:set>
+						<c:if test="${user_info.userSchool eq null}">
+							<c:set var="flagSchool" value="1"></c:set>
+							您毕业学校是？
+						</c:if>
+						<c:if test="${flagSchool eq 0}">
+							${user_info.userSchool}
+						</c:if>
 					</div>
 					<div class="info-div">
-						没脸中
+						<c:set var="flagLovestate" value="0"></c:set>
+						<c:if test="${user_info.userLovestate eq null}">
+							<c:set var="flagLovestate" value="1"></c:set>
+							您的恋爱状态是？
+						</c:if>
+						<c:if test="${flagLovestate eq 0}">
+							${user_info.userLovestate}
+						</c:if>						
 					</div>
 					<div class="info-div">
-						生日1995年12月25
+						<c:set var="flagTropism" value="0"></c:set>
+						<c:if test="${user_info.userTropism eq null}">
+							<c:set var="flagTropism" value="1"></c:set>
+							您的性取向是？
+						</c:if>
+						<c:if test="${flagTropism eq 0}">
+							${user_info.userTropism}
+						</c:if>		
+					</div>
+					<div class="info-div">
+						<c:set var="flagBirthday" value="0"></c:set>
+						<c:if test="${user_info.userLovestate eq null}">
+							<c:set var="flagBirthday" value="1"></c:set>
+							您的生日是？
+						</c:if>
+						<c:if test="${flagBirthday eq 0}">
+							${user_info.userBirthday}
+						</c:if>	
 					</div>
 					<div class="info-div">
 						<a>编辑个人资料</a>
@@ -177,17 +232,17 @@
 					</div>
 					<div class="row">
 						<!-- 放一张大图 -->
-						<div class="col-xs-8"><img src="resource/test/20140622214745_tNe8v.thumb.700_0.jpeg"></div>
+						<div class="col-xs-8"><img src="/billblog-manager-controller/resource/test/20140622214745_tNe8v.thumb.700_0.jpeg"></div>
 						<!-- 放小图 -->
 						<div class="col-xs-4">
-							<img src="resource/test/318768-15032013295555.jpg"></img>
-							<img src="resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
+							<img src="/billblog-manager-controller/resource/test/318768-15032013295555.jpg"></img>
+							<img src="/billblog-manager-controller/resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
 						</div>
 						<!-- 放小图 -->
 						<div class="col-xs-12" style="font-size:0px;">
-							<img src="resource/test/318768-15032013295555.jpg"></img>
-							<img src="resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
-							<img alt="" src="resource/test/90.jpg">
+							<img src="/billblog-manager-controller/resource/test/318768-15032013295555.jpg"></img>
+							<img src="/billblog-manager-controller/resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
+							<img alt="" src="/billblog-manager-controller/resource/test/90.jpg">
 						</div>
 					</div>
 				</div>
@@ -203,8 +258,8 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="/billblog/resource/js/jquery.min.js" ></script>
-<script type="text/javascript" src="/billblog/resource/js/bootstrap.min.js" ></script>
-<script type="text/javascript" src="/billblog/resource/js/main/main.js"></script>
-<script type="text/javascript" src="/billblog/resource/js/home/home.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home.js"></script>
 </html>

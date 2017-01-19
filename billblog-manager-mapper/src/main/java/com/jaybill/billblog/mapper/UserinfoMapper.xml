@@ -3,17 +3,18 @@
 <mapper namespace="com.jaybill.billblog.mapper.UserinfoMapper" >
   <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Userinfo" >
     <id column="USER_ID" property="userId" jdbcType="BIGINT" />
-    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
     <result column="USER_SEX" property="userSex" jdbcType="TINYINT" />
-    <result column="USER_BIRTHDAY" property="userBirthday" jdbcType="DATE" />
+    <result column="USER_BIRTHDAY" property="userBirthday" jdbcType="VARCHAR" />
     <result column="USER_SCHOOL" property="userSchool" jdbcType="VARCHAR" />
     <result column="USER_POSITION" property="userPosition" jdbcType="VARCHAR" />
     <result column="USER_LOVESTATE" property="userLovestate" jdbcType="TINYINT" />
     <result column="USER_SIGNATURE" property="userSignature" jdbcType="VARCHAR" />
+    <result column="USER_ADDRESS" property="userAddress" jdbcType="VARCHAR" />
+    <result column="USER_TROPISM" property="userTropism" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    USER_ID, USER_NICKNAME, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, 
-    USER_SIGNATURE
+    USER_ID, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, 
+    USER_SIGNATURE,USER_ADDRESS,USER_TROPISM
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -65,9 +66,6 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userNickname != null" >
-        #{userNickname,jdbcType=VARCHAR},
-      </if>
       <if test="userSex != null" >
         #{userSex,jdbcType=TINYINT},
       </if>
@@ -91,9 +89,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Userinfo" >
     update userinfo
     <set >
-      <if test="userNickname != null" >
-        USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
-      </if>
       <if test="userSex != null" >
         USER_SEX = #{userSex,jdbcType=TINYINT},
       </if>
@@ -116,14 +111,15 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Userinfo" >
-    update userinfo
-    set USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
+    update userinfo set
       USER_SEX = #{userSex,jdbcType=TINYINT},
-      USER_BIRTHDAY = #{userBirthday,jdbcType=DATE},
+      USER_BIRTHDAY = #{userBirthday,jdbcType=VARCHAR},
       USER_SCHOOL = #{userSchool,jdbcType=VARCHAR},
       USER_POSITION = #{userPosition,jdbcType=VARCHAR},
       USER_LOVESTATE = #{userLovestate,jdbcType=TINYINT},
-      USER_SIGNATURE = #{userSignature,jdbcType=VARCHAR}
+      USER_SIGNATURE = #{userSignature,jdbcType=VARCHAR},
+      USER_ADDRESS = #{userAddress,jdbcType=VARCHAR},
+      USER_TROPISM = #{userTropism,jdbcType=TINYINT}
     where USER_ID = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>
