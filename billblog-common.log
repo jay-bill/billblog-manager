@@ -1,0 +1,425 @@
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Committing JDBC transaction on Connection [com.mysql.jdbc.JDBC4Connection@12f90d5]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Releasing JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] after transaction
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - Invoking ResponseBodyAdvice chain for body=[Ljava.lang.String;@a074ca
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - After ResponseBodyAdvice chain body=[Ljava.lang.String;@a074ca
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Written [[Ljava.lang.String;@a074ca] as "application/json;charset=utf-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@1f448ac]
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing POST request for [/billblog-manager-controller/userinfocontroller/saveuserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/saveuserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String[] com.jaybill.billblog.controller.UserInfoController.saveUserInfo(com.jaybill.billblog.pojo.Userinfo,java.lang.String,javax.servlet.http.HttpServletRequest)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Creating new transaction with name [com.jaybill.billblog.serviceimf.CommonServiceImf.updateUserInfo]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Acquired Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] for JDBC transaction
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Switching JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] to manual commit
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - ==>  Preparing: update userinfo set USER_SEX = ?, USER_BIRTHDAY = ?, USER_SCHOOL = ?, USER_POSITION = ?, USER_LOVESTATE = ?, USER_SIGNATURE = ?, USER_ADDRESS = ?, USER_TROPISM = ? where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - ==> Parameters: 0(Byte), 1995年11月初四 (String), 华南理工大学(String), 软件架构师(String), 0(Byte), 这是个性签名！(String), 广西钦州青塘镇(String), 0(Byte), 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - <==    Updates: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778] from current transaction
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - ==>  Preparing: update user SET USER_NICKNAME = ? where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - ==> Parameters: jaybill(String), 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - <==    Updates: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@cf4778]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Initiating transaction commit
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Committing JDBC transaction on Connection [com.mysql.jdbc.JDBC4Connection@12f90d5]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Releasing JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] after transaction
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - Invoking ResponseBodyAdvice chain for body=[Ljava.lang.String;@a52253
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - After ResponseBodyAdvice chain body=[Ljava.lang.String;@a52253
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Written [[Ljava.lang.String;@a52253] as "application/json;charset=utf-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@1f448ac]
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/userinfocontroller/touserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/touserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String com.jaybill.billblog.controller.UserInfoController.toUserInfo(long,javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/userinfocontroller/touserinfo.do] is: -1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@170a082]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME, USER_LEVEL from user where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@170a082]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@170a082]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@170a082]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed037]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, USER_SIGNATURE,USER_ADDRESS,USER_TROPISM from userinfo where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed037]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed037]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed037]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16630f]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==>  Preparing: select COUNT(ATTENTION_NOTICERID) from attention where ATTENTION_BENOTICEDID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16630f]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16630f]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16630f]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e87506]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==>  Preparing: select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e87506]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e87506]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1e87506]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@146452a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==>  Preparing: select COUNT(USER_ID) from weibo where USER_ID=? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@146452a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@146452a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@146452a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Rendering view [org.springframework.web.servlet.view.JstlView: name 'user-info'; URL [/WEB-INF/jsp/user-info.jsp]] in DispatcherServlet with name 'billblog-manager'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_base_info' of type [com.jaybill.billblog.pojo.User] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_info' of type [com.jaybill.billblog.pojo.Userinfo] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_fans_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_noticed_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'weibo_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_base_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Forwarding to resource [/WEB-INF/jsp/user-info.jsp] in InternalResourceView 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Matching patterns for request [/resource/js/user-info/user-info.js] are [/resource/js/**]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - URI Template variables for request [/resource/js/user-info/user-info.js] are {}
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapping [/resource/js/user-info/user-info.js] to HandlerExecutionChain with handler [ResourceHttpRequestHandler [locations=[ServletContext resource [/resource/js/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@95c278]]] and 1 interceptor
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/resource/js/user-info/user-info.js] is: -1
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/userinfocontroller/touserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/touserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String com.jaybill.billblog.controller.UserInfoController.toUserInfo(long,javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/userinfocontroller/touserinfo.do] is: -1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bc2b0a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME, USER_LEVEL from user where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bc2b0a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bc2b0a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bc2b0a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19acc54]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, USER_SIGNATURE,USER_ADDRESS,USER_TROPISM from userinfo where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19acc54]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19acc54]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19acc54]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1249d99]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==>  Preparing: select COUNT(ATTENTION_NOTICERID) from attention where ATTENTION_BENOTICEDID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1249d99]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1249d99]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1249d99]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@137239d]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==>  Preparing: select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@137239d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@137239d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@137239d]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d8980]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==>  Preparing: select COUNT(USER_ID) from weibo where USER_ID=? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d8980]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d8980]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@9d8980]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Rendering view [org.springframework.web.servlet.view.JstlView: name 'user-info'; URL [/WEB-INF/jsp/user-info.jsp]] in DispatcherServlet with name 'billblog-manager'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_base_info' of type [com.jaybill.billblog.pojo.User] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_info' of type [com.jaybill.billblog.pojo.Userinfo] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_fans_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_noticed_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'weibo_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_base_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Forwarding to resource [/WEB-INF/jsp/user-info.jsp] in InternalResourceView 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Matching patterns for request [/resource/js/user-info/user-info.js] are [/resource/js/**]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - URI Template variables for request [/resource/js/user-info/user-info.js] are {}
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapping [/resource/js/user-info/user-info.js] to HandlerExecutionChain with handler [ResourceHttpRequestHandler [locations=[ServletContext resource [/resource/js/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@95c278]]] and 1 interceptor
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/resource/js/user-info/user-info.js] is: -1
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing POST request for [/billblog-manager-controller/userinfocontroller/saveuserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/saveuserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String[] com.jaybill.billblog.controller.UserInfoController.saveUserInfo(com.jaybill.billblog.pojo.Userinfo,java.lang.String,javax.servlet.http.HttpServletRequest)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Creating new transaction with name [com.jaybill.billblog.serviceimf.CommonServiceImf.updateUserInfo]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Acquired Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] for JDBC transaction
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Switching JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] to manual commit
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - ==>  Preparing: update userinfo set USER_SEX = ?, USER_BIRTHDAY = ?, USER_SCHOOL = ?, USER_POSITION = ?, USER_LOVESTATE = ?, USER_SIGNATURE = ?, USER_ADDRESS = ?, USER_TROPISM = ? where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - ==> Parameters: 1(Byte), 1995年12月25号(String), 华南理工大学(String), 软件架构师(String), 0(Byte), 这是个性签名！(String), 广西钦州(String), 0(Byte), 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.updateByPrimaryKey - <==    Updates: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Fetched SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d] from current transaction
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - ==>  Preparing: update user SET USER_NICKNAME = ? where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - ==> Parameters: jaybill(String), 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.updateByPrimaryKeySelective - <==    Updates: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b0e60d]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Initiating transaction commit
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Committing JDBC transaction on Connection [com.mysql.jdbc.JDBC4Connection@12f90d5]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceTransactionManager - Releasing JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] after transaction
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - Invoking ResponseBodyAdvice chain for body=[Ljava.lang.String;@17c09c6
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdviceChain - After ResponseBodyAdvice chain body=[Ljava.lang.String;@17c09c6
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Written [[Ljava.lang.String;@17c09c6] as "application/json;charset=utf-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@1f448ac]
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/userinfocontroller/touserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/touserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String com.jaybill.billblog.controller.UserInfoController.toUserInfo(long,javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/userinfocontroller/touserinfo.do] is: -1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1644cf3]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME, USER_LEVEL from user where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1644cf3]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1644cf3]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1644cf3]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@154e1de]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, USER_SIGNATURE,USER_ADDRESS,USER_TROPISM from userinfo where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@154e1de]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@154e1de]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@154e1de]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9235]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==>  Preparing: select COUNT(ATTENTION_NOTICERID) from attention where ATTENTION_BENOTICEDID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9235]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9235]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6c9235]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1afca98]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==>  Preparing: select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1afca98]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1afca98]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1afca98]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22717]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==>  Preparing: select COUNT(USER_ID) from weibo where USER_ID=? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22717]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22717]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22717]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Rendering view [org.springframework.web.servlet.view.JstlView: name 'user-info'; URL [/WEB-INF/jsp/user-info.jsp]] in DispatcherServlet with name 'billblog-manager'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_base_info' of type [com.jaybill.billblog.pojo.User] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_info' of type [com.jaybill.billblog.pojo.Userinfo] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_fans_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_noticed_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'weibo_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_base_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Forwarding to resource [/WEB-INF/jsp/user-info.jsp] in InternalResourceView 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/js/user-info/user-info.js
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/js/user-info/user-info.js]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Matching patterns for request [/resource/js/user-info/user-info.js] are [/resource/js/**]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - URI Template variables for request [/resource/js/user-info/user-info.js] are {}
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapping [/resource/js/user-info/user-info.js] to HandlerExecutionChain with handler [ResourceHttpRequestHandler [locations=[ServletContext resource [/resource/js/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@95c278]]] and 1 interceptor
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/resource/js/user-info/user-info.js] is: -1
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/image/s_blog.ico
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/image/s_blog.ico
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Matching patterns for request [/resource/image/s_blog.ico] are [/resource/image/**]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - URI Template variables for request [/resource/image/s_blog.ico] are {}
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapping [/resource/image/s_blog.ico] to HandlerExecutionChain with handler [ResourceHttpRequestHandler [locations=[ServletContext resource [/resource/image/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@ccafb6]]] and 1 interceptor
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/resource/image/s_blog.ico] is: -1
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/userinfocontroller/touserinfo.do]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /userinfocontroller/touserinfo.do
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Returning handler method [public java.lang.String com.jaybill.billblog.controller.UserInfoController.toUserInfo(long,javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.Object>)]
+DEBUG http-8080-1 org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'userInfoController'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/userinfocontroller/touserinfo.do] is: -1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b892a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_HEADIMAGE,USER_NICKNAME, USER_LEVEL from user where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b892a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b892a]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7b892a]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8bda87]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_SEX, USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, USER_LOVESTATE, USER_SIGNATURE,USER_ADDRESS,USER_TROPISM from userinfo where USER_ID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.UserinfoMapper.selectByPrimaryKey - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8bda87]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8bda87]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@8bda87]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13be6c8]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==>  Preparing: select COUNT(ATTENTION_NOTICERID) from attention where ATTENTION_BENOTICEDID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectFansSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13be6c8]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13be6c8]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13be6c8]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb1524]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==>  Preparing: select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = ? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.AttentionMapper.selectBenoticedSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb1524]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb1524]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1bb1524]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Creating a new SqlSession
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aaa18]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Registering transaction synchronization for JDBC Connection
+DEBUG http-8080-1 org.mybatis.spring.transaction.SpringManagedTransaction - JDBC Connection [com.mysql.jdbc.JDBC4Connection@12f90d5] will be managed by Spring
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==>  Preparing: select COUNT(USER_ID) from weibo where USER_ID=? 
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - ==> Parameters: 9(Long)
+DEBUG http-8080-1 com.jaybill.billblog.mapper.WeiboMapper.selectWeiboSum - <==      Total: 1
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aaa18]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aaa18]
+DEBUG http-8080-1 org.mybatis.spring.SqlSessionUtils - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1aaa18]
+DEBUG http-8080-1 org.springframework.jdbc.datasource.DataSourceUtils - Returning JDBC Connection to DataSource
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Rendering view [org.springframework.web.servlet.view.JstlView: name 'user-info'; URL [/WEB-INF/jsp/user-info.jsp]] in DispatcherServlet with name 'billblog-manager'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_base_info' of type [com.jaybill.billblog.pojo.User] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_info' of type [com.jaybill.billblog.pojo.Userinfo] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_fans_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'user_noticed_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'weibo_sum' of type [java.lang.Integer] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_base_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Added model object 'org.springframework.validation.BindingResult.user_info' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.view.JstlView - Forwarding to resource [/WEB-INF/jsp/user-info.jsp] in InternalResourceView 'user-info'
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - DispatcherServlet with name 'billblog-manager' processing GET request for [/billblog-manager-controller/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/image/s_blog.ico
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Looking up handler method for path /resource/image/s_blog.ico
+DEBUG http-8080-1 org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Did not find handler method for [/resource/image/s_blog.ico]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Matching patterns for request [/resource/image/s_blog.ico] are [/resource/image/**]
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - URI Template variables for request [/resource/image/s_blog.ico] are {}
+DEBUG http-8080-1 org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapping [/resource/image/s_blog.ico] to HandlerExecutionChain with handler [ResourceHttpRequestHandler [locations=[ServletContext resource [/resource/image/]], resolvers=[org.springframework.web.servlet.resource.PathResourceResolver@ccafb6]]] and 1 interceptor
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Last-Modified value for [/billblog-manager-controller/resource/image/s_blog.ico] is: -1
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Null ModelAndView returned to DispatcherServlet with name 'billblog-manager': assuming HandlerAdapter completed request handling
+DEBUG http-8080-1 org.springframework.web.servlet.DispatcherServlet - Successfully completed request
