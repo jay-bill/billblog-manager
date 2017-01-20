@@ -6,8 +6,28 @@ public class Weibo {
     private Long weiboId;
 
     private Long userId;
+    
+    private String userNickname;
+    
+    private String userHeadimage;
 
-    private String weiboContent;
+    public String getUserNickname() {
+		return userNickname;
+	}
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
+	public String getUserHeadimage() {
+		return userHeadimage;
+	}
+
+	public void setUserHeadimage(String userHeadimage) {
+		this.userHeadimage = userHeadimage;
+	}
+
+	private String weiboContent;
 
     private Timestamp weiboPublishtime;
 

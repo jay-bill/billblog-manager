@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Weibo" >
     <id column="WEIBO_ID" property="weiboId" jdbcType="BIGINT" />
     <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+    <result column="USER_HEADIMAGE" property="userHeadimage" jdbcType="VARCHAR" />
     <result column="WEIBO_CONTENT" property="weiboContent" jdbcType="VARCHAR" />
     <result column="WEIBO_PUBLISHTIME" property="weiboPublishtime" jdbcType="TIMESTAMP" />
     <result column="WEIBO_STATE" property="weiboState" jdbcType="TINYINT" />
@@ -12,7 +14,7 @@
     <result column="WEIBO_IMAGE" property="weiboImage" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    WEIBO_ID, USER_ID, WEIBO_CONTENT, WEIBO_PUBLISHTIME, WEIBO_STATE
+    WEIBO_ID, USER_ID, USER_NICKNAME, USER_HEADIMAGE, WEIBO_CONTENT, WEIBO_PUBLISHTIME, WEIBO_STATE
   </sql>
   <sql id="Blob_Column_List" >
     WEIBO_IMAGE
@@ -29,16 +31,29 @@
   <select id="selectWeiboSum" parameterType="long" resultType="int">
   	 select COUNT(USER_ID) from weibo where USER_ID=#{userId}
   </select>
+  <!-- main.jsp的微博 ，我的和我关注的人的-->
+  <select id="selectMineAndMynoticeWeibo" resultMap="ResultMapWithBLOBs">
+  	select * from weibo where USER_ID= #{0} 
+  	or 
+  	USER_ID in 
+  	(select ATTENTION_BENOTICEDID from attention where ATTENTION_NOTICERID = #{0}) 
+  	order by WEIBO_PUBLISHTIME desc limit #{1},20  	
+  </select>
+  <!-- 选出某个用户的微博。一次最多20条 -->
+  <select id="selectOneUserWeibo" resultMap="ResultMapWithBLOBs">
+  	select * from weibo where USER_ID = #{0} order by WEIBO_PUBLISHTIME desc limit #{1},20
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from weibo
     where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jaybill.billblog.pojo.Weibo" >
     insert into weibo (WEIBO_ID, USER_ID, WEIBO_CONTENT, 
-      WEIBO_PUBLISHTIME, WEIBO_STATE, WEIBO_IMAGE
+      WEIBO_PUBLISHTIME, WEIBO_STATE, WEIBO_IMAGE,USER_NICKNAME,USER_HEADIMAGE
       )
     values (#{weiboId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{weiboContent,jdbcType=VARCHAR}, 
-      #{weiboPublishtime,jdbcType=TIMESTAMP}, #{weiboState,jdbcType=TINYINT}, #{weiboImage,jdbcType=LONGVARCHAR}
+      #{weiboPublishtime,jdbcType=TIMESTAMP}, #{weiboState,jdbcType=TINYINT}, #{weiboImage,jdbcType=LONGVARCHAR},
+      #{userNickname},#{userHeadimage}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Weibo" >

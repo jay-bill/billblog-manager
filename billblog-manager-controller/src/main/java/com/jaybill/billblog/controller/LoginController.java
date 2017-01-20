@@ -45,6 +45,8 @@ public class LoginController {
 		//如果获取的值不为空
 		//将用户id存到session里面
 		session.setAttribute("user_id", beSelectedUser.getUserId());//用户id存到session里面
+		//将基本信息存到session里面——当前用户
+		session.setAttribute("user_base_info", beSelectedUser);
 		//因为是post方式提交，所以重定向到tomainpage方法
 		return "redirect:/weibocontroller/tomainpage.do";
 	}

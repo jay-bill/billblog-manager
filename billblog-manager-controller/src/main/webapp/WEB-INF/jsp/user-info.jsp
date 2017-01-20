@@ -22,7 +22,9 @@
 		<div class="container" id="nav-con">
 			<!-- logo -->
 			<div class="col-md-2 col-xs-9" id="logo">
-				<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				<a href="/billblog-manager-controller/weibocontroller/tomainpage.do">
+					<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				</a>
 			</div>
 			<!-- 输入栏 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
@@ -35,7 +37,7 @@
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
-						<a href="main.jsp" class="dropdown-toggle">
+						<a href="/billblog-manager-controller/weibocontroller/tomainpage.do" class="dropdown-toggle">
 				          <span class="glyphicon glyphicon-home"></span>&nbsp;首页
 	               		</a>
 					</div>
@@ -69,7 +71,7 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right " role="menu" aria-labelledby="dropdownMenu1">
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tomainpage.do">
 							<span class="glyphicon glyphicon-home"></span>&nbsp;首页
 						</a>
 					</li>
@@ -107,18 +109,20 @@
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" id="top-bg-div">
 				<!-- 头像 -->
 				<div>
-					<img src="${user_base_info.userHeadimage}">
+					<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">
+						<img src="${user_base_info.userHeadimage}">
+					</a>			
 				</div>
 				<!-- 昵称 -->
 				<div>
-					<h3>${user_base_info.userNickname}</h3>
+					<h3><a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">${user_base_info.userNickname}</a></h3>
 					<p>
 						<c:set var="flagSignature" value="0"></c:set>
 						<c:if test="${user_info.userSignature eq null}">
 							<c:set var="flagSignature" value="1"></c:set>
 							编辑您的个性签名
 						</c:if>
-						<c:if test="${flagAddress eq 0}">
+						<c:if test="${flagSignature eq 0}">
 							${user_info.userSignature}
 						</c:if>							
 					</p>
@@ -130,7 +134,7 @@
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 func-select-div">
 				<div class="row">
-					<div class="col-xs-4"><a href="home.jsp">我的微博</a></div>
+					<div class="col-xs-4"><a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">我的微博</a></div>
 					<div class="col-xs-4"><a href="photo.jsp">我的相册</a></div>
 					<div class="col-xs-4">管理中心</div>
 				</div>
@@ -188,15 +192,45 @@
 							</p>
 							<p>
 								<span>性别</span>								
-								<span id="userSex">${user_info.userSex}</span>
+								<span id="userSex">
+									<c:if test="${user_info.userSex eq 0}">
+										男
+									</c:if>
+									<c:if test="${user_info.userSex eq 1}">
+										女
+									</c:if>
+								</span>
 							</p>
 							<p>
 								<span>性取向</span>
-								<span id="userTropism">${user_info.userTropism}</span>
+								<span id="userTropism">
+									<c:if test="${user_info.userTropism eq 0}">
+										异性恋
+									</c:if>
+									<c:if test="${user_info.userTropism eq 1}">
+										双性恋
+									</c:if>
+									<c:if test="${user_info.userTropism eq 2}">
+										同性恋
+									</c:if>
+								</span>
 							</p>
 							<p>
 								<span>感情状况</span>
-								<span id="userLoveState">${user_info.userLovestate}</span>
+								<span id="userLoveState">
+									<c:if test="${user_info.userLovestate eq 0}">
+										单身
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 1}">
+										恋爱中
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 2}">
+										已婚
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 3}">
+										离异
+									</c:if>
+								</span>
 							</p>
 							<p>
 								<span>生日</span>
@@ -235,41 +269,89 @@
 							<div>
 								<p>
 									<span>昵称</span>
-									<input name="userNickname" value="2395956@ww.cpm"/>
+									<input name="userNickname" value="${user_base_info.userNickname}"/>
 								</p>
 								<p>
 									<span>个性签名</span>
-									<input name="userSignature" value="这是个性签名！"/>
+									<input name="userSignature" value="${user_info.userSignature }"/>
 								</p>
 								<p>
 									<span>所在地</span>
-									<input name="userAddress" value="广西钦州">
+									<input name="userAddress" value="${user_info.userAddress }">
 								</p>
 								<p>
-									<span>性别</span>								
-									<input name="userSex" type="radio" value="0">男
-									<input name="userSex" type="radio" value="1">女
+									<span>性别</span>	
+									<c:if test="${user_info.userSex eq 0}">
+										<input name="userSex" type="radio" value="0" checked>男
+										<input name="userSex" type="radio" value="1">女
+									</c:if>							
+									<c:if test="${user_info.userSex eq 1}">
+										<input name="userSex" type="radio" value="0">男
+										<input name="userSex" type="radio" value="1" checked>女
+									</c:if>										
 								</p>
 								<p>
 									<span>性取向</span>
-									<select name="userTropism">
-										<option value="0">异性恋</option>
-										<option value="1">双性恋</option>
-										<option value="2">同性恋</option>
-									</select>
+									<c:if test="${user_info.userTropism eq 0}">
+										<select name="userTropism">
+											<option value="0" selected="selected">异性恋</option>
+											<option value="1">双性恋</option>
+											<option value="2">同性恋</option>
+										</select>
+									</c:if>
+									<c:if test="${user_info.userTropism eq 1}">
+										<select name="userTropism">
+											<option value="0">异性恋</option>
+											<option value="1" selected="selected">双性恋</option>
+											<option value="2">同性恋</option>
+										</select>
+									</c:if>
+									<c:if test="${user_info.userTropism eq 2}">
+										<select name="userTropism">
+											<option value="0" selected="selected">异性恋</option>
+											<option value="1">双性恋</option>
+											<option value="2" selected="selected">同性恋</option>
+										</select>
+									</c:if>
 								</p>
 								<p>
 									<span>感情状况</span>
-									<select name="userLovestate">
-										<option value="0">单身</option>
-										<option value="1">恋爱中</option>
-										<option value="2">已婚</option>
-										<option value="3">离异</option>
-									</select>
+									<c:if test="${user_info.userLovestate eq 0}">
+										<select name="userLovestate">
+											<option value="0" selected="selected">单身</option>
+											<option value="1">恋爱中</option>
+											<option value="2">已婚</option>
+											<option value="3">离异</option>
+										</select>
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 1}">
+										<select name="userLovestate">
+											<option value="0">单身</option>
+											<option value="1" selected="selected">恋爱中</option>
+											<option value="2">已婚</option>
+											<option value="3">离异</option>
+										</select>
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 2}">
+										<select name="userLovestate">
+											<option value="0">单身</option>
+											<option value="1">恋爱中</option>
+											<option value="2" selected="selected">已婚</option>
+											<option value="3">离异</option>
+										</select>
+									</c:if>
+									<c:if test="${user_info.userLovestate eq 3}">
+										<select name="userLovestate">
+											<option value="0">单身</option>
+											<option value="1">恋爱中</option>
+											<option value="2">已婚</option>
+											<option value="3" selected="selected">离异</option>
+										</select>
+									</c:if>
 								</p>
 								<p>
 									<span>生日</span>
-									<input name="userBirthday" value="1995-11-04">
+									<input name="userBirthday" value="${user_info.userBirthday }">
 								</p>
 								<p>
 									<span>注册时间</span>
@@ -277,11 +359,11 @@
 								</p>
 								<p>
 									<span>学校</span>
-									<input name="userSchool" value="钦州市第二中学"/>
+									<input name="userSchool" value="${user_info.userSchool}"/>
 								</p>
 								<p>
 									<span>工作</span>
-									<input name="userPosition" value="软件架构师"/>
+									<input name="userPosition" value="${user_info.userPosition}"/>
 								</p>
 							</div>
 						</form>									

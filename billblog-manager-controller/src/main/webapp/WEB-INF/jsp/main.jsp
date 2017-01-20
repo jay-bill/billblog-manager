@@ -20,7 +20,9 @@
 		<div class="container" id="nav-con">
 			<!-- logo -->
 			<div class="col-md-2 col-xs-9" id="logo">
-				<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				<a href="/billblog-manager-controller/weibocontroller/tomainpage.do">
+					<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				</a>
 			</div>
 			<!-- 输入栏 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
@@ -56,7 +58,7 @@
 						<span><a href="#" class="dropdown-toggle">昵称</a></span>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">设置</a>
+						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
 					</div>
 				</div>
 			</div>
@@ -110,7 +112,7 @@
 							</a>
 						</li>
 						<li>
-							<a role="menuitem" tabindex="-1" href="home.jsp">
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
 								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的主页
 							</a>
 						</li>
@@ -130,10 +132,10 @@
 				<div class="col-md-7 col-sm-10 col-xs-12" id="center-div">
 					
 					<!-- 微博输入框 -->
-					<div class="hidden-xs" id="input-text-div">
+					<form class="hidden-xs" id="input-text-div" action="broadcastweibo.do" method="post" enctype="multipart/form-data">
 						<p>有什么新鲜事儿想告诉大家</p>
 						<div>
-							<textarea></textarea>
+							<textarea name="weiboContent"></textarea>
 						</div>
 						<div class="container-fluid" id="input-text-under">
 							<div class="col-sm-10">
@@ -144,10 +146,10 @@
 								<a>头条文章</a>
 							</div>
 							<div class="col-sm-2">
-								<button type="button" class="btn btn-sm btn-warning" style="float:right;">发布 </button>
+								<input id="broadcast" type="submit" class="btn btn-sm btn-warning" style="float:right;" value="发布 ">
 							</div>
 						</div>
-					</div>
+					</form>
 					
 					<!-- 微博正文部分 -->
 					<div id="content-outer">
@@ -160,11 +162,11 @@
 						<div></div>
 						<!-- 用户头像 -->
 						<div>
-							<a href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${user_base_info.userId}"><img src="${user_base_info.userHeadimage}"></a>
+							<a href="tohomepage.do?userId=${user_base_info.userId}"><img title="我的主页" src="${user_base_info.userHeadimage}"></a>
 						</div>
 						
 						<div style="margin-top:-30px;text-align:center;">
-							<p>${user_base_info.userNickname}</p>
+							<p><a href="tohomepage.do?userId=${user_base_info.userId}">${user_base_info.userNickname}</a></p>
 							<div class="container-fluid">
 								<div class="col-xs-4 nums-div">
 									<div>${user_noticed_sum}</div>
@@ -232,4 +234,5 @@
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main-ajax.js"></script>
 </html>

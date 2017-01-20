@@ -71,7 +71,9 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t<div class=\"container\" id=\"nav-con\">\r\n");
       out.write("\t\t\t<!-- logo -->\r\n");
       out.write("\t\t\t<div class=\"col-md-2 col-xs-9\" id=\"logo\">\r\n");
-      out.write("\t\t\t\t<img alt=\"\" src=\"/billblog-manager-controller/resource/image/s_weibo.png\">\r\n");
+      out.write("\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/tomainpage.do\">\r\n");
+      out.write("\t\t\t\t\t<img alt=\"\" src=\"/billblog-manager-controller/resource/image/s_weibo.png\">\r\n");
+      out.write("\t\t\t\t</a>\r\n");
       out.write("\t\t\t</div>\r\n");
       out.write("\t\t\t<!-- 输入栏 -->\r\n");
       out.write("\t\t\t<div class=\"col-md-5 hidden-sm hidden-xs\">\r\n");
@@ -107,7 +109,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<span><a href=\"#\" class=\"dropdown-toggle\">昵称</a></span>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/logincontroller/loginout\" class=\"dropdown-toggle\">设置</a>\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/logincontroller/loginout\" class=\"dropdown-toggle\">注销</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -161,7 +163,9 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t\t</li>\r\n");
       out.write("\t\t\t\t\t\t<li>\r\n");
-      out.write("\t\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"home.jsp\">\r\n");
+      out.write("\t\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open\"></span>&nbsp;我的主页\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t\t</li>\r\n");
@@ -181,10 +185,10 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t<div class=\"col-md-7 col-sm-10 col-xs-12\" id=\"center-div\">\r\n");
       out.write("\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t<!-- 微博输入框 -->\r\n");
-      out.write("\t\t\t\t\t<div class=\"hidden-xs\" id=\"input-text-div\">\r\n");
+      out.write("\t\t\t\t\t<form class=\"hidden-xs\" id=\"input-text-div\" action=\"broadcastweibo.do\" method=\"post\" enctype=\"multipart/form-data\">\r\n");
       out.write("\t\t\t\t\t\t<p>有什么新鲜事儿想告诉大家</p>\r\n");
       out.write("\t\t\t\t\t\t<div>\r\n");
-      out.write("\t\t\t\t\t\t\t<textarea></textarea>\r\n");
+      out.write("\t\t\t\t\t\t\t<textarea name=\"weiboContent\"></textarea>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t<div class=\"container-fluid\" id=\"input-text-under\">\r\n");
       out.write("\t\t\t\t\t\t\t<div class=\"col-sm-10\">\r\n");
@@ -195,10 +199,10 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t\t<a>头条文章</a>\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\t<div class=\"col-sm-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-sm btn-warning\" style=\"float:right;\">发布 </button>\r\n");
+      out.write("\t\t\t\t\t\t\t\t<input id=\"broadcast\" type=\"submit\" class=\"btn btn-sm btn-warning\" style=\"float:right;\" value=\"发布 \">\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
+      out.write("\t\t\t\t\t</form>\r\n");
       out.write("\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t<!-- 微博正文部分 -->\r\n");
       out.write("\t\t\t\t\t<div id=\"content-outer\">\r\n");
@@ -211,17 +215,20 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<div></div>\r\n");
       out.write("\t\t\t\t\t\t<!-- 用户头像 -->\r\n");
       out.write("\t\t\t\t\t\t<div>\r\n");
-      out.write("\t\t\t\t\t\t\t<a href=\"/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=");
+      out.write("\t\t\t\t\t\t\t<a href=\"tohomepage.do?userId=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-      out.write("\"><img src=\"");
+      out.write("\"><img title=\"我的主页\" src=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userHeadimage}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\"></a>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t<div style=\"margin-top:-30px;text-align:center;\">\r\n");
-      out.write("\t\t\t\t\t\t\t<p>");
+      out.write("\t\t\t\t\t\t\t<p><a href=\"tohomepage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write('"');
+      out.write('>');
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userNickname}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-      out.write("</p>\r\n");
+      out.write("</a></p>\r\n");
       out.write("\t\t\t\t\t\t\t<div class=\"container-fluid\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"col-xs-4 nums-div\">\r\n");
       out.write("\t\t\t\t\t\t\t\t\t<div>");
@@ -295,6 +302,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/jquery.min.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/bootstrap.min.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/main/main.js\"></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/main/main-ajax.js\"></script>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

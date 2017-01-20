@@ -219,7 +219,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t  </div>\r\n");
       out.write("\t\t\t\t\t\t  <div class=\"form-group\">\r\n");
       out.write("\t\t\t\t\t\t    <div class=\"col-sm-12\">\r\n");
-      out.write("\t\t\t\t\t\t    \t<p>还没有微博？<a>立即注册！</a></p>\r\n");
+      out.write("\t\t\t\t\t\t    \t<p>还没有微博？<a href=\"regist.jsp\">立即注册！</a></p>\r\n");
       out.write("\t\t\t\t\t\t    </div>\r\n");
       out.write("\t\t\t\t\t\t  </div>\r\n");
       out.write("\t\t\t\t\t\t</form>\r\n");

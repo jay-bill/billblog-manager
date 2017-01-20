@@ -16,11 +16,6 @@
 	
 	changeImgSize();
 	
-	//改变图片大小
-	$(window).resize(function(){
-		changeImgSize();	
-	});
-	
 	//滚动条事件，对左边的信息div重新定位
 	$(window).scroll(function(){
 		var scrTop = $(window).scrollTop();
@@ -31,3 +26,9 @@
 			$("#left-div>:nth-child(2)").css("position","static");
 		}
 	});
+	  
+
+	    
+
+	    
+	    

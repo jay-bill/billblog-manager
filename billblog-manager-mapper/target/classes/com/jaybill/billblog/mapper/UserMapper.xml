@@ -28,7 +28,7 @@
   	select * from user where USER_ACCOUNT = #{userAccount}
   </select>
   <select id="selectByAccountAndPword" resultMap="BaseResultMap" parameterType="com.jaybill.billblog.pojo.User">
-  	select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME from user where USER_ACCOUNT = #{userAccount} and USER_PASSWORD = #{userPassword}
+  	select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME,USER_HEADIMAGE from user where USER_ACCOUNT = #{userAccount} and USER_PASSWORD = #{userPassword}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user

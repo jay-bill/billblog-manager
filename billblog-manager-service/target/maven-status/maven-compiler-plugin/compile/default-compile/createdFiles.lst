@@ -1,3 +1,4 @@
+com\jaybill\billblog\serviceimf\WeiboServiceImf.class
 com\jaybill\billblog\serviceimf\LoginServiceImf.class
 com\jaybill\billblog\service\LoginService.class
 com\jaybill\billblog\serviceimf\CommonServiceImf.class

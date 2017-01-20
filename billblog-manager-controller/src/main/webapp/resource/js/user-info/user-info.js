@@ -7,7 +7,7 @@
  	});
  	
  	$("#saveInfo").click(function(){
- 		alert("保存");
+ 		alert("已保存");
  		$.ajax({
 	 		url:"saveuserinfo.do",
 	 		type:"post",
@@ -19,8 +19,6 @@
 	 		success:function(d){
 	 			//更新之前的信息
 	 			//昵称
-	 			alert("开始");
-	 			alert($("#content-display-outer input[name='userNickname']").val());
 	 			$("#userNickname").text(
 	 					$("#content-display-outer input[name='userNickname']").val()
 	 			);
@@ -29,17 +27,47 @@
 	 					$("#content-display-outer input[name='userAddress']").val()
 	 			);
 	 			//性别
-	 			$("#userSex").text(
-	 					$("#content-display-outer radio[name='userSex']").val()
-	 			);
+	 			if($("#content-display-outer input[name='userSex']:checked").val()=="1"||
+	 			   $("#content-display-outer input[name='userSex']:checked").val()==1)
+	 			{
+	 				$("#userSex").text("女");
+	 			}
+	 			if($("#content-display-outer input[name='userSex']:checked").val()=="0"||
+	 	 			   $("#content-display-outer input[name='userSex']:checked").val()==0)
+	 	 			{
+	 	 				$("#userSex").text("男");
+	 	 			}
 	 			//性取向
-	 			$("#userTropism").text(
-	 					$("#content-display-outer radio[name='userTropism']").val()
-	 			);
+	 			if($("#content-display-outer select[name='userTropism'] option:selected").val()=="0"||
+	 			   $("#content-display-outer select[name='userTropism'] option:selected").val()==0){
+		 			$("#userTropism").text("异性恋");
+ 				}
+	 			if($("#content-display-outer select[name='userTropism'] option:selected").val()=="1"||
+	 	 		    $("#content-display-outer select[name='userTropism'] option:selected").val()==1){
+ 		 			$("#userTropism").text("双性恋");
+  				}
+	 			if($("#content-display-outer select[name='userTropism'] option:selected").val()=="2"||
+	 	 		    $("#content-display-outer select[name='userTropism'] option:selected").val()==2){
+ 		 			$("#userTropism").text("同性恋");
+  				}
+	 			
 	 			//情感状况
-	 			$("#userLoveState").text(
-	 					$("#content-display-outer radio[name='userLoveState']").val()
-	 			);
+	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="0"||
+	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==0){
+	 				$("#userLoveState").text("单身");
+	 			}
+	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="1"||
+	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==1){
+	 				$("#userLoveState").text("恋爱中");
+	 			}
+	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="2"||
+	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==2){
+	 				$("#userLoveState").text("已婚");
+	 			}
+	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="3"||
+	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==3){
+	 				$("#userLoveState").text("离异");
+	 			}
 	 			//生日
 	 			$("#userBirthday").text(
 	 					$("#content-display-outer input[name='userBirthday']").val()
@@ -52,7 +80,6 @@
 	 			$("#userPosition").text(
 	 					$("#content-display-outer input[name='userPosition']").val()
 	 			);
-	 			alert("最后");
 	 			$("#main-div").css("display","block");
 	 	 		$("#main-display-div").css("display","none");
 	 		}

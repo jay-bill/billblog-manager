@@ -166,7 +166,7 @@
 						  </div>
 						  <div class="form-group">
 						    <div class="col-sm-12">
-						    	<p>还没有微博？<a>立即注册！</a></p>
+						    	<p>还没有微博？<a href="regist.jsp">立即注册！</a></p>
 						    </div>
 						  </div>
 						</form>

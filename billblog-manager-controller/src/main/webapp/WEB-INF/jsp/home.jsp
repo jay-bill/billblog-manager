@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/home/home.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
-<title>孙悟空的微博</title>
+<title>${user_base_info.userNickname}的微博</title>
 </head>
 <body>
 	<!-- 导航栏 -->
@@ -21,7 +21,9 @@
 		<div class="container" id="nav-con">
 			<!-- logo -->
 			<div class="col-md-2 col-xs-9" id="logo">
-				<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				<a href="/billblog-manager-controller/weibocontroller/tomainpage.do">
+					<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				</a>
 			</div>
 			<!-- 输入栏 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
@@ -34,7 +36,7 @@
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
-						<a href="main.jsp" class="dropdown-toggle">
+						<a href="/billblog-manager-controller/weibocontroller/tomainpage.do" class="dropdown-toggle">
 				          <span class="glyphicon glyphicon-home"></span>&nbsp;首页
 	               		</a>
 					</div>
@@ -54,7 +56,7 @@
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right spe-nav-right">
-						<span><a href="#" class="dropdown-toggle">昵称到今年考九年级看你空间</a></span>
+						<span><a href="#" class="dropdown-toggle">${user_base_info.userNickname}</a></span>
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="#" class="dropdown-toggle">设置</a>
@@ -68,7 +70,7 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right " role="menu" aria-labelledby="dropdownMenu1">
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tomainpage.do">
 							<span class="glyphicon glyphicon-home"></span>&nbsp;首页
 						</a>
 					</li>
@@ -106,18 +108,24 @@
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" id="top-bg-div">
 				<!-- 头像 -->
 				<div>
-					<img src="${user_base_info.userHeadimage}">
+					<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">
+						<img src="${user_base_info.userHeadimage}">
+					</a>
 				</div>
 				<!-- 昵称 -->
 				<div>
-					<h3>${user_base_info.userNickname}</h3>
+					<h3>
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">
+						${user_base_info.userNickname}
+						</a>
+					</h3>
 					<p>
 						<c:set var="flagSignature" value="0"></c:set>
 						<c:if test="${user_info.userSignature eq null}">
 							<c:set var="flagSignature" value="1"></c:set>
 							编辑您的个性签名
 						</c:if>
-						<c:if test="${flagAddress eq 0}">
+						<c:if test="${flagSignature eq 0}">
 							${user_info.userSignature}
 						</c:if>							
 					</p>
@@ -129,13 +137,13 @@
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 func-select-div">
 				<div class="row">
-					<div class="col-xs-4"><a href="home.jsp">我的微博</a></div>
+					<div class="col-xs-4"><a href="tohomepage.do?userId=${user_base_info.userId}">我的微博</a></div>
 					<div class="col-xs-4"><a href="photo.jsp">我的相册</a></div>
 					<div class="col-xs-4">管理中心</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 第三行 -->
 		<div class="row" style="margin-top:20px;">
 			<div class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3" id="left-div">
@@ -167,7 +175,12 @@
 							您的性别是？
 						</c:if>
 						<c:if test="${flagSex eq 0}">
-							${user_info.userSex}
+							<c:if test="${user_info.userSex eq 0}">
+								男
+							</c:if>
+							<c:if test="${user_info.userSex eq 1}">
+								女
+							</c:if>
 						</c:if>						
 					</div>
 					<div class="info-div">
@@ -197,7 +210,18 @@
 							您的恋爱状态是？
 						</c:if>
 						<c:if test="${flagLovestate eq 0}">
-							${user_info.userLovestate}
+							<c:if test="${user_info.userLovestate eq 0}">
+								单身
+							</c:if>
+							<c:if test="${user_info.userLovestate eq 1}">
+								恋爱中
+							</c:if>
+							<c:if test="${user_info.userLovestate eq 2}">
+								已婚
+							</c:if>
+							<c:if test="${user_info.userLovestate eq 3}">
+								离异
+							</c:if>
 						</c:if>						
 					</div>
 					<div class="info-div">
@@ -207,7 +231,15 @@
 							您的性取向是？
 						</c:if>
 						<c:if test="${flagTropism eq 0}">
-							${user_info.userTropism}
+							<c:if test="${user_info.userTropism eq 0}">
+								异性恋
+							</c:if>
+							<c:if test="${user_info.userTropism eq 1}">
+								双性恋
+							</c:if>
+							<c:if test="${user_info.userTropism eq 2}">
+								同性恋
+							</c:if>
 						</c:if>		
 					</div>
 					<div class="info-div">
@@ -221,7 +253,7 @@
 						</c:if>	
 					</div>
 					<div class="info-div">
-						<a>编辑个人资料</a>
+						<a href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${user_base_info.userId}">编辑个人资料</a>
 					</div>
 				</div>
 				
@@ -257,9 +289,26 @@
 			</div>
 		</div>
 	</div>
+	<!-- 页尾 -->
+	<footer class="hidden-xs hidden-sm">
+		<div>
+			<span>微博客服</span>
+			<span>意见反馈</span>
+			<span>舞弊举报</span>
+			<span>开方平台</span>
+			<span>微博招聘</span>
+			<span>服务大厅</span>
+			<p>
+				<span>粤ICP证100780号</span>
+				<span>大粤网201430260259号</span>
+				<span>Copyright © 2017-2018 WEIBO 广州标新科技网络技术有限公司</span>
+			</p>
+		</div>
+	</footer>
 </body>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home-ajax.js"></script>
 </html>
