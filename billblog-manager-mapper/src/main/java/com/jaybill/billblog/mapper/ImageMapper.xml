@@ -18,15 +18,68 @@
     from image
     where IMAGE_ID = #{imageId,jdbcType=BIGINT}
   </select>
+  <!-- 根据用户id和分页获取图片 -->
+  <select id="selectByUserId" resultMap="BaseResultMap">
+  	select * from image where USER_ID = #{0} AND IMAGE_STATE=0 order by IMAGE_DATETIME desc limit #{1},#{2}
+  </select>
+  <select id="selectOnlyByUserId" resultMap="BaseResultMap">
+  	select * from image where USER_ID = #{0} AND IMAGE_STATE=0 order by IMAGE_DATETIME desc
+  </select>
+  <!-- 计算总默认图片的分组数 -->
+  <select id="countDefaultImageGroupSum" resultType="int">
+  	select COUNT(IMAGE_DATETIME) from image WHERE USER_ID=#{0} GROUP BY 
+	IMAGE_DATETIME ORDER by IMAGE_DATETIME DESC
+  </select>
+  <!-- 先算出按时间分组的5个分组总图片数 -->
+  <select id="selectGroupByTime" resultType="int">
+  	select COUNT(IMAGE_DATETIME) from image WHERE USER_ID=#{0} GROUP BY 
+	IMAGE_DATETIME ORDER by IMAGE_DATETIME DESC LIMIT #{1},5
+  </select>
+  <!-- 获取某个用户的所有相册名称 -->
+  <select id="selectImageAlbum" parameterType="long" resultType="String">
+  	select IMAGE_ALBUM from image where USER_ID = #{userId} group by IMAGE_ALBUM
+  </select>
+  <!-- 根据相册分组，选出每组第一张图片 路径-->
+  <select id="selectFirstImgByGroup" resultMap="BaseResultMap" parameterType="long">
+  	SELECT a.image_path,a.image_album FROM image a WHERE IMAGE_ID in 
+  	(SELECT MAX(IMAGE_ID) FROM image WHERE USER_ID=#{userId} GROUP BY IMAGE_ALBUM )
+  </select>
+  
+  
+  
+  
+  
+  <!-- 根据相册名称，获取图片 -->
+  <select id="selectByAlbumName" resultMap="BaseResultMap">
+  	select * from image where USER_ID=#{0} AND IMAGE_STATE=0 AND IMAGE_ALBUM=#{1} order by IMAGE_DATETIME desc limit #{2},#{3}
+  </select>
+   <!-- 先算出按时间分组的5个分组总图片数 -->
+  <select id="selectGroupByTimeAndAlbum" resultType="int">
+  	select COUNT(IMAGE_DATETIME) from image WHERE USER_ID=#{0} AND IMAGE_ALBUM=#{1} GROUP BY 
+	IMAGE_DATETIME ORDER by IMAGE_DATETIME DESC LIMIT #{2},5
+  </select>
+  <!-- 计算某个相册的分组数 -->
+  <select id="countAlbumImageGroupSum" resultType="int">
+  	select COUNT(IMAGE_DATETIME) from image WHERE USER_ID=#{0} AND IMAGE_ALBUM=#{1} GROUP BY 
+	IMAGE_DATETIME ORDER by IMAGE_DATETIME DESC
+  </select>
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from image
     where IMAGE_ID = #{imageId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jaybill.billblog.pojo.Image" >
-    insert into image (IMAGE_ID, USER_ID, IMAGE_ALBUM, 
+    insert into image (USER_ID, IMAGE_ALBUM, 
       IMAGE_PATH, IMAGE_DATETIME, IMAGE_STATE
       )
-    values (#{imageId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{imageAlbum,jdbcType=VARCHAR}, 
+    values ( #{userId,jdbcType=BIGINT}, #{imageAlbum,jdbcType=VARCHAR}, 
       #{imagePath,jdbcType=VARCHAR}, #{imageDatetime,jdbcType=TIMESTAMP}, #{imageState,jdbcType=TINYINT}
       )
   </insert>

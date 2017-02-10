@@ -25,12 +25,12 @@
 				</a>
 			</div>
 			<!-- 输入栏 -->
-			<div class="col-md-5 hidden-sm hidden-xs">
+			<form id="searchForm" class="col-md-5 hidden-sm hidden-xs" action="/billblog-manager-controller/searchcontroller/searchUser.do">
 				<div id="search-div">
-					<input>
-					<img alt="" src="/billblog-manager-controller/resource/image/search.png">
+					<input name="userNickname">
+					<img id="searchImg" alt="" src="/billblog-manager-controller/resource/image/search.png">
 				</div>
-			</div>
+			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
@@ -48,14 +48,22 @@
 						<a href="#" class="dropdown-toggle">
 				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
 	                	</a>
+					</div>					
+					<div class="col-md-2 nav-right spe-nav-right">
+						<span>
+							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
+							 class="dropdown-toggle">
+							 ${user_base_info.userNickname}
+							</a>
+						</span>					
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
+						<a href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+						  <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>
 	                	</a>
-					</div>
-					<div class="col-md-2 nav-right spe-nav-right">
-						<span><a href="#" class="dropdown-toggle">昵称</a></span>
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
@@ -69,31 +77,63 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-right " role="menu" aria-labelledby="dropdownMenu1">
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tomainpage.do">
 							<span class="glyphicon glyphicon-home"></span>&nbsp;首页
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;相册
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+				          <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>				          
+	                	</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showWriteWeiboDiv()">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;写微博
 						</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showSearchDiv()">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;搜索
+						</a>
+					</li>
+					<li role="presentation">						
+						<a id="mynicknameA" role="menuitem" tabindex="-1" 
+						href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+							<span style="color:blue;">${user_base_info.userNickname}</span>
+						</a>						
 					</li>
 					<li role="presentation" class="divider"></li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">登录</a>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=${user_id}">							
+							<span style="color:blue;">粉丝${user_fans_sum}</span>
+						</a>						
 					</li>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/attentioncontroller/tonoticelistpage.do?userId=${user_id}">							
+							<span style="color:blue;">关注${user_noticed_sum}</span>
+						</a>						
+					</li>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">							
+							<span style="color:blue;">微博${weibo_sum}</span>
+						</a>						
+					</li>
+					<li role="presentation" class="divider"></li>					
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">注册</a>
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/logincontroller/loginout">登出</a>
 					</li>
 				</ul>
 			</div>
@@ -117,8 +157,8 @@
 							</a>
 						</li>
 						<li>
-							<a role="menuitem" tabindex="-1" href="#">
-								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的收藏
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}">
+								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的相册
 							</a>
 						</li>
 						<li>
@@ -139,20 +179,25 @@
 						</div>
 						<div class="container-fluid" id="input-text-under">
 							<div class="col-sm-10">
-								<a>表情</a>
-								<a>图片</a>
+								<a href="javascript:void(0)">表情</a>
+								<a href="javascript:void(0)">图片</a>
 								<a>视频</a>
 								<a>话题</a>
-								<a>头条文章</a>
+								<input name="weiboImages" type="file" multiple  id="uploadImages" accept="image/*" onchange="setImagePreview(this)" style="display:none;"/>
 							</div>
 							<div class="col-sm-2">
-								<input id="broadcast" type="submit" class="btn btn-sm btn-warning" style="float:right;" value="发布 ">
+								<input id="broadcast" type="submit" class="btn btn-sm btn-warning" style="float:right;" value="发布 ">								
 							</div>
+						</div>
+						<!-- 预览栏 -->
+						<div id="previewDiv">
+							<img id="previewImg" src="">
 						</div>
 					</form>
 					
 					<!-- 微博正文部分 -->
 					<div id="content-outer">
+						<input type="hidden" value="${user_id}" id="hiddenId">
 						<!-- 待填充 -->
 					</div>			
 				</div>
@@ -162,23 +207,35 @@
 						<div></div>
 						<!-- 用户头像 -->
 						<div>
-							<a href="tohomepage.do?userId=${user_base_info.userId}"><img title="我的主页" src="${user_base_info.userHeadimage}"></a>
+							<a href="tohomepage.do?userId=${user_base_info.userId}"><img id="myHeadimage" title="我的主页" src="${user_base_info.userHeadimage}"></a>
 						</div>
 						
 						<div style="margin-top:-30px;text-align:center;">
-							<p><a href="tohomepage.do?userId=${user_base_info.userId}">${user_base_info.userNickname}</a></p>
+							<p><a id="nicknameA" href="tohomepage.do?userId=${user_base_info.userId}">${user_base_info.userNickname}</a></p>
 							<div class="container-fluid">
 								<div class="col-xs-4 nums-div">
-									<div>${user_noticed_sum}</div>
-									<div>关注</div>
+									<div>
+										<a href="/billblog-manager-controller/attentioncontroller/tonoticelistpage.do?userId=${user_id}">${user_noticed_sum}</a>
+									</div>
+									<div>
+										<a href="/billblog-manager-controller/attentioncontroller/tonoticelistpage.do?userId=${user_id}">关注</a>
+									</div>
 								</div>
 								<div class="col-xs-4 nums-div">
-									<div>${user_fans_sum}</div>
-									<div>粉丝</div>
+									<div>
+										<a href="/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=${user_id}">${user_fans_sum}</a>
+									</div>
+									<div>
+										<a href="/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=${user_id}">粉丝</a>
+									</div>
 								</div>
 								<div class="col-xs-4 nums-div">
-									<div>${weibo_sum}</div>
-									<div>微博</div>
+									<div>
+										<a href="tohomepage.do?userId=${user_base_info.userId}">${weibo_sum}</a>									
+									</div>
+									<div>
+										<a href="tohomepage.do?userId=${user_base_info.userId}">微博</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -228,11 +285,22 @@
 				<span>大粤网201430260259号</span>
 				<span>Copyright © 2017-2018 WEIBO 广州标新科技网络技术有限公司</span>
 			</p>
+			<p>
+				联系QQ:2399599130，
+				电话：18813296645
+			</p>
 		</div>
 	</footer>
 </body>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/like/like-weibo.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/comments/comments-ajax.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main-ajax.js"></script>
+<script type="text/javascript">
+	$("#searchImg").click(function(){
+		$("#searchForm").submit();
+	});
+</script>
 </html>

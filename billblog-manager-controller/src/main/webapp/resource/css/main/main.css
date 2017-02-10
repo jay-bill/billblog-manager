@@ -7,6 +7,9 @@
 	#hot-topic-div div{
 		border-bottom:2px solid gray;
 	}
+	#previewDiv{
+		margin-top:10px;
+	}
 	ul{
 		list-style:none;
 		padding:0px;
@@ -92,4 +95,9 @@
 	}
 	.nums-div{
 		overflow:hidden;
+	}
+	
+	.innerForwardBottomDiv{
+		width:22%;
+		display:inline-block;
 	}

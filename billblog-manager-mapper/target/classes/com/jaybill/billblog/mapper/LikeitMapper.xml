@@ -6,12 +6,48 @@
     <id column="BELIKE_ID" property="belikeId" jdbcType="BIGINT" />
     <id column="LIKE_DATETIME" property="likeDatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap type="com.jaybill.billblog.pojo.User" id="userMap">
+  	<id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="USER_IDENTITY" property="userIdentity" jdbcType="TINYINT" />
+    <result column="USER_STATE" property="userState" jdbcType="TINYINT" />
+    <result column="USER_DATETIME" property="userDatetime" jdbcType="TIMESTAMP" />
+    <result column="USER_HEADIMAGE" property="userHeadimage" jdbcType="VARCHAR" />
+    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+    <result column="USER_LEVEL" property="userLevel" jdbcType="TINYINT" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="com.jaybill.billblog.pojo.LikeitKey" >
     delete from likeit
     where LIKE_PEOPELEID = #{likePeopeleid,jdbcType=BIGINT}
       and BELIKE_ID = #{belikeId,jdbcType=BIGINT}
       and LIKE_DATETIME = #{likeDatetime,jdbcType=TIMESTAMP}
   </delete>
+  <!-- 取消点赞 -->
+  <delete id="deleteTogetherId">
+  	delete from likeit
+  	where LIKE_PEOPELEID=#{0} and BELIKE_ID = #{1}
+  </delete>
+  <!-- 判断是否点赞 -->
+  <select id="selectLikeWeibo" resultMap="BaseResultMap">
+  	select * from likeit where LIKE_PEOPELEID=#{0} and BELIKE_ID=#{1}
+  </select>
+  
+  <!-- 计算点赞总数 -->
+  <select id="selectLikeSum" parameterType="long" resultType="int">
+  	select COUNT(BELIKE_ID) from likeit where BELIKE_ID=#{belikeId}
+  </select>
+  
+  <!-- 选出点赞的人的信息 -->
+  <select id="selectUserLiked" resultMap="userMap">
+  	select * from user where USER_ID in
+  	(select LIKE_PEOPELEID from likeit where BELIKE_ID=#{0} order by LIKE_DATETIME desc)
+  	limit #{1},10
+  </select>
+  
+  <!-- 获取点赞时间 -->
+  <select id="selectLikeTime" resultType="java.sql.Timestamp">
+  	select LIKE_DATETIME from likeit where BELIKE_ID = #{0} order by LIKE_DATETIME desc limit #{1},10
+  </select>
   <insert id="insert" parameterType="com.jaybill.billblog.pojo.LikeitKey" >
     insert into likeit (LIKE_PEOPELEID, BELIKE_ID, LIKE_DATETIME
       )

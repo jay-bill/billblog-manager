@@ -17,6 +17,7 @@
 <title>孙悟空的微博</title>
 </head>
 <body>
+<!-- 导航栏 -->
 	<!-- 导航栏 -->
 	<div class="row navbar-fixed-top" id="nav"> 
 		<div class="container" id="nav-con">
@@ -27,12 +28,12 @@
 				</a>
 			</div>
 			<!-- 输入栏 -->
-			<div class="col-md-5 hidden-sm hidden-xs">
+			<form id="searchForm" class="col-md-5 hidden-sm hidden-xs" action="/billblog-manager-controller/searchcontroller/searchUser.do">
 				<div id="search-div">
-					<input>
-					<img alt="" src="/billblog-manager-controller/resource/image/search.png">
+					<input name="userNickname">
+					<img id="searchImg" alt="" src="/billblog-manager-controller/resource/image/search.png">
 				</div>
-			</div>
+			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
@@ -54,13 +55,18 @@
 					<div class="col-md-2 nav-right">
 						<a href="#" class="dropdown-toggle">
 				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
-	                	</a>
+	                	</a>						
 					</div>
 					<div class="col-md-2 nav-right spe-nav-right">
-						<span><a href="#" class="dropdown-toggle">昵称到今年考九年级看你空间</a></span>
+						<span>
+							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
+							 class="dropdown-toggle">
+							 ${user_base_info.userNickname}
+							</a>
+						</span>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">设置</a>
+						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
 					</div>
 				</div>
 			</div>
@@ -76,26 +82,45 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showWriteWeiboDiv()">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;写微博
 						</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">
-							<span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
+						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showSearchDiv()">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;搜索
 						</a>
+					</li>
+					<li role="presentation">						
+						<a id="mynicknameA" role="menuitem" tabindex="-1" 
+						href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+							<span style="color:blue;">${user_base_info.userNickname}</span>
+						</a>						
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=${user_id}">							
+							<span style="color:blue;">粉丝${user_fans_sum}</span>
+						</a>						
+					</li>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/attentioncontroller/tonoticelistpage.do?userId=${user_id}">							
+							<span style="color:blue;">关注${user_noticed_sum}</span>
+						</a>						
+					</li>
+					<li role="presentation">						
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">							
+							<span style="color:blue;">微博${weibo_sum}</span>
+						</a>						
 					</li>
 					<li role="presentation" class="divider"></li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">登录</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="#">注册</a>
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/logincontroller/loginout">登出</a>
 					</li>
 				</ul>
 			</div>
@@ -131,15 +156,7 @@
 		</div>
 		<!-- 第二行 -->
 		<!-- 功能选项 -->
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 func-select-div">
-				<div class="row">
-					<div class="col-xs-4"><a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info.userId}">我的微博</a></div>
-					<div class="col-xs-4"><a href="photo.jsp">我的相册</a></div>
-					<div class="col-xs-4">管理中心</div>
-				</div>
-			</div>
-		</div>
+
 		
 		<!-- 第三行 -->
 		<div class="row" style="margin-top:20px;">
@@ -179,7 +196,9 @@
 						<div>
 							<span>基本信息</span>
 							&nbsp;
-							<button>编辑</button>
+							<c:if test="${user_base_info.userId eq user_id}">
+								<button>编辑</button>
+							</c:if>
 						</div>
 						<div>
 							<p>
@@ -217,7 +236,7 @@
 							</p>
 							<p>
 								<span>感情状况</span>
-								<span id="userLoveState">
+								<span id="userLovestate">
 									<c:if test="${user_info.userLovestate eq 0}">
 										单身
 									</c:if>
@@ -281,6 +300,10 @@
 								</p>
 								<p>
 									<span>性别</span>	
+									<c:if test="${user_info.userSex eq null}">
+										<input name="userSex" type="radio" value="0">男
+										<input name="userSex" type="radio" value="1">女
+									</c:if>	
 									<c:if test="${user_info.userSex eq 0}">
 										<input name="userSex" type="radio" value="0" checked>男
 										<input name="userSex" type="radio" value="1">女
@@ -316,6 +339,15 @@
 								</p>
 								<p>
 									<span>感情状况</span>
+									<c:if test="${user_info.userLovestate eq null}">
+										<select name="userLovestate">
+											<option>&nbsp;</option>
+											<option value="0">单身</option>
+											<option value="1">恋爱中</option>
+											<option value="2">已婚</option>
+											<option value="3">离异</option>
+										</select>
+									</c:if>
 									<c:if test="${user_info.userLovestate eq 0}">
 										<select name="userLovestate">
 											<option value="0" selected="selected">单身</option>
@@ -395,4 +427,9 @@
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/user-info/user-info.js"></script>
+<script type="text/javascript">
+	$("#searchImg").click(function(){
+		$("#searchForm").submit();
+	});
+</script>
 </html>

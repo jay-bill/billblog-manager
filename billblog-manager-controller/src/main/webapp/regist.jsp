@@ -30,19 +30,21 @@
 	<!-- 邮箱注册 -->
 	<div class="container" id="form-div">
 		<form role="form">
-		  <div class="form-group">
+		  <div id="line1" class="form-group">
 		    <label for="name">邮箱：</label>
 		    <input type="text" class="form-control" name="email" id="name" placeholder="请输入常用邮箱">
 		  </div>
-		  <div class="form-group">
+		  <div id="line2" class="form-group">
 		    <label for="inputfile">密码：</label>
 		    <input type="password" class="form-control" name="pword" id="name" placeholder="6到16位英文数字密码，区分大小写">
 		  </div>
-		  <div class="form-group">
-		    <label for="inputfile">验证码：</label>
-		    <input type="text" class="form-control" id="name" style="width:120px;">
+		  <div id="line3" class="form-group">
+		    <label for="inputfile">验证码：</label><br>
+		    <input type="text" id="name" style="width:120px;">
+		    <img id='verifyCodeImg' src="">
+		    <input type='hidden' style="float:left;">
 		  </div>
-		  <button type="button" name="regist" class="btn btn-primary btn-block">注册</button>
+		  <button id="phone_submit" type="button" name="regist" class="btn btn-primary btn-block">注册</button>
 		  <div style="margin-top:20px;">
 		     <span>我已阅读标<a href="#">微博协议</a>并同意遵守协议</span><input type="radio" name="select" style="width:13px;height:13px;">
 		  </div>

@@ -14,7 +14,7 @@ public class Weibo {
     public String getUserNickname() {
 		return userNickname;
 	}
-
+    
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
@@ -35,6 +35,19 @@ public class Weibo {
 
     private String weiboImage;
 
+    public Weibo(){}
+    
+    public Weibo(Long userId,String userNickname,Timestamp weiboPublishtime,
+     String userHeadimage,String weiboContent,Byte weiboState,String weiboImage){
+    	this.userNickname=userNickname;
+    	this.userId= userId;
+    	this.userHeadimage=userHeadimage;
+    	this.weiboContent=weiboContent;
+    	this.weiboState=weiboState;
+    	this.weiboImage=weiboImage;
+    	this.weiboPublishtime=weiboPublishtime;
+    }
+    
     public Long getWeiboId() {
         return weiboId;
     }

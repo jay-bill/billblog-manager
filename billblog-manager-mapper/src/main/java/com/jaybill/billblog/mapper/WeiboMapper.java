@@ -38,4 +38,24 @@ public interface WeiboMapper {
 	 * @return
 	 */
 	List<Weibo> selectOneUserWeibo(long userId, long offset);
+	
+	/**
+	 * 删除微博
+	 * @param weiboId
+	 * @param newState 0表示正常状态，1表示删除状态，2表示转发状态，3表示收藏状态
+	 * @return
+	 */
+	int deleteWeibo(long weiboId,byte delState);
+
+	/**
+	 * 更新昵称
+	 * @param userNickname
+	 */
+	void updateNicknameCauseBySaveUpateInfo(Long userId, String userNickname);
+
+	/**
+	 * 获取所有包含图片的微博
+	 * @return
+	 */
+	List<Weibo> selectContainImages();
 }

@@ -84,6 +84,10 @@ public class UserInfoController{
 		userInfo.setUserId(userId);
 		//更新信息
 		commonService.updateUserInfo(user,userInfo);
+		//更新存在user_base_info里面的内容
+		User userBase = (User)request.getSession().getAttribute("user_base_info");
+		if(userBase!=null)
+			userBase.setUserNickname(userNickname);
 		//为了能在ajax执行success只需返回一个空值即可；如果返回null则执行ajax里面的error
 		String [] returnValue={};
 		return returnValue;

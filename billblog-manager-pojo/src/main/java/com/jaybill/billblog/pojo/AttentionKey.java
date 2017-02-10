@@ -5,6 +5,13 @@ public class AttentionKey {
 
     private Long attentionBenoticedid;
 
+    public AttentionKey(){}
+
+    public AttentionKey(Long attentionNoticerid,Long attentionBenoticedid){
+    	this.attentionBenoticedid = attentionBenoticedid;
+    	this.attentionNoticerid = attentionNoticerid;
+    }
+    
     public Long getAttentionNoticerid() {
         return attentionNoticerid;
     }

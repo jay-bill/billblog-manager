@@ -14,25 +14,27 @@
 <link rel="stylesheet" href="resource/css/index/index.css"></link>
 </head>
 <body>
-	<!-- 导航栏 -->
+<!-- 导航栏 -->
 	<div class="row navbar-fixed-top" id="nav"> 
 		<div class="container" id="nav-con">
 			<!-- logo -->
 			<div class="col-md-2 col-xs-9" id="logo">
-				<img alt="" src="resource/image/s_weibo.png">
+				<a href="/billblog-manager-controller/weibocontroller/tomainpage.do">
+					<img alt="" src="/billblog-manager-controller/resource/image/s_weibo.png">
+				</a>
 			</div>
 			<!-- 输入栏 -->
-			<div class="col-md-5 hidden-sm hidden-xs">
+			<form id="searchForm" class="col-md-5 hidden-sm hidden-xs" action="/billblog-manager-controller/searchcontroller/searchUser.do">
 				<div id="search-div">
-					<input>
-					<img alt="" src="resource/image/search.png">
+					<input name="userNickname">
+					<img id="searchImg" alt="" src="/billblog-manager-controller/resource/image/search.png">
 				</div>
-			</div>
+			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
+						<a href="/billblog-manager-controller/weibocontroller/tomainpage.do" class="dropdown-toggle">
 				          <span class="glyphicon glyphicon-home"></span>&nbsp;首页
 	               		</a>
 					</div>
@@ -51,11 +53,11 @@
 				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
 	                	</a>
 					</div>
-					<div class="col-md-2 nav-right">
-						<a href="regist.jsp" class="dropdown-toggle">注册</a>
+					<div class="col-md-2 nav-right spe-nav-right">
+						<span><a href="#" class="dropdown-toggle">昵称</a></span>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="index.jsp" class="dropdown-toggle">登录</a>
+						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
 					</div>
 				</div>
 			</div>
@@ -96,7 +98,7 @@
 			</div>
 		</div>
 	</div>
-	
+		
 	<!-- 主题内容 -->
 	<div class="container" id="main-outer">
 		<div class="container-fluid">
@@ -210,4 +212,9 @@
 	    	}
 	    });
 	 </script>
+	 <script type="text/javascript">
+		$("#searchImg").click(function(){
+			$("#searchForm").submit();
+		});
+	</script>
 </html>

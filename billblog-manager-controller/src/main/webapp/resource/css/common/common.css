@@ -8,6 +8,7 @@
 		background:#fff;
 		margin:0px;
 		height:50px;
+		z-index:10;
 	}
 	#nav-con{
 		height:50px;
@@ -86,4 +87,17 @@
 		overflow:hidden;
 		word-break:break-all;
 		word-wrap:break-word;
+	}
+	
+	.comment{
+		padding:0px;
+		margin:0px;
+	}
+	
+	#bigImageBlackDiv{
+		background:black;
+		width:100%;
+		top:0px;
+		left:0px;
+		z-index:11;
 	}

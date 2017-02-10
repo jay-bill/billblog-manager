@@ -7,6 +7,17 @@
     <id column="ATTENTION_BENOTICEDID" property="attentionBenoticedid" jdbcType="BIGINT" />
     <result column="ATTENTION_DATETIME" property="attentionDatetime" jdbcType="TIMESTAMP" />
   </resultMap>
+   <resultMap id="userMap" type="com.jaybill.billblog.pojo.User" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="USER_IDENTITY" property="userIdentity" jdbcType="TINYINT" />
+    <result column="USER_STATE" property="userState" jdbcType="TINYINT" />
+    <result column="USER_DATETIME" property="userDatetime" jdbcType="TIMESTAMP" />
+    <result column="USER_HEADIMAGE" property="userHeadimage" jdbcType="VARCHAR" />
+    <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR" />
+    <result column="USER_LEVEL" property="userLevel" jdbcType="TINYINT" />
+  </resultMap>
   
   <sql id="Base_Column_List" >
     ATTENTION_NOTICERID, ATTENTION_BENOTICEDID, ATTENTION_DATETIME
@@ -27,7 +38,22 @@
   <select id="selectBenoticedSum" parameterType="long" resultType="int">
   	select COUNT(ATTENTION_BENOTICEDID) from attention where ATTENTION_NOTICERID = #{attentionNoticerid}
   </select>
-  
+  <!-- 获取粉丝列表的基本信息，每次选出5个粉丝 -->
+  <select id="selectFansListUser" resultMap="userMap">
+  	select USER_ID,USER_IDENTITY,USER_HEADIMAGE,USER_NICKNAME,USER_LEVEL from user where 
+  	USER_ID in 
+  	(select ATTENTION_NOTICERID from attention where ATTENTION_BENOTICEDID=#{0}
+  	 order by ATTENTION_DATETIME desc)
+  	 limit #{1},5  	
+  </select>
+  <!-- 获取关注列表的基本信息 -->
+  <select id="selectNoticeListUser" resultMap="userMap">
+  	select USER_ID,USER_IDENTITY,USER_HEADIMAGE,USER_NICKNAME,USER_LEVEL from user where 
+  	USER_ID in 
+  	(select ATTENTION_BENOTICEDID from attention where ATTENTION_NOTICERID=#{0}
+ 	 order by ATTENTION_DATETIME desc)
+ 	 limit #{1},5 
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.jaybill.billblog.pojo.AttentionKey" >
     delete from attention
     where ATTENTION_NOTICERID = #{attentionNoticerid,jdbcType=BIGINT}

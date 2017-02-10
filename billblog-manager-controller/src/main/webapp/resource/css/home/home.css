@@ -76,7 +76,10 @@
 	.func-select-div>:first-child>:first-child{
 		border-bottom:2px solid red;
 	}
-	
+	.innerForwardBottomDiv{
+		width:22%;
+		display:inline-block;
+	}
 	/*手机设备左边不显示*/
 	@media(max-width:766px){
 		#left-div{
@@ -90,3 +93,5 @@
 	@media(max-width:992px){
 		
 	}
+	
+	

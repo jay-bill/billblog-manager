@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jaybill.billblog.email.EmailUtil;
 import com.jaybill.billblog.exception.UserAccountException;
 import com.jaybill.billblog.exception.UserAccountExistedException;
+import com.jaybill.billblog.pojo.User;
 import com.jaybill.billblog.pojo.Userinfo;
+import com.jaybill.billblog.service.CommonService;
 import com.jaybill.billblog.service.RegistService;
 import com.jaybill.billblog.validate.DeleteVerifyCodeUtils;
 import com.jaybill.billblog.validate.VerifyCodeUtils;
@@ -37,6 +39,8 @@ public class RegistController {
 
 	@Autowired
 	private RegistService service;
+	@Autowired
+	private CommonService commonService;
 	/**
 	 * 获取验证码
 	 * @param request
@@ -143,6 +147,8 @@ public class RegistController {
 			request.getSession().removeAttribute("user_password");
 			//将用户的id保存到session
 			request.getSession().setAttribute("user_id",userId);
+			User userBaseInfo = commonService.getUserBaseInfo(userId);
+			request.getSession().setAttribute("user_base_info", userBaseInfo);
 			//将用户id插入到Userinfo中
 			Userinfo userInfo = new Userinfo();
 			userInfo.setUserId(userId);

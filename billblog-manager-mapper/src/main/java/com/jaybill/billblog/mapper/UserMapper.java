@@ -11,8 +11,12 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Long userId);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateForeignHeadImage(User record);
 
+    int updateByPrimaryKeySelective(User record);
+    
+    int updateUserHeadImage(User record);
+    
     int updateByPrimaryKey(User record);
     
     User selectByUserAccount(String userAccount);
@@ -23,4 +27,6 @@ public interface UserMapper {
      * @return
      */
     User selectByAccountAndPword(User inUser);
+
+	User selectByNickname(String userNickname);
 }

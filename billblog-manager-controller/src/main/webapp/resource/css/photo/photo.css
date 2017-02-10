@@ -24,6 +24,7 @@
 	}
 	
 	#photo-main-div{
+		margin-bottom:100px;
 	}
 	
 	#photo-main-div>:first-child{
@@ -47,6 +48,40 @@
 	p{
 		padding:10px;
 		margin-bottom:0px;
+	}
+	
+	.dividePage{
+		padding:10px;
+		margin-top:5px;
+		background:white;
+	}
+	
+	.dividePage a{
+		display:inline-block;
+		width:60px;
+		text-align:center;
+		border-left:1px solid #b9b9b9;
+		margin-bottom:5px;
+	}
+	.dividePage>:first-child{
+		border:0px;
+	}
+	
+	.dividePage a:hover{
+		background:#f9f9f9;
+	}
+	
+	#breadNav{
+		padding-left:20px;
+		padding-top:15px;
+	}
+	
+	.ajaxPageA{
+		display:inline-block;
+		width:50px;
+		text-align:center;
+		margin:10px 0px;
+		border-left:1px solid gray;
 	}
 	
 	@media(min-width:992px){

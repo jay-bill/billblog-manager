@@ -9,6 +9,14 @@ public class LikeitKey {
 
     private Timestamp likeDatetime;
 
+    public LikeitKey(Long likePeopeleid,Long belikeId,Timestamp likeDatetime){
+    	this.likePeopeleid=likePeopeleid;
+    	this.belikeId=belikeId;
+    	this.likeDatetime=likeDatetime;
+    }
+    
+    public LikeitKey(){}
+    
     public Long getLikePeopeleid() {
         return likePeopeleid;
     }

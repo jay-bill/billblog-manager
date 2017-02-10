@@ -30,6 +30,11 @@
   <select id="selectByAccountAndPword" resultMap="BaseResultMap" parameterType="com.jaybill.billblog.pojo.User">
   	select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME,USER_HEADIMAGE from user where USER_ACCOUNT = #{userAccount} and USER_PASSWORD = #{userPassword}
   </select>
+  <select id="selectByNickname" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select USER_ID, USER_ACCOUNT, USER_IDENTITY, USER_STATE, USER_DATETIME,USER_NICKNAME,USER_HEADIMAGE from user
+  	where USER_NICKNAME = #{userNickname}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user
     where USER_ID = #{userId,jdbcType=BIGINT}
@@ -89,6 +94,13 @@
       </if>
     </trim>
   </insert>
+   <!-- 更新头像，先更新外键，在更新本表 -->
+  <update id="updateForeignHeadImage" parameterType="com.jaybill.billblog.pojo.User" >
+    update weibo set USER_HEADIMAGE = #{userHeadimage} where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+   <update id="updateUserHeadImage" parameterType="com.jaybill.billblog.pojo.User" >
+    update user set USER_HEADIMAGE = #{userHeadimage} where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.User" >
     update user
     <set >
@@ -109,6 +121,9 @@
       </if>
       <if test="userNickname != null" >
         USER_NICKNAME = #{userNickname,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userHeadimage != null">
+      	USER_HEADIMAGE = #{userHeadimage}
       </if>
     </set>
     where USER_ID = #{userId,jdbcType=BIGINT}

@@ -239,4 +239,45 @@
 				}
 			}
 		});
+	   
+	 //电脑版判断格式是否正确
+	   $("#phone_submit").click(function(){
+		   flag=2;		  
+//		   if(phoneEmailIsTure())
+//			   return;
+//		   if(phonePwordIsTure())
+//			   return;
+		 //判断验证码填写是否正确，区分大小写
+		   if($("#line3 input[type='hidden']").val()!=$("#line3 input[type='text']").val().toUpperCase()){
+			   alert("验证码有误！请重新输入");
+			   $("#line3 input[type='text']").val("");//清空输入
+			   getVerifyCode();//更新验证码
+			   return;
+		   }else{//如果验证码填写正确,跳转到后台,后台发送邮件（短信）			      
+			   var email = $("#line1 input[name='email']").val();
+			   var password = $("#line2 input[type='password']").val();
+			   $.ajax({
+				  url:"registcontroller/submitemail",
+				  type:"get",
+				  data:{userAccount:email,userPassword:password},//传递账户密码给控制器
+				  dataType:"json",
+				  success:function(info){
+					  if(info[0]=="0"){
+						  //错误页面			
+						  var errpage = " http://jaybill.tunnel.qydev.com/billblog-manager-controller/error-user.jsp?errinfo="+info[1];
+						  window.location.href=errpage;
+					  }else if(info[0]=="1"){
+						  //邮件已发送
+						  alert("邮件已发送！");	
+						  $("#form-div").html("<p>请到您的邮箱获取验证码<<</p>");					  
+						  $("#form-div").append("<form id='form' action='registcontroller/makesureregist'></form>")
+						  $("#form").append("<input id='makeSureText' name='inputCode' type='text'/>");
+						  $("#form").append("<input id='makeSureBtn' type='submit'>确认注册</button>");
+						  $("#mainDiv").css("text-align","center");
+						  $("#mainDiv p").css("margin-top","30px");						 
+					  }				 
+				  }
+			   });
+		   }
+	   });
    }

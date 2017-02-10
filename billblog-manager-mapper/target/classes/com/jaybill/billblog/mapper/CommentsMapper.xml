@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jaybill.billblog.mapper.CommentsMapper" >
+ 
   <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Comments" >
     <id column="COMMENT_ID" property="commentId" jdbcType="BIGINT" />
     <result column="BECOMMENT_ID" property="becommentId" jdbcType="BIGINT" />
@@ -9,20 +10,39 @@
     <result column="COMMENT_DATETIME" property="commentDatetime" jdbcType="TIMESTAMP" />
     <result column="COMENT_STATE" property="comentState" jdbcType="TINYINT" />
   </resultMap>
+ 
   <sql id="Base_Column_List" >
     COMMENT_ID, BECOMMENT_ID, COMMENT_REVIEWERID, COMMENT_CONTENT, COMMENT_DATETIME, 
     COMENT_STATE
   </sql>
+ 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from comments
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
   </select>
+ 
+  <!-- 获取评论 ，每次10条-->
+  <select id="selectCommentByBecommentId" resultMap="BaseResultMap">
+  	select * from comments where (BECOMMENT_ID=#{0} and COMENT_STATE!=1) order by COMMENT_DATETIME desc limit #{1},10
+  </select>
+  <!-- 计算每条微博的评论总数 -->
+  <select id="selectCommentSum" resultType="int" parameterType="long">
+    select COUNT(*) from comments where (BECOMMENT_ID=#{weiboId} and COMENT_STATE!=1)
+  </select>
+  <!-- 逻辑删除 -->
+  <update id="deleteByUserIdCommentId">
+  	update comments set COMENT_STATE = 1 where COMMENT_REVIEWERID = #{0} and COMMENT_ID = #{1} 
+  </update>
+  <update id="deleteByCmtId">
+  	update comments set COMENT_STATE = 1 where COMMENT_ID = #{0} 
+  </update>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from comments
     where COMMENT_ID = #{commentId,jdbcType=BIGINT}
   </delete>
+ 
   <insert id="insert" parameterType="com.jaybill.billblog.pojo.Comments" >
     insert into comments (COMMENT_ID, BECOMMENT_ID, COMMENT_REVIEWERID, 
       COMMENT_CONTENT, COMMENT_DATETIME, COMENT_STATE
@@ -31,6 +51,7 @@
       #{commentContent,jdbcType=VARCHAR}, #{commentDatetime,jdbcType=TIMESTAMP}, #{comentState,jdbcType=TINYINT}
       )
   </insert>
+  
   <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Comments" >
     insert into comments
     <trim prefix="(" suffix=")" suffixOverrides="," >

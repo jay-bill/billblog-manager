@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+	#main-div{
+		margin-top:50px;
+		margin-bottom:20px;
+	}
+	
+	#main-div h2{
+		font-family:"微软雅黑";
+		color:white;
+	}
+	
+	#input-div{
+		padding:0px;
+	}
+	
+	#main-div input{
+
+	}
+	
+	.person-id{
+		border:0px;
+		margin-top:20px;
+		height:130px;
+		background:white;
+	}
+	
+	#head-div{
+		float:left;
+		margin-top:15px;
+	}
+	
+	#head-img-id{
+		width:100px;
+		height:100px;
+		border-radius:100px;
+	}
+	
+	#content-div{
+		float:left;
+		margin-left:5px;
+		display:block;
+		padding:7.5px;
+	}
+	
+	.rela-bottom{
+		width:20%;
+		float:left;
+	}
+	
+	#avoidNoticeAId,#noticeAId{
+		display:none;
+	}
+	
+	@media(max-width:450px){
+		#head_img_id{
+			width:70px;
+			height:70px;
+		}
+		
+	.rela-bottom{
+		width:33.3%;
+		float:left;
+	}
+	}

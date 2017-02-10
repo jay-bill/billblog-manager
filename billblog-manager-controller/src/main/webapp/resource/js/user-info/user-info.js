@@ -52,21 +52,21 @@
   				}
 	 			
 	 			//情感状况
-	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="0"||
-	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==0){
-	 				$("#userLoveState").text("单身");
+	 			if($("#content-display-outer select[name='userLovestate'] option:selected").val()=="0"||
+	 				$("#content-display-outer select[name='userLovestate'] option:selected").val()==0){
+	 				$("#userLovestate").text("单身");
 	 			}
-	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="1"||
-	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==1){
-	 				$("#userLoveState").text("恋爱中");
+	 			if($("#content-display-outer select[name='userLovestate'] option:selected").val()=="1"||
+	 				$("#content-display-outer select[name='userLovestate'] option:selected").val()==1){
+	 				$("#userLovestate").text("恋爱中");
 	 			}
-	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="2"||
-	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==2){
-	 				$("#userLoveState").text("已婚");
+	 			if($("#content-display-outer select[name='userLovestate'] option:selected").val()=="2"||
+	 				$("#content-display-outer select[name='userLovestate'] option:selected").val()==2){
+	 				$("#userLovestate").text("已婚");
 	 			}
-	 			if($("#content-display-outer input[name='userLoveState'] option:selected").val()=="3"||
-	 				$("#content-display-outer input[name='userLoveState'] option:selected").val()==3){
-	 				$("#userLoveState").text("离异");
+	 			if($("#content-display-outer select[name='userLovestate'] option:selected").val()=="3"||
+	 				$("#content-display-outer select[name='userLovestate'] option:selected").val()==3){
+	 				$("#userLovestate").text("离异");
 	 			}
 	 			//生日
 	 			$("#userBirthday").text(

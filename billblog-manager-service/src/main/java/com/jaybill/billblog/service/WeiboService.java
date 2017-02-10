@@ -26,4 +26,18 @@ public interface WeiboService {
 	List<Weibo> getOneUserWeibo(long userId, long offset);
 
 	void broadcastWeibo(Weibo weibo);
+
+	/**
+	 * 逻辑删除微博
+	 * @param weiboId
+	 * @return
+	 */
+	int deleteWeibo(long weiboId);
+
+	/**
+	 * 根据微博id获取微博内容
+	 * @param oriWeiboId
+	 * @return
+	 */
+	Weibo getOneWeiboById(long oriWeiboId);
 }

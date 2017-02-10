@@ -44,7 +44,12 @@
 		margin-top:0px;
 		font-family:"微软雅黑";
 	}
-	
+	.inputTextDiv{
+		background:gainsboro;		
+	}
+	.inputText{
+		padding-top:20px;
+	}
 	/*手机设备*/
 	@media(max-width:450px){
 		#main-outer,#main-outer>div{

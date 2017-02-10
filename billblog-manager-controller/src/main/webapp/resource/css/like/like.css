@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+	.person-id{
+		border:0px;
+		margin-top:20px;
+		height:130px;
+		background:white;
+	}
+	
+	.head-div{
+		float:left;
+		margin-top:15px;
+	}
+	
+	.head-img-id{
+		width:100px;
+		height:100px;
+		border-radius:100px;
+	}
+	
+	.content-div{
+		float:left;
+		margin-left:5px;
+		display:block;
+		padding:7.5px;
+	}
+	

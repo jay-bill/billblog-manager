@@ -1,5 +1,8 @@
 package com.jaybill.billblog.service;
 
+import java.util.List;
+
+import com.jaybill.billblog.pojo.Info;
 import com.jaybill.billblog.pojo.User;
 import com.jaybill.billblog.pojo.Userinfo;
 
@@ -37,4 +40,32 @@ public interface CommonService {
 	 * 更新用户的详细信息
 	 */
 	void updateUserInfo(User user,Userinfo userInfo);
+	
+	/**
+	 * 获取某个用户的图片的所有分组的图片数目
+	 * @param userId
+	 * @return
+	 */
+	 List<Integer> getDefaultImageGroupSum(long userId);
+	 
+	 /**
+		 * 获取未读的通知数目
+		 * @param beinfoId
+		 * @return
+		 */
+		public int selectSumNoRead(long beinfoId);
+		
+		/**
+		 * 通过被通知者的id获取通知的信息
+		 * @param beinfoId
+		 * @return
+		 */
+		public List<Info> selectByBeinfoId(long beinfoId);
+		
+		/**
+		 * 已读后，将通知状态改为1
+		 * @param beinfoId
+		 * @return
+		 */
+		public int updateInfoState(long beinfoId);
 }

@@ -1,12 +1,17 @@
 package com.jaybill.billblog.serviceimf;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jaybill.billblog.mapper.AttentionMapper;
+import com.jaybill.billblog.mapper.ImageMapper;
+import com.jaybill.billblog.mapper.InfoMapper;
 import com.jaybill.billblog.mapper.UserMapper;
 import com.jaybill.billblog.mapper.UserinfoMapper;
 import com.jaybill.billblog.mapper.WeiboMapper;
+import com.jaybill.billblog.pojo.Info;
 import com.jaybill.billblog.pojo.User;
 import com.jaybill.billblog.pojo.Userinfo;
 import com.jaybill.billblog.service.CommonService;
@@ -22,6 +27,10 @@ public class CommonServiceImf implements CommonService {
 	private AttentionMapper attentionMapper;
 	@Autowired
 	private WeiboMapper weiboMapper;
+	@Autowired
+	private ImageMapper imageMapper;
+	@Autowired
+	private InfoMapper infoReadMapper;
 	
 	/**
 	 *选出用户的账户基本信息
@@ -85,5 +94,43 @@ public class CommonServiceImf implements CommonService {
 	public void updateUserInfo(User user,Userinfo userInfo) {
 		infoMapper.updateByPrimaryKey(userInfo);
 		userMapper.updateByPrimaryKeySelective(user);
+		//更新weibo表中的用户昵称
+		weiboMapper.updateNicknameCauseBySaveUpateInfo(user.getUserId(),user.getUserNickname());
+	}
+
+	/**
+	 * 获取某个用户图片的所有分组的图片数目
+	 */
+	@Override
+	public List<Integer> getDefaultImageGroupSum(long userId) {
+		List<Integer> resList = imageMapper.countDefaultImageGroupSum(userId);
+		return resList;
+	}
+	
+	/**
+	 * 获取未读的通知数目
+	 * @param beinfoId
+	 * @return
+	 */
+	public int selectSumNoRead(long beinfoId){
+		return infoReadMapper.selectSumNoRead(beinfoId);
+	}
+	
+	/**
+	 * 通过被通知者的id获取通知的信息
+	 * @param beinfoId
+	 * @return
+	 */
+	public List<Info> selectByBeinfoId(long beinfoId){
+		return infoReadMapper.selectByBeinfoId(beinfoId);
+	}
+	
+	/**
+	 * 已读后，将通知状态改为1
+	 * @param beinfoId
+	 * @return
+	 */
+	public int updateInfoState(long beinfoId){
+		return infoReadMapper.updateInfoState(beinfoId);
 	}
 }

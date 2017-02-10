@@ -27,10 +27,10 @@
     where USER_ID = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.jaybill.billblog.pojo.Userinfo" >
-    insert into userinfo (USER_ID, USER_NICKNAME, USER_SEX, 
+    insert into userinfo (USER_ID, USER_SEX, 
       USER_BIRTHDAY, USER_SCHOOL, USER_POSITION, 
       USER_LOVESTATE, USER_SIGNATURE)
-    values (#{userId,jdbcType=BIGINT}, #{userNickname,jdbcType=VARCHAR}, #{userSex,jdbcType=TINYINT}, 
+    values (#{userId,jdbcType=BIGINT}, #{userSex,jdbcType=TINYINT}, 
       #{userBirthday,jdbcType=DATE}, #{userSchool,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, 
       #{userLovestate,jdbcType=TINYINT}, #{userSignature,jdbcType=VARCHAR})
   </insert>
