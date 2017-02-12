@@ -15,14 +15,60 @@
 	    	$(".content-text").css("padding-right",10);
 	    }
 	    
+	    /*************************登录弹出层***********************************************/
+		var w,h;
+		function getSrceenWH(){
+			w = $(window).width();
+			h = $(window).height();
+			$('#dialogBg').width(w).height(h);
+		}
+		
+		window.onresize = function(){  
+			getSrceenWH();
+		}  
+		$(window).resize();  
+		
+	    function closeLoginDiv(thisA){
+	    	openLoginDiv(thisA);
+	    	//关闭弹窗
+			$('#dialogBg').fadeOut(300,function(){
+				$('#dialog').addClass('bounceOutUp').fadeOut();
+			});
+	    }
+	    function openLoginDiv(thisA){
+	    	var className = $(thisA).attr('class');
+			$('#dialogBg').fadeIn(300);
+			$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+	    }
+	    /****************************************************************************/
+	    
 	    //关注
-		function notice(beNoticedId){
+		function notice(beNoticedId,thisA){
 			$.ajax({
 				url:"/billblog-manager-controller/attentioncontroller/addattention.do",
 				type:"post",
 				data:{beNoticedId:beNoticedId},
 				dataType:"json",
-				error:function(){alert("关注失败！");},
+				error:function(){
+					var dataDiv =  "<div id='dialogBg'></div>" +
+									"<div id='dialog' class='animated'>"+
+									"<img class='dialogIco' width='50' height='50' src='/billblog-manager-controller/resource/plug-res/images/ico.png'/>"+
+										"<div class='dialogTop'>"+
+											"<a href='javascript:;' class='claseDialogBtn' onclick='closeLoginDiv(this)'>关闭</a>"+
+										"</div>"+
+										"<form action='/billblog-manager-controller/logincontroller/login' method='post' id='editForm'>"+
+											"<ul class='editInfos'>"+
+												"<li><label style='color:black;'>账号：<input type='text' name='userAccount' required class='ipt'/></label></li>"+
+												"<li><label style='color:black;'>密码：<input type='text' name='userPassword' required class='ipt'/></label></li>"+
+												"<li><a href='/billblog-manager-controller/regist.jsp'>还没账号？立即注册！</a></li>"+
+												"<li><input type='submit' value='确认提交' class='submitBtn' /></li>"+
+											"</ul>"+
+										"</form>"+
+									"</div>";
+					$("body").append(dataDiv);
+					getSrceenWH();		
+					openLoginDiv(thisA);
+				},
 				success:function(num){
 					alert("关注成功");
 					$("#noticeAId").css("display","none");
@@ -107,6 +153,13 @@
 	    }
 	 	//获取微博的ajax	   
 	 	function updateWeiboContent(offset){
+	 		//先删除“点击加载更多”的按钮
+	 		if($("#loadmore").length>0){
+ 				$("#loadmore").remove();//先删除
+ 			 }
+ 			//添加“正在加载的功能”
+	 		var imgLoad="<div id='tmpLoading' style='text-align:center;'><img src='/billblog-manager-controller/resource/image/loading.gif' style='width:50px;'/></div>";
+	 		$("#content-outer").append(imgLoad);
 	 		var userId = getUrlRequest();
  			$.ajax({
 		 		url:"/billblog-manager-controller/weibocontroller/getoneuserweibo.do",
@@ -114,16 +167,12 @@
 		 		data:{userId:userId,offset:offset},
 		 		dataType:"json",
 		 		error:function(){alert("出错了");},
-		 		success:function(weibos){			 			
-		 			 if($("#loadmore").length>0){
-		 				$("#loadmore").remove();//先删除
-		 			 }
-		 			 
+		 		success:function(weibos){			 					 			 
 		 			 for(i=0;i<weibos[0].length;i++){
 		 				//默认状态时
 		 				if(weibos[0][i].weiboState==0){
-		 					 var suffix1 = "</div><div class='float'></div><div class='container-fluid text-bottom-div'><div class='col-xs-3'><a>收藏</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='forwardWeiboDiv("+weibos[0][i].weiboId+",this)'>转发</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='getComments("+weibos[0][i].weiboId+",this,0)'>评论"+weibos[3][i]+"</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='likeweibo("+weibos[0][i].weiboId+",this)'>点赞</a>"+"&nbsp;<a target='_blank' href='/billblog-manager-controller/likecontroller/showlikepeople.do?belikeId="+weibos[0][i].weiboId+"&offset=0'>"+weibos[1][i]+"</a></div></div></div>";
-			 				 var suffix2 = "</div><div class='float'></div><div class='container-fluid text-bottom-div'><div class='col-xs-3'><a>收藏</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='forwardWeiboDiv("+weibos[0][i].weiboId+",this)'>转发</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='getComments("+weibos[0][i].weiboId+",this,0)'>评论"+weibos[3][i]+"</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='avoidLike("+weibos[0][i].weiboId+",this)'>已赞</a>"+"&nbsp;<a target='_blank' href='/billblog-manager-controller/likecontroller/showlikepeople.do?belikeId="+weibos[0][i].weiboId+"&offset=0'>"+weibos[1][i]+"</a></div></div></div>";
+		 					 var suffix1 = "</div><div class='float'></div><div class='container-fluid text-bottom-div'><div class='col-xs-3'><a>收藏</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='forwardWeiboDiv("+weibos[0][i].weiboId+",this)'>转发</a></div><div class='col-xs-3'><a href='javascript:void(0)' class='rollIn' onclick='getComments("+weibos[0][i].weiboId+",this,0)'>评论"+weibos[3][i]+"</a></div><div class='col-xs-3'><a href='javascript:void(0)' class='rollIn' onclick='likeweibo("+weibos[0][i].weiboId+",this)'>点赞</a>"+"&nbsp;<a target='_blank' href='/billblog-manager-controller/likecontroller/showlikepeople.do?belikeId="+weibos[0][i].weiboId+"&offset=0'>"+weibos[1][i]+"</a></div></div></div>";
+			 				 var suffix2 = "</div><div class='float'></div><div class='container-fluid text-bottom-div'><div class='col-xs-3'><a>收藏</a></div><div class='col-xs-3'><a href='javascript:void(0)' onclick='forwardWeiboDiv("+weibos[0][i].weiboId+",this)'>转发</a></div><div class='col-xs-3'><a href='javascript:void(0)' class='rollIn' onclick='getComments("+weibos[0][i].weiboId+",this,0)'>评论"+weibos[3][i]+"</a></div><div class='col-xs-3'><a href='javascript:void(0)' class='rollIn' onclick='avoidLike("+weibos[0][i].weiboId+",this)'>已赞</a>"+"&nbsp;<a target='_blank' href='/billblog-manager-controller/likecontroller/showlikepeople.do?belikeId="+weibos[0][i].weiboId+"&offset=0'>"+weibos[1][i]+"</a></div></div></div>";
 			 				 var data = "<div class='row content'><div class='content-head'><a href='tohomepage.do?userId="+weibos[0][i].userId+"'><img width='50px' height='50px' src='"+weibos[0][i].userHeadimage+"'></a></div><div class='content-text' id='tempId'><h4><a>"+weibos[0][i].userNickname+"</a></h4><p style='margin-bottom:10px;color:#808080;'>"+
 				 						new Date(weibos[0][i].weiboPublishtime).toLocaleString()+"</p>"+weibos[0][i].weiboContent+"<br>";			 				 
 			 				 if(weibos[0][i].userId==$("#mynicknameA").attr("href").split("?userId=")[1]){
@@ -329,15 +378,50 @@
 			 				 $("#content-outer").append(data);
 		 				}
 		 			 }
+		 			 //加载更多
 		 			 if(weibos[0].length<10){
 				 			$("#content-outer").append("<div style='text-align:center;'>已加载全部</div>");
 		 			 }else{
 				 			$("#content-outer").append("<div style='text-align:center;'><button id='loadmore' onclick='updateWeiboContent("+$(".content").length+")'>点击加载更多</button></div>");
 		 			 }
+		 			 
+		 			 //删除加载中的图片
+		 			 $("#tmpLoading").fadeOut(100,function(){
+		 				$("#tmpLoading").remove();
+ 					 });
+		 			 
+		 			 //css重新定位
 		 			 var counter1 = setInterval(calTextWidth,80);//强制运行这个函数
 				     setTimeout(function(){
 				    	clearInterval(counter1);//2s后停止运行
 				     },2000);
+				     /*******************css样式************************************/					     
+					   //头像翻转
+					 	$(".content-head img").mouseenter(function(){
+					 		$(this).addClass("headRotate");
+					 	});
+					 	$(".content-head img").mouseleave(function(){
+					 		$(this).addClass("headLeaveRotate");
+					 		$(this).removeClass("headRotate");
+					 		var tmp = $(this);
+					 		setTimeout(function(){
+					 			tmp.removeClass("headLeaveRotate");
+					 		},150);
+					 	});
+					 	
+					 	//相片翻转
+					 	$(".weiboImage").mouseenter(function(){
+					 		$(this).addClass("headRotate");
+					 	});
+					 	$(".weiboImage").mouseleave(function(){
+					 		$(this).addClass("headLeaveRotate");
+					 		$(this).removeClass("headRotate");
+					 		var tmp = $(this);
+					 		setTimeout(function(){
+					 			tmp.removeClass("headLeaveRotate");
+					 		},150);
+					 	});
+					 	/*******************************************************/
 		 		}
 		 	});
 	 		calTextWidth();

@@ -151,14 +151,59 @@
 			}
 		});
 	}
+	/*************************登录弹出层***********************************************/
+	var w,h;
+	function getSrceenWH(){
+		w = $(window).width();
+		h = $(window).height();
+		$('#dialogBg').width(w).height(h);
+	}
+	
+	window.onresize = function(){  
+		getSrceenWH();
+	}  
+	$(window).resize();  
+	
+    function closeLoginDiv(thisA){
+    	openLoginDiv(thisA);
+    	//关闭弹窗
+		$('#dialogBg').fadeOut(300,function(){
+			$('#dialog').addClass('bounceOutUp').fadeOut();
+		});
+    }
+    function openLoginDiv(thisA){
+    	var className = $(thisA).attr('class');
+		$('#dialogBg').fadeIn(300);
+		$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+    }
+    /****************************************************************************/
 	//关注
-	function notice(beNoticedId){
+	function notice(beNoticedId,thisA){
 		$.ajax({
 			url:"/billblog-manager-controller/attentioncontroller/addattention.do",
 			type:"post",
 			data:{beNoticedId:beNoticedId},
 			dataType:"json",
-			error:function(){alert("关注失败！");},
+			error:function(){
+				var dataDiv =  "<div id='dialogBg'></div>" +
+								"<div id='dialog' class='animated'>"+
+								"<img class='dialogIco' width='50' height='50' src='/billblog-manager-controller/resource/plug-res/images/ico.png'/>"+
+									"<div class='dialogTop'>"+
+										"<a href='javascript:;' class='claseDialogBtn' onclick='closeLoginDiv(this)'>关闭</a>"+
+									"</div>"+
+									"<form action='/billblog-manager-controller/logincontroller/login' method='post' id='editForm'>"+
+										"<ul class='editInfos'>"+
+											"<li><label style='color:black;'>账号：<input type='text' name='userAccount' required class='ipt'/></label></li>"+
+											"<li><label style='color:black;'>密码：<input type='text' name='userPassword' required class='ipt'/></label></li>"+
+											"<li><a href='/billblog-manager-controller/regist.jsp'>还没账号？立即注册！</a></li>"+
+											"<li><input type='submit' value='确认提交' class='submitBtn' /></li>"+
+										"</ul>"+
+									"</form>"+
+								"</div>";
+				$("body").append(dataDiv);
+				getSrceenWH();		
+				openLoginDiv(thisA);
+			},
 			success:function(num){
 				alert("关注成功");
 				$("#noticeAId").css("display","none");

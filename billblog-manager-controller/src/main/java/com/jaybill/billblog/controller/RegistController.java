@@ -28,6 +28,7 @@ import com.jaybill.billblog.service.CommonService;
 import com.jaybill.billblog.service.RegistService;
 import com.jaybill.billblog.validate.DeleteVerifyCodeUtils;
 import com.jaybill.billblog.validate.VerifyCodeUtils;
+import com.jaybill.billblog.website.WebsiteNames;
 /**
  * 主要完成注册功能的控制，包括获取验证码：getVerifyCode()、发送邮件submitEmail()
  * @author jaybill
@@ -119,11 +120,30 @@ public class RegistController {
 			request.getSession().setAttribute("email_code", emailCode);//存到session中
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-		String [] userErrorInfo = {"1"};//0有异常，1表示正常执行
+		}
+		//成功后，把1和用户账号返回ajax
+		String [] userErrorInfo = {"1",userAccount};//0有异常，1表示正常执行
 		return userErrorInfo;
 	}
 	
+	/**
+	 * 重新获取验证码
+	 * @param userAccount
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="submitemailagain",produces={"application/json;charset=utf-8"})
+	public String[] submitEmail(@RequestParam("userAccount") String userAccount,HttpServletRequest request){
+		//发送邮件		
+		try {
+			String emailCode = EmailUtil.submitEmail(userAccount); //给emailCode赋值
+			request.getSession().setAttribute("email_code", emailCode);//存到session中
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new String[]{};
+	}
 	/**
 	 * 该方法点击邮件上的链接才会触发
 	 * 将用户信息填进数据库
@@ -131,8 +151,9 @@ public class RegistController {
 	 * @param session
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value="makesureregist")
-	public String makeSureRegist(@RequestParam("inputCode") String inputCode,
+	public String[] makeSureRegist(@RequestParam("inputCode") String inputCode,
 			HttpServletRequest request){
 		//判断输入的邮箱验证码和emailCode是否相等			
 		System.out.println("emailCode:"+request.getSession().getAttribute("email_code"));
@@ -145,6 +166,7 @@ public class RegistController {
 			//除移之前保存的账户、密码的session
 			request.getSession().removeAttribute("user_account");
 			request.getSession().removeAttribute("user_password");
+			request.getSession().removeAttribute("email_code");
 			//将用户的id保存到session
 			request.getSession().setAttribute("user_id",userId);
 			User userBaseInfo = commonService.getUserBaseInfo(userId);
@@ -155,9 +177,10 @@ public class RegistController {
 			service.addUserinfo(userInfo);
 			//为了防止用户刷新页面报错，重定向到安全页面
 			//在同一个应用程序内，重定向不会使得session失效
-			return "redirect:/weibocontroller/tomainpage.do";
+			//重定向到用户信息编辑页面
+			return new String[]{WebsiteNames.userInfoPage+userId};
 		}else{
-			throw new UserAccountException("输入的邮箱验证码错误！");
+			return null;
 		}
 	}
 }

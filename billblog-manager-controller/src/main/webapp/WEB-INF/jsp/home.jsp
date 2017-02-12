@@ -9,10 +9,16 @@
 <link rel="SHORTCUT ICON" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/home/home.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
+<style>
+	.text-bottom-div div{
+		padding:0px;
+	}
+</style>
 <title>${other_user_base_info.userNickname}的微博</title>
 </head>
 <body>
@@ -74,39 +80,47 @@
 				<a class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-align-justify"></span>&nbsp;菜单
 				</a>
-				<ul class="dropdown-menu dropdown-menu-right " role="menu" aria-labelledby="dropdownMenu1">
+				<ul class="dropdown-menu dropdown-menu-right " role="menu" aria-labelledby="dropdownMenu1">					
 					<li role="presentation">
 						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tomainpage.do">
 							<span class="glyphicon glyphicon-home"></span>&nbsp;首页
 						</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
-							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
-						</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showWriteWeiboDiv()">
-							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;写微博
-						</a>
-					</li>
+					</li>					
+					<c:if test="${user_id>0}">
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+								<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
+							</a>
+						</li>
+					</c:if>
+					<c:if test="${user_id>0}">
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showWriteWeiboDiv()">
+								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;写微博
+							</a>
+						</li>
+					</c:if>
 					<li role="presentation">
 						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showSearchDiv()">
 							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;搜索
 						</a>
 					</li>
-					<li role="presentation">						
-						<a id="mynicknameA" role="menuitem" tabindex="-1" 
-						href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
-							<span style="color:blue;">${user_base_info.userNickname}</span>
-						</a>						
-					</li>
-					<li role="presentation">						
-						<a role="menuitem" tabindex="-1" 
-						href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${user_id}">
-							<span style="color:blue;">编辑信息</span>
-						</a>						
-					</li>
+					<c:if test="${user_id>0}">
+						<li role="presentation">						
+							<a id="mynicknameA" role="menuitem" tabindex="-1" 
+							href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+								<span style="color:blue;">${user_base_info.userNickname}</span>
+							</a>						
+						</li>
+					</c:if>
+					<c:if test="${user_id eq other_user_base_info.userId}">
+						<li role="presentation">						
+							<a role="menuitem" tabindex="-1" 
+							href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${user_id}">
+								<span style="color:blue;">编辑信息</span>
+							</a>						
+						</li>
+					</c:if>
 					<li role="presentation">						
 						<a role="menuitem" tabindex="-1" 
 						href="/billblog-manager-controller/userinfocontroller/touserinfo.do?userId=${other_user_base_info.userId}">
@@ -168,9 +182,9 @@
 					</p>
 					<c:if test="${other_user_base_info.userId ne user_id}">
 						<div>
-							<button id="noticeAId" onclick="notice(${other_user_base_info.userId})" class="btn btn-info" style="display:none;">关注</button>
-							<button id="avoidNoticeAId" onclick="avoidNotice(${other_user_base_info.userId})" class="btn btn-success" style="display:none;">已关注</button>
-							<button id="avoidNoticeAIdEach" onclick="avoidNotice(${other_user_base_info.userId})" class="btn btn-default" style="display:none;">互相关注</button>
+							<button id="noticeAId" onclick="notice(${other_user_base_info.userId},this)" class="btn btn-info" style="display:none;">关注</button>
+							<button id="avoidNoticeAId" onclick="avoidNotice(${other_user_base_info.userId},this)" class="btn btn-success" style="display:none;">已关注</button>
+							<button id="avoidNoticeAIdEach" onclick="avoidNotice(${other_user_base_info.userId},this)" class="btn btn-default" style="display:none;">互相关注</button>
 						</div>
 					</c:if>
 				</div>
@@ -371,6 +385,18 @@
 <script type="text/javascript">
 	$("#searchImg").click(function(){
 		$("#searchForm").submit();
+	});
+	//logo翻转
+	$("#logo img").mouseenter(function(){
+		$(this).addClass("rotateYLogo");
+	});
+	$("#logo img").mouseleave(function(){
+		$(this).addClass("rotatoYLogoLeave");
+		$(this).removeClass("rotateYLogo");
+		var tmp = $(this);
+		setTimeout(function(){
+			tmp.removeClass("rotatoYLogoLeave");
+		},600); 
 	});
 </script>
 </html>

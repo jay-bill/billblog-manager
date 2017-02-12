@@ -16,7 +16,34 @@
 		clearInterval(counter)
 	},5000);
 
-
+	/****************************弹出登录层****************************************/
+		var w,h;
+		function getSrceenWH(){
+			w = $(window).width();
+			h = $(window).height();
+			$('#dialogBg').width(w).height(h);
+		}
+		
+		window.onresize = function(){  
+			getSrceenWH();
+		}  
+		$(window).resize();  
+		
+	    function closeLoginDiv(thisA){
+	    	openLoginDiv(thisA);
+	    	//关闭弹窗
+			$('#dialogBg').fadeOut(300,function(){
+				$('#dialog').addClass('bounceOutUp').fadeOut();
+			});
+	    }
+	    function openLoginDiv(thisA){
+	    	var className = $(thisA).attr('class');
+			$('#dialogBg').fadeIn(300);
+			$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+	    }
+	  /*****************************************************************************/
+	  
+	    
 	  /**
 	  * 点赞
 	  */
@@ -33,7 +60,27 @@
 			 data:{belikeId:belikeId,beinfoId:beinfoId},
 			 dataType:"json",
 			 error:function(){
-				 alert("点赞失败，请重试"+" "+thisA.href);
+				 var dataDiv =  "<div id='dialogBg'></div>" +
+								"<div id='dialog' class='animated'>"+
+								"<img class='dialogIco' width='50' height='50' src='/billblog-manager-controller/resource/plug-res/images/ico.png'/>"+
+									"<div class='dialogTop'>"+
+										"<a href='javascript:;' class='claseDialogBtn' onclick='closeLoginDiv(this)'>关闭</a>"+
+									"</div>"+
+									"<form action='/billblog-manager-controller/logincontroller/login' method='post' id='editForm'>"+
+										"<ul class='editInfos'>"+
+											"<li><label>账号：<input type='text' name='userAccount' required class='ipt'/></label></li>"+
+											"<li><label>密码：<input type='text' name='userPassword' required class='ipt'/></label></li>"+
+											"<li><a href='/billblog-manager-controller/regist.jsp'>还没账号？立即注册！</a></li>"+
+											"<li><input type='submit' value='确认提交' class='submitBtn' /></li>"+
+										"</ul>"+
+									"</form>"+
+								"</div>";
+				/**
+				 * 对弹出层的操作
+				 */
+				$("body").append(dataDiv);
+				getSrceenWH();		
+				openLoginDiv(thisA);
 			 },
 			 success:function(like){
 				alert("点赞成功！"); 

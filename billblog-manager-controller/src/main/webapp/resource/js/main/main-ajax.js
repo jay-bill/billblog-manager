@@ -65,17 +65,21 @@
 		    //显示用户数据 
 		 	//获取微博的ajax	   
 		 	function updateWeiboContent(value){
+		 		//先删除“点击加载更多”
+		 		 if($("#loadmore").length>0){
+	 				$("#loadmore").remove();//先删除
+	 			 }	
+		 		 //正在加载的提示动态图
+		 		var imgLoad="<div id='tmpLoading' style='text-align:center;'><img src='/billblog-manager-controller/resource/image/loading.gif' style='width:50px;'/></div>";
+		 		$("#content-outer").append(imgLoad);
+		 		
 	 			$.ajax({	 				
 			 		url:"getmineandmynoticeweibo.do",
 			 		type:"get",
 			 		data:{offset:value},
 			 		dataType:"json",
 			 		error:function(){alert("出错了");},
-			 		success:function(weibos){			 			
-			 			 if($("#loadmore").length>0){
-			 				$("#loadmore").remove();//先删除
-			 			 }
-			 			 
+			 		success:function(weibos){			 						 					 			 
 			 			 for(i=0;i<weibos[0].length;i++){
 			 				//默认状态时
 			 				if(weibos[0][i].weiboState==0){
@@ -285,19 +289,54 @@
 			 					 }
 			 					 else if(weibos[2][i]==1&&(weiboContents[9]=="0"||weiboContents[9]==0)){
 			 						data=data1+suffix2;//组装
-			 					 }
-				 				 $("#content-outer").append(data);
-			 				}
+			 					 }			 					
+				 				 $("#content-outer").append(data);				 				 
+			 				}//转发结束
 			 			 }
+			 			 //加载更多
 			 			 if(weibos[0].length<10){
 					 			$("#content-outer").append("<div style='text-align:center;'>已加载全部</div>");
 			 			 }else{
 					 			$("#content-outer").append("<div style='text-align:center;'><button id='loadmore' onclick='updateWeiboContent("+$(".content").length+")'>点击加载更多</button></div>");
 			 			 }
+			 			 
+			 			 //删除加载中的图片
+			 			 $("#tmpLoading").fadeOut(100,function(){
+			 				$("#tmpLoading").remove();
+	 					 });
+			 			 
+			 			 //css定位
 			 			 var counter1 = setInterval(calTextWidth,80);//强制运行这个函数
 					     setTimeout(function(){
 					    	clearInterval(counter1);//2s后停止运行
 					     },2000);
+					 /*******************css样式************************************/					     
+					   //头像翻转
+					 	$(".content-head img").mouseenter(function(){
+					 		$(this).addClass("headRotate");
+					 	});
+					 	$(".content-head img").mouseleave(function(){
+					 		$(this).addClass("headLeaveRotate");
+					 		$(this).removeClass("headRotate");
+					 		var tmp = $(this);
+					 		setTimeout(function(){
+					 			tmp.removeClass("headLeaveRotate");
+					 		},150);
+					 	});
+					 	
+					 	//相片翻转
+					 	$(".weiboImage").mouseenter(function(){
+					 		$(this).addClass("headRotate");
+					 	});
+					 	$(".weiboImage").mouseleave(function(){
+					 		$(this).addClass("headLeaveRotate");
+					 		$(this).removeClass("headRotate");
+					 		var tmp = $(this);
+					 		setTimeout(function(){
+					 			tmp.removeClass("headLeaveRotate");
+					 		},150);
+					 	});
+					 	/*******************************************************/
 			 		}
 			 	});
 		 		calTextWidth();
@@ -338,9 +377,7 @@
 			    	calTextWidth();
 			    });
 		    });
-		    
-		 	updateWeiboContent(0);	//获取数据		
-		    
+ 
 		 	var counter = setInterval(calTextWidth,80);//强制运行这个函数
 		    setTimeout(function(){
 		    	clearInterval(counter);//2s后停止运行
@@ -444,3 +481,5 @@
 		    	$("body").css("overflow","auto");
 		    	$(".weiboImage").attr("onclick","showBigImage(this)");
 		    }
+		    
+			updateWeiboContent(0);	//获取数据	

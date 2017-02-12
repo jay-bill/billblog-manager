@@ -142,7 +142,12 @@ public class WeiboController {
 		//微博
 		List<Weibo> weiboList = weiboService.getOneUserWeibo(userId,offset);		
 		//自己的id
-		long myId = (long)request.getSession().getAttribute("user_id");
+		long myId = -1;
+		if(request.getSession()!=null){
+			if(request.getSession().getAttribute("user_id")!=null){
+				myId = (long)request.getSession().getAttribute("user_id");
+			}
+		}		
 		List<Object> list = getWeibo(weiboList,myId,request);
 		return list;
 	}	
@@ -237,9 +242,15 @@ public class WeiboController {
 				return "##$$%&$*&##";
 			}else if(!resStr.contains("@_@")){ 
 					int likeSumOri = likeService.getLikeSum(weibo.getWeiboId());
-					int isLikeOri = likeService.selectIsAlreadyLike(
-									(long)request.getSession().getAttribute("user_id"), 
-									weibo.getWeiboId());
+					//先默认我的id为-1，如果session存在：表明不是游客的话，改变myId；
+					//如果是游客的话，id=-1;
+					long myId = -1;
+					if(request.getSession()!=null){
+						if(request.getSession().getAttribute("user_id")!=null){
+							myId = (long)request.getSession().getAttribute("user_id");
+						}
+					}
+					int isLikeOri = likeService.selectIsAlreadyLike(myId, weibo.getWeiboId());
 					int commentSumOri = commentService.getCommentSum(weibo.getWeiboId());
 					sb.insert(0,"@_@"+weibo.getUserHeadimage()+"@_@"+weibo.getUserNickname()+
 							"@_@"+weibo.getWeiboPublishtime()+"@_@"+weibo.getWeiboContent()+

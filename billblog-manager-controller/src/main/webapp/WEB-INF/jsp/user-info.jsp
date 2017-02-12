@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/home/home.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/user-info/user-info.css">
-<title>孙悟空的微博</title>
+<title>微博</title>
 </head>
 <body>
 <!-- 导航栏 -->
@@ -222,7 +222,7 @@
 							</p>
 							<p>
 								<span>性取向</span>
-								<span id="userTropism">
+								<span id="userTropism">									
 									<c:if test="${user_info.userTropism eq 0}">
 										异性恋
 									</c:if>

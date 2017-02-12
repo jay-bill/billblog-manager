@@ -41,7 +41,10 @@ public class AttentionController {
 			@RequestParam("method") int type,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		//当前使用者的id
-		long noticerId = (long)session.getAttribute("user_id");
+		long noticerId = -1;
+		if(session.getAttribute("user_id")!=null){
+			noticerId = (long)session.getAttribute("user_id");
+		}
 		String [] res = attentionRelative(noticerId, beNoticedId);//判断关注关系
 		return res;
 	}
@@ -146,7 +149,12 @@ public class AttentionController {
 	@ResponseBody
 	public List<Object> getFansUserList(@RequestParam("offset") long offset,
 			@RequestParam("userId") long userId,HttpServletRequest request){
-		long myId = (long)request.getSession().getAttribute("user_id");
+		HttpSession session = request.getSession();
+		//当前使用者的id
+		long myId = -1;//游客
+		if(session.getAttribute("user_id")!=null){
+			myId = (long)session.getAttribute("user_id");
+		}
 		//根据当前用户id，获取粉丝基本信息
 		List<User> user = attentionService.getFansUser(userId,offset);
 		List<Object> res= getSomeInfo(user,myId, userId, offset);//获取信息
@@ -234,7 +242,12 @@ public class AttentionController {
 			HttpServletRequest request){
 		//根据当前用户id，获取粉丝基本信息
 		List<User> user = attentionService.getBeNoticedUser(userId,offset);	
-		long myId = (long)request.getSession().getAttribute("user_id");
+		HttpSession session = request.getSession();
+		//当前使用者的id
+		long myId = -1;//游客
+		if(session.getAttribute("user_id")!=null){
+			myId = (long)session.getAttribute("user_id");
+		}
 		if(user.size()==0)
 			return null;
 		//返回到ajax

@@ -9,6 +9,7 @@
 <link rel="SHORTCUT ICON" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/home/home.css">

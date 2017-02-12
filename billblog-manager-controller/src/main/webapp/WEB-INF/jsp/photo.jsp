@@ -7,8 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <link rel="SHORTCUT ICON" href="resource/image/s_blog.ico">
-<link rel="BOOKMARK" href="resource/image/s_blog.ico">
+<link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/common.css">
+
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
@@ -133,9 +135,9 @@
 					<p>${user_info.userSignature }</p>
 					<c:if test="${other_user_base_info.userId ne user_id}">
 						<div>
-							<button id="noticeAId" onclick="notice(${other_user_base_info.userId})" class="btn btn-info" style="display:none;">关注</button>
-							<button id="avoidNoticeAId" onclick="avoidNotice(${other_user_base_info.userId})" class="btn btn-success" style="display:none;">已关注</button>
-							<button id="avoidNoticeAIdEach" onclick="avoidNotice(${other_user_base_info.userId})" class="btn btn-default" style="display:none;">互相关注</button>
+							<button id="noticeAId" onclick="notice(${other_user_base_info.userId},this)" class="btn btn-info" style="display:none;">关注</button>
+							<button id="avoidNoticeAId" onclick="avoidNotice(${other_user_base_info.userId},this)" class="btn btn-success" style="display:none;">已关注</button>
+							<button id="avoidNoticeAIdEach" onclick="avoidNotice(${other_user_base_info.userId},this)" class="btn btn-default" style="display:none;">互相关注</button>
 						</div>
 					</c:if>
 				</div>

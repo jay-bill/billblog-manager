@@ -26,11 +26,27 @@
 	<mvc:resources location="/resource/image/" mapping="/resource/image/**"/>
 	<mvc:resources location="/resource/verifyCode/" mapping="/resource/verifyCode/**"/>
 	<mvc:resources location="/resource/test/" mapping="/resource/test/**"/>
+	<mvc:resources location="/resource/plug-res/" mapping="/resource/plug-res/**"/>
+	
 	<!-- 拦截器 -->
 	<!-- 拦截所有.do结尾的链接 -->		
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**/*.do"/> 	
+			<mvc:mapping path="/**/*.do"/>
+			<mvc:exclude-mapping path="/**/tohomepage.do"/> 
+			<mvc:exclude-mapping path="/**/getoneuserweibo.do"/>
+			<mvc:exclude-mapping path="/**/tophotopage.do"/>
+			<mvc:exclude-mapping path="/**/tofanslistpage.do"/>
+			<mvc:exclude-mapping path="/**/getimagesbyalbum.do"/>			
+			<mvc:exclude-mapping path="/**/tonoticelistpage.do"/> 
+			<mvc:exclude-mapping path="/**/getdefaultimagesgroupbytime.do"/>
+			<mvc:exclude-mapping path="/**/selectfirstimgbygroup.do"/>
+			<mvc:exclude-mapping path="/**/touserinfo.do"/>
+			<mvc:exclude-mapping path="/**/getfansuserlist.do"/>
+			
+			<mvc:exclude-mapping path="/**/getnoticeuserlist.do"/>
+			<mvc:exclude-mapping path="/**/judgeattention.do"/>
+			
 			<bean class="com.jaybill.billblog.interceptors.UserIdInterceptor"/> 			
 		</mvc:interceptor>
 	</mvc:interceptors>

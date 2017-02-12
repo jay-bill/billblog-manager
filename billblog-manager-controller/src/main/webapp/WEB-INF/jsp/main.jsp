@@ -100,7 +100,7 @@
 	                	</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showWriteWeiboDiv()">
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/writeWeibo.jsp">
 							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;写微博
 						</a>
 					</li>
@@ -301,6 +301,32 @@
 <script type="text/javascript">
 	$("#searchImg").click(function(){
 		$("#searchForm").submit();
+	});
+	
+	//头像旋转
+	$("#myHeadimage").mouseenter(function(){
+		$(this).addClass("headRotate");
+	});
+	$("#myHeadimage").mouseleave(function(){
+		$(this).addClass("headLeaveRotate");
+		$(this).removeClass("headRotate");
+		var tmp = $(this);
+		setTimeout(function(){
+			tmp.removeClass("headLeaveRotate");
+		},150);
+	});
+	
+	//logo翻转
+	$("#logo img").mouseenter(function(){
+		$(this).addClass("rotateYLogo");
+	});
+	$("#logo img").mouseleave(function(){
+		$(this).addClass("rotatoYLogoLeave");
+		$(this).removeClass("rotateYLogo");
+		var tmp = $(this);
+		setTimeout(function(){
+			tmp.removeClass("rotatoYLogoLeave");
+		},600); 
 	});
 </script>
 </html>

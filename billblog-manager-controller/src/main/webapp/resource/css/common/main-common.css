@@ -50,6 +50,9 @@
 	.inputText{
 		padding-top:20px;
 	}
+
+	
+	
 	/*手机设备*/
 	@media(max-width:450px){
 		#main-outer,#main-outer>div{

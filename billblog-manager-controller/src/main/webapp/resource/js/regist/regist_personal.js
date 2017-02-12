@@ -62,19 +62,20 @@
 		 //判断密码格式是否正确
 		   if(!reg2.test($("input[name='pword']").val())){
 			   if($('#app-pword').length>0) //如果提示已经存在，则返回
-				   return;
+				   return true;
 			   $('form').find('div').eq(1).append("<p id='app-pword' class='form-group' style='color:red;margin-bottom:15px'>你输入的密码格式不符合要求！</p>");
+			   return true;
 		   }
 	   }
-	   //点击注册(手机版)
-	   $("button[name='regist']").click(function(){
-		   //将flag置为1
-		   flag = 1;
-		 //首先判断邮箱格式是否正确		
-		   phoneEmailIsTure();
-		   //判断密码格式是否正确
-		   phonePwordIsTure();
-	   });
+//	   //点击注册(手机版)
+//	   $("button[name='regist']").click(function(){
+//		   //将flag置为1
+//		   flag = 1;
+//		 //首先判断邮箱格式是否正确		
+//		   phoneEmailIsTure();
+//		   //判断密码格式是否正确
+//		   phonePwordIsTure();
+//	   });
 	   
 	 //电脑版判断邮箱是否正确
 	   function pcEmailIsTure(){
@@ -82,7 +83,7 @@
 		  if(!reg1.test($(".pc_email").val())){
 			  if($("#pc_em_span").length>0)
 				  return true;
-			  $("#line1").append("<span id='pc_em_span' style='color:red;'>输入的邮箱格式有误</span>");
+			  $(".pc_line1").append("<span id='pc_em_span' style='color:red;'>输入的邮箱格式有误</span>");
 			  return true;
 		  } 
 	   }
@@ -92,7 +93,7 @@
 		  if(!reg2.test($(".pc_pword").val())){
 			  if($("#pc_pw_span").length>0)
 				  return true;
-			  $("#line2").append("<span id='pc_pw_span' style='color:red;'>输入的密码格式有误</span>");
+			  $(".pc_line2").append("<span id='pc_pw_span' style='color:red;'>输入的密码格式有误</span>");
 			  return true;
 		  } 
 	   }
@@ -179,15 +180,23 @@
 			   return;
 		   if(pcPwordIsTure())
 			   return;
-		 //判断验证码填写是否正确，区分大小写
-		   if($("#line3 input[type='hidden']").val()!=$("#line3 input[type='text']").val().toUpperCase()){
+		   
+		   //判断验证码填写是否正确，区分大小写
+		   if($("#tmpVal").val()!=$("#inpVal").val().toUpperCase()){
 			   alert("验证码有误！请重新输入");
-			   $("#line3 input[type='text']").val("");//清空输入
+			   $("#inpVal").val("");//清空输入
 			   getVerifyCode();//更新验证码
 			   return;
 		   }else{//如果验证码填写正确,跳转到后台,后台发送邮件（短信）			      
-			   var email = $("#line1 input[name='email']").val();
-			   var password = $("#line2 input[type='password']").val();
+			   var email = $(".pc_email").val();
+			   var password = $("#pc_password").val();
+			   var grayDiv = "<div id='pc_grayDiv'>" +
+			   					"<div>"+
+			   						"<img src='/billblog-manager-controller/resource/image/loading.gif' style='width:100px;border-radius:100px;'>"+
+			   						"<p>邮件发送中，请稍后......</p>"+
+			   					"</div>"+
+			   				"</div>";
+			   $("body").append(grayDiv);
 			   $.ajax({
 				  url:"registcontroller/submitemail",
 				  type:"get",
@@ -200,11 +209,14 @@
 						  window.location.href=errpage;
 					  }else if(info[0]=="1"){
 						  //邮件已发送
-						  alert("邮件已发送！");	
+						  $("#pc_grayDiv").fadeOut(1000,function(){
+							  $("#pc_grayDiv").remove(); 
+						  });
 						  $("#mainDiv").html("<p>请到您的邮箱获取验证码<<</p>");					  
 						  $("#mainDiv").append("<form id='form' action='registcontroller/makesureregist'></form>")
 						  $("#form").append("<input id='makeSureText' name='inputCode' type='text'/>");
-						  $("#form").append("<input id='makeSureBtn' type='submit'>确认注册</button>");
+						  $("#mainDiv").append("<button id='makeSureBtn' class='btn btn-info' onclick='makeSureRegist()'>确认注册</button>");
+						  $("#mainDiv").append("<a href='javascript:void(0)' onclick=getCodeAgain('"+info[1]+"',this)>重新获取验证码</a>");
 						  $("#mainDiv").css("text-align","center");
 						  $("#mainDiv p").css("margin-top","30px");						 
 					  }				 
@@ -240,13 +252,13 @@
 			}
 		});
 	   
-	 //电脑版判断格式是否正确
+	 //手机版判断格式是否正确
 	   $("#phone_submit").click(function(){
-		   flag=2;		  
-//		   if(phoneEmailIsTure())
-//			   return;
-//		   if(phonePwordIsTure())
-//			   return;
+		   flag=1;		  
+		   if(phoneEmailIsTure())
+			   return;
+		   if(phonePwordIsTure())
+			   return;
 		 //判断验证码填写是否正确，区分大小写
 		   if($("#line3 input[type='hidden']").val()!=$("#line3 input[type='text']").val().toUpperCase()){
 			   alert("验证码有误！请重新输入");
@@ -256,6 +268,13 @@
 		   }else{//如果验证码填写正确,跳转到后台,后台发送邮件（短信）			      
 			   var email = $("#line1 input[name='email']").val();
 			   var password = $("#line2 input[type='password']").val();
+			   var grayDiv = "<div id='mb_grayDiv'>" +
+								"<div>"+
+									"<img src='/billblog-manager-controller/resource/image/loading.gif' style='width:100px;border-radius:50px;'>"+
+									"<p>邮件发送中，请稍后......</p>"+
+								"</div>"+
+							"</div>";
+			   	$("body").append(grayDiv);
 			   $.ajax({
 				  url:"registcontroller/submitemail",
 				  type:"get",
@@ -268,11 +287,14 @@
 						  window.location.href=errpage;
 					  }else if(info[0]=="1"){
 						  //邮件已发送
-						  alert("邮件已发送！");	
+						  $("#mb_grayDiv").fadeOut(1000,function(){
+							  $("#mb_grayDiv").remove(); 
+						  });
 						  $("#form-div").html("<p>请到您的邮箱获取验证码<<</p>");					  
 						  $("#form-div").append("<form id='form' action='registcontroller/makesureregist'></form>")
 						  $("#form").append("<input id='makeSureText' name='inputCode' type='text'/>");
-						  $("#form").append("<input id='makeSureBtn' type='submit'>确认注册</button>");
+						  $("#form-div").append("<button id='makeSureBtn' class='btn btn-info' onclick='makeSureRegist()'>确认注册</button>");
+						  $("#form-div").append("<a href='javascript:void(0)' onclick=getCodeAgain('"+info[1]+"',this)>重新获取验证码</a>");
 						  $("#mainDiv").css("text-align","center");
 						  $("#mainDiv p").css("margin-top","30px");						 
 					  }				 
@@ -280,4 +302,23 @@
 			   });
 		   }
 	   });
+   }
+   function alreadyGetCode_PC(){
+	  //电脑
+	  $("#mainDiv").html("<p>请到您的邮箱获取验证码</p>");	
+	  $("#mainDiv").append("<a href='regist.jsp'>返回注册页面</a>");
+	  $("#mainDiv").append("<form id='form' action='registcontroller/makesureregist'></form>")
+	  $("#form").append("<input id='makeSureText' name='inputCode' type='text'/>");
+	  $("#mainDiv").append("<button id='makeSureBtn' class='btn btn-info' onclick='makeSureRegist()'>确认注册</button>");
+	  $("#mainDiv").css("text-align","center");
+	  $("#mainDiv p").css("margin-top","30px");	
+   }
+   function alreadyGetCode_MB(){
+	   $("#form-div").html("<p>请到您的邮箱获取验证码</p>");	
+	   $("#form-div").append("<a href='regist.jsp'>返回注册页面</a>")
+		  $("#form-div").append("<form id='form' action='registcontroller/makesureregist'></form>")
+		  $("#form").append("<input id='makeSureText' name='inputCode' type='text'/>");
+		  $("#form-div").append("<button id='makeSureBtn' class='btn btn-info' onclick='makeSureRegist()'>确认注册</button>");
+		  $("#mainDiv").css("text-align","center");
+		  $("#mainDiv p").css("margin-top","30px");			
    }

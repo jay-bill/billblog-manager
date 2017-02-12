@@ -16,7 +16,9 @@
 	<!--导航栏-->
 	<div id="navbar">
 	   <div class="col-xs-2">
-	      <img src="resource/image/reback.png">
+	      <a href='regist.jsp'>
+	      	<img src="resource/image/reback.png">
+      	  </a>
 	   </div>
 	   <div class="col-xs-8">
 	      注册
@@ -41,8 +43,10 @@
 		  <div id="line3" class="form-group">
 		    <label for="inputfile">验证码：</label><br>
 		    <input type="text" id="name" style="width:120px;">
-		    <img id='verifyCodeImg' src="">
+		    <img id='verifyCodeImgPc' src="">
 		    <input type='hidden' style="float:left;">
+		    <br>
+		    <a href="javascript:void(0)" onclick="alreadyGetCode_MB()">已经获取了验证码</a>
 		  </div>
 		  <button id="phone_submit" type="button" name="regist" class="btn btn-primary btn-block">注册</button>
 		  <div style="margin-top:20px;">
@@ -110,22 +114,25 @@
         <!-- 主题内容左边 -->
         <div id="mainLeft">
            <div id="mainLeftDiv">
-             <div id="line1" class="line">
+             <div id="line1" class="line pc_line1">
                 <div class="tag">邮箱：</div>
                 <input name="email" class="pc_email" placeholder="请输入常用邮箱">
              </div>
              <div style="margin:0px 0px 10px 82px;font-size:14px;">
                 或使用<a href="#">手机注册</a>
              </div>
-             <div id="line2" class="line">
+             <div id="line2" class="line pc_line2">
                 <div class="tag">密码：</div>
-                <input type="password" class="pc_pword" name="pword" placeholder="6到16位英文数字密码，区分大小写">
+                <input id="pc_password"  type="password" class="pc_pword" name="pword" placeholder="6到16位英文数字密码，区分大小写">
              </div>
              <div id="line3" class="line">
                 <div class="tag">验证码：</div>
-                <input type="text" style="width:74px;height:30px;">
+                <input id="inpVal" type="text" style="width:74px;height:30px;">
                 <img src="" id="verifyCodeImg">
-                <input type="hidden">
+                <input id="tmpVal" type="hidden">
+                <br>
+                <div class="tag"></div>
+                <a href="javascript:void(0)" onclick="alreadyGetCode_PC()">已经获取了验证码</a>
              </div>
              <div id="line4" class="line">
              	<div class="tag"></div>
@@ -171,6 +178,7 @@
 	 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 	 <script type="text/javascript" src="/billblog-manager-controller/resource/js/common/common.js"></script>
 	 <script type="text/javascript" src="/billblog-manager-controller/resource/js/regist/regist_personal.js"></script>	 
+	 <script type="text/javascript" src="/billblog-manager-controller/resource/js/regist/regist-ajax.js"></script>	 
 	 <script type="text/javascript">
 	 	var wid = parseInt($(window).width());
 	 	$("#area-div").css("left",(wid-270)/2);

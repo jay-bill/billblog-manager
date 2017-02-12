@@ -12,8 +12,10 @@
 				dataType:"json",
 				success:function(d){
 					//改变页面中的验证码					 
-					$("#verifyCodeImg").attr("src",d[0]);
+					$("#verifyCodeImg").attr("src",d[0]);					
+					$("#verifyCodeImgPc").attr("src",d[0]);					
 					$("#line3 input[type='hidden']").attr("value",d[1]);
+					$("#tmpVal").attr("value",d[1]);
 				}
 			});
 		}
@@ -25,6 +27,7 @@
 				success:function(d){
 					//改变页面中的验证码
 					$("#verifyCodeImg").attr("src",d[0]);
+					$("#verifyCodeImgPc").attr("src",d[0]);
 					$("#line3 input[type='hidden']").attr("value",d[1]);
 				}
 			});
@@ -33,5 +36,12 @@
 	
 	 //点击验证码刷新
 	   $("#verifyCodeImg").click(function(){
+		   $("#verifyCodeImg").attr("src","/billblog-manager-controller/resource/image/loading.gif");						
 		   getVerifyCode();
 	   });
+	   //点击验证码刷新
+	   $("#verifyCodeImgPc").click(function(){
+		   $("#verifyCodeImgPc").attr("src","/billblog-manager-controller/resource/image/loading.gif");	
+		   getVerifyCode();
+	   });
+	   

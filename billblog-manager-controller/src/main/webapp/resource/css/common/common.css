@@ -101,3 +101,194 @@
 		left:0px;
 		z-index:11;
 	}
+	
+	.headRotate{
+		animation:myfirst 0.1s;
+		-moz-animation:myfirst 0.1s; /* Firefox */
+		-webkit-animation:myfirst 0.1s; /* Safari and Chrome */
+		-o-animation:myfirst 0.1s; /* Opera */
+		border:1px solid yellow;
+		box-shadow:yellow 0px 0px 50px;
+	}
+	
+	@keyframes myfirst
+	{
+		0%   {transform:rotate(60deg);}
+		20%  {transform:rotate(120deg);}
+		40%  {transform:rotate(180deg);}
+		60%  {transform:rotate(240deg);}
+		80%  {transform:rotate(300deg);}
+		100% {transform:rotate(360deg);}
+	}
+	
+	@-moz-keyframes myfirst /* Firefox */
+	{
+		0%   {-moz-transform:rotate(60deg);}
+		20%  {-moz-transform:rotate(120deg);}
+		40%  {-moz-transform:rotate(180deg);}
+		60%  {-moz-transform:rotate(240deg);}
+		80%  {-moz-transform:rotate(300deg);}
+		100% {-moz-transform:rotate(360deg);}
+	}
+	
+	@-webkit-keyframes myfirst /* Safari and Chrome */
+	{
+		0%   {-webkit-transform:rotate(60deg);}
+		20%  {-webkit-transform:rotate(120deg);}
+		40%  {-webkit-transform:rotate(180deg);}
+		60%  {-webkit-transform:rotate(240deg);}
+		80%  {-webkit-transform:rotate(300deg);}
+		100% {-webkit-transform:rotate(360deg);}
+	}
+	
+	@-o-keyframes myfirst /* Opera */
+	{
+		0%   {-o-transform:rotate(60deg);}
+		20%  {-o-transform:rotate(120deg);}
+		40%  {-o-transform:rotate(180deg);}
+		60%  {-o-transform:rotate(240deg);}
+		80%  {-o-transform:rotate(300deg);}
+		100% {-o-transform:rotate(360deg);}
+	}
+	
+	
+	.headLeaveRotate{
+		animation:next 0.1s;
+		-moz-animation:next 0.1s; /* Firefox */
+		-webkit-animation:next 0.1s; /* Safari and Chrome */
+		-o-animation:next 0.1s; /* Opera */
+	}
+	@keyframes next
+	{
+		0%   {transform:rotate(-60deg);}
+		20%  {transform:rotate(-120deg);}
+		40%  {transform:rotate(-180deg);}
+		60%  {transform:rotate(-240deg);}
+		80%  {transform:rotate(-300deg);}
+		100% {transform:rotate(-360deg);}
+	}
+	
+	@-moz-keyframes next /* Firefox */
+	{
+		0%   {-moz-transform:rotate(-60deg);}
+		20%  {-moz-transform:rotate(-120deg);}
+		40%  {-moz-transform:rotate(-180deg);}
+		60%  {-moz-transform:rotate(-240deg);}
+		80%  {-moz-transform:rotate(-300deg);}
+		100% {-moz-transform:rotate(-360deg);}
+	}
+	
+	@-webkit-keyframes next /* Safari and Chrome */
+	{
+		0%   {-webkit-transform:rotate(-60deg);}
+		20%  {-webkit-transform:rotate(-120deg);}
+		40%  {-webkit-transform:rotate(-180deg);}
+		60%  {-webkit-transform:rotate(-240deg);}
+		80%  {-webkit-transform:rotate(-300deg);}
+		100% {-webkit-transform:rotate(-360deg);}
+	}
+	
+	@-o-keyframes next /* Opera */
+	{
+		0%   {-o-transform:rotate(-60deg);}
+		20%  {-o-transform:rotate(-120deg);}
+		40%  {-o-transform:rotate(-180deg);}
+		60%  {-o-transform:rotate(-240deg);}
+		80%  {-o-transform:rotate(-300deg);}
+		100% {-o-transform:rotate(-360deg);}
+	}
+	
+	.rotateYLogo{
+		animation:logo 0.5s;
+		-moz-animation:logo 0.5s; /* Firefox */
+		-webkit-animation:logo 0.5s; /* Safari and Chrome */
+		-o-animation:logo 0.5s; /* Opera */
+	}
+	
+	/*logo的动画效果*/
+	@keyframes logo
+	{
+		0%   {transform:rotateY(60deg);}
+		20%  {transform:rotateY(120deg);}
+		40%  {transform:rotateY(180deg);}
+		60%  {transform:rotateY(240deg);}
+		80%  {transform:rotateY(300deg);}
+		100% {transform:rotateY(360deg);}
+	}
+	
+	@-moz-keyframes logo /* Firefox */
+	{
+		0%   {-moz-transform:rotateY(60deg);}
+		20%  {-moz-transform:rotateY(120deg);}
+		40%  {-moz-transform:rotateY(180deg);}
+		60%  {-moz-transform:rotateY(240deg);}
+		80%  {-moz-transform:rotateY(300deg);}
+		100% {-moz-transform:rotateY(360deg);}
+	}
+	
+	@-webkit-keyframes logo /* Safari and Chrome */
+	{
+		0%   {-webkit-transform:rotateY(60deg);}
+		20%  {-webkit-transform:rotateY(120deg);}
+		40%  {-webkit-transform:rotateY(180deg);}
+		60%  {-webkit-transform:rotateY(240deg);}
+		80%  {-webkit-transform:rotateY(300deg);}
+		100% {-webkit-transform:rotateY(360deg);}
+	}
+	
+	@-o-keyframes logo /* Opera */
+	{
+		0%   {-o-transform:rotateY(60deg);}
+		20%  {-o-transform:rotateY(120deg);}
+		40%  {-o-transform:rotateY(180deg);}
+		60%  {-o-transform:rotateY(240deg);}
+		80%  {-o-transform:rotateY(300deg);}
+		100% {-o-transform:rotateY(360deg);}
+	}
+	
+	.rotatoYLogoLeave{
+		animation:logoLeave 0.5s;
+		-moz-animation:logoLeave 0.5s; /* Firefox */
+		-webkit-animation:logoLeave 0.5s; /* Safari and Chrome */
+		-o-animation:logoLeave 0.5s; /* Opera */
+	}
+	/*logo的动画效果，反方向*/
+	@keyframes logoLeave
+	{
+		0%   {transform:rotateY(-60deg);}
+		20%  {transform:rotateY(-120deg);}
+		40%  {transform:rotateY(-180deg);}
+		60%  {transform:rotateY(-240deg);}
+		80%  {transform:rotateY(-300deg);}
+		100% {transform:rotateY(-360deg);}
+	}
+	
+	@-moz-keyframes logoLeave /* Firefox */
+	{
+		0%   {-moz-transform:rotateY(-60deg);}
+		20%  {-moz-transform:rotateY(-120deg);}
+		40%  {-moz-transform:rotateY(-180deg);}
+		60%  {-moz-transform:rotateY(-240deg);}
+		80%  {-moz-transform:rotateY(-300deg);}
+		100% {-moz-transform:rotateY(-360deg);}
+	}
+	
+	@-webkit-keyframes logoLeave /* Safari and Chrome */
+	{
+		0%   {-webkit-transform:rotateY(-60deg);}
+		20%  {-webkit-transform:rotateY(-120deg);}
+		40%  {-webkit-transform:rotateY(-180deg);}
+		60%  {-webkit-transform:rotateY(-240deg);}
+		80%  {-webkit-transform:rotateY(-300deg);}
+		100% {-webkit-transform:rotateY(-360deg);}
+	}
+	
+	@-o-keyframes logoLeave /* Opera */
+	{
+		0%   {-o-transform:rotateY(-60deg);}
+		20%  {-o-transform:rotateY(-120deg);}
+		40%  {-o-transform:rotateY(-180deg);}
+		60%  {-o-transform:rotateY(-240deg);}
+		80%  {-o-transform:rotateY(-300deg);}
+		100% {-o-transform:rotateY(-360deg);}
+	}
