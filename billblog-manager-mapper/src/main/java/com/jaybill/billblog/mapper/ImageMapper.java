@@ -78,4 +78,18 @@ public interface ImageMapper {
 	 * @return
 	 */
 	List<Image> selectByAlbumName(long userId,String album,int begin,int end);
+
+	/**
+	 * 获取最新六张图片
+	 * @param userId
+	 * @return
+	 */
+	List<Image> selectLastSix(long userId);
+	
+	/**
+	 * 逻辑删除某张图片
+	 * @param imageId
+	 * @return
+	 */
+	int deleteImage(long imageId);
 }

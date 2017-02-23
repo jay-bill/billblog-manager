@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.SharecountMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Sharecount" >
+    <id column="WEIBO_ID" property="weiboId" jdbcType="BIGINT" />
+    <result column="SHARE_COUNT" property="shareCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WEIBO_ID, SHARE_COUNT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sharecount
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sharecount
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Sharecount" >
+    insert into sharecount (WEIBO_ID, SHARE_COUNT)
+    values (#{weiboId,jdbcType=BIGINT}, #{shareCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Sharecount" >
+    insert into sharecount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        WEIBO_ID,
+      </if>
+      <if test="shareCount != null" >
+        SHARE_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        #{weiboId,jdbcType=BIGINT},
+      </if>
+      <if test="shareCount != null" >
+        #{shareCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Sharecount" >
+    update sharecount
+    <set >
+      <if test="shareCount != null" >
+        SHARE_COUNT = SHARE_COUNT+#{shareCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Sharecount" >
+    update sharecount
+    set SHARE_COUNT = SHARE_COUNT+#{shareCount,jdbcType=INTEGER}
+    where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
+  </update>
+</mapper>

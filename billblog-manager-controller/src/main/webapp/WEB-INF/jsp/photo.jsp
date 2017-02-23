@@ -10,6 +10,7 @@
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/common.css">
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/lunbo.css">
 
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/home-common.css">
@@ -44,28 +45,32 @@
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
+				          <span class="	glyphicon glyphicon-home"></span>&nbsp;主页
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-camera"></span>&nbsp;相册
 	                	</a>
-					</div>
-					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
-	                	</a>
-					</div>
+					</div>					
 					<div class="col-md-2 nav-right spe-nav-right">
 						<span>
-							<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${other_user_base_info.userId }" class="dropdown-toggle">
-								${other_user_base_info.userNickname}
+							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
+							 class="dropdown-toggle">
+							 ${user_base_info.userNickname}
 							</a>
-						</span>
+						</span>					
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">登出</a>
+						<a href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+						  <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>
+	                	</a>
+					</div>
+					<div class="col-md-2 nav-right">
+						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
 					</div>
 				</div>
 			</div>
@@ -86,6 +91,17 @@
 							<span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;主页
 						</a>
 					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="showSearchDiv()">
+							<span class="glyphicon glyphicon-eye-open"></span>&nbsp;搜索
+						</a>
+					</li>
+					<li role="presentation">						
+						<a id="mynicknameA" role="menuitem" tabindex="-1" 
+						href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+							<span style="color:blue;">${user_base_info.userNickname}</span>
+						</a>						
+					</li>
 					<li role="presentation" class="divider"></li>
 					<li role="presentation">						
 						<a href="/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=${user_id}">							
@@ -98,16 +114,13 @@
 						</a>						
 					</li>
 					<li role="presentation">						
-						<a href="/billblog-manager-controller/attentioncontroller/tohomepage.do?userId=${user_id}">							
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">							
 							<span style="color:blue;">微博${weibo_sum}</span>
 						</a>						
 					</li>
-					<li role="presentation" class="divider"></li>
+					<li role="presentation" class="divider"></li>					
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" 
-						href="/billblog-manager-controller/logincontroller/loginout">
-							登出
-						</a>
+						<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/logincontroller/loginout">登出</a>
 					</li>
 				</ul>
 			</div>
@@ -202,6 +215,12 @@
 			</nav>
 		</div>
 		
+		<div class='row'>
+			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" style='background:white;padding-top:10px;'>
+				<button class='btn'>批量删除</button>				
+			</div>
+		</div>
+		
 		<!-- 第四行，相片 -->
 		<div class="row" id="photo-main-div">
 			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
@@ -251,4 +270,7 @@
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/photo/photo.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/photo/photo-ajax.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js" ></script>
+
 </html>

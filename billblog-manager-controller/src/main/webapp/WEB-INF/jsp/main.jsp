@@ -10,8 +10,11 @@
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/lunbo.css">
+
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/main/main.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
+
 <title>微博-随时随地发现新鲜事儿</title>
 </head>
 <body>
@@ -40,13 +43,13 @@
 	               		</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-home"></span>&nbsp;主页
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-camera"></span>&nbsp;相册
 	                	</a>
 					</div>					
 					<div class="col-md-2 nav-right spe-nav-right">
@@ -153,19 +156,19 @@
 						</li>
 						<li>
 							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
-								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的主页
+								<span class="glyphicon glyphicon-home"></span>&nbsp;我的主页
 							</a>
 						</li>
 						<li>
 							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}">
-								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的相册
+								<span class="glyphicon glyphicon-camera"></span>&nbsp;我的相册
 							</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a role="menuitem" tabindex="-1" href="#">
 								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;热门微博
 							</a>
-						</li>
+						</li> -->
 						<li></li>
 					</ul>
 				</div>
@@ -175,29 +178,41 @@
 					<form class="hidden-xs" id="input-text-div" action="broadcastweibo.do" method="post" enctype="multipart/form-data">
 						<p>有什么新鲜事儿想告诉大家</p>
 						<div>
-							<textarea name="weiboContent"></textarea>
+							<textarea id="weiboTextarea" name="weiboContent" style="border:1px solid gray;"></textarea>
 						</div>
 						<div class="container-fluid" id="input-text-under">
 							<div class="col-sm-10">
-								<a href="javascript:void(0)">表情</a>
-								<a href="javascript:void(0)">图片</a>
-								<a>视频</a>
-								<a>话题</a>
+								<a href="javascript:void(0)" onclick="showEmoji(this)">
+									 <span class="glyphicon glyphicon-magnet"></span>
+								</a>
+								&nbsp;
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-picture"></span>
+								</a>
+<!-- 								<a>视频</a>
+								<a>话题</a> -->
 								<input name="weiboImages" type="file" multiple  id="uploadImages" accept="image/*" onchange="setImagePreview(this)" style="display:none;"/>
 							</div>
 							<div class="col-sm-2">
 								<input id="broadcast" type="submit" class="btn btn-sm btn-warning" style="float:right;" value="发布 ">								
 							</div>
-						</div>
+						</div>						
 						<!-- 预览栏 -->
 						<div id="previewDiv">
 							<img id="previewImg" src="">
+						</div>
+						<!-- 表情栏 -->
+						<div id="emojiDiv">
+							<ul>
+							
+							</ul>
 						</div>
 					</form>
 					
 					<!-- 微博正文部分 -->
 					<div id="content-outer">
 						<input type="hidden" value="${user_id}" id="hiddenId">
+						<input type="hidden" id="hidden-user-headimg" value="${user_base_info.userHeadimage}"/>
 						<!-- 待填充 -->
 					</div>			
 				</div>
@@ -295,9 +310,18 @@
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/commonUse.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/image.js"></script>
+
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/like/like-weibo.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/comments/comments-ajax.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/main-home.js"></script>
+
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main-ajax.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/smohan.face.js" ></script>
+
 <script type="text/javascript">
 	$("#searchImg").click(function(){
 		$("#searchForm").submit();
@@ -328,5 +352,6 @@
 			tmp.removeClass("rotatoYLogoLeave");
 		},600); 
 	});
+
 </script>
 </html>

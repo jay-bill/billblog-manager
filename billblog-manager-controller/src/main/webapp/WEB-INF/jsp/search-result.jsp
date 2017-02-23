@@ -31,6 +31,7 @@
 				</div>
 			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
+			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
@@ -39,27 +40,30 @@
 	               		</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-home"></span>&nbsp;主页
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-camera"></span>&nbsp;相册
 	                	</a>
-					</div>
-					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
-	                	</a>
-					</div>
+					</div>					
 					<div class="col-md-2 nav-right spe-nav-right">
 						<span>
 							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
 							 class="dropdown-toggle">
 							 ${user_base_info.userNickname}
 							</a>
-						</span>
+						</span>					
+					</div>
+					<div class="col-md-2 nav-right">
+						<a href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+						  <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>
+	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>

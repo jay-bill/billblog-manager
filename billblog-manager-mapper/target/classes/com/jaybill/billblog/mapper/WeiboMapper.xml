@@ -149,4 +149,8 @@
       WEIBO_STATE = #{weiboState,jdbcType=TINYINT}
     where WEIBO_ID = #{weiboId,jdbcType=BIGINT}
   </update>
+  
+  <select id="selectWeiboIdByTimeAndUserid" resultMap="BaseResultMap">
+  	select WEIBO_ID from weibo where WEIBO_PUBLISHTIME=STR_TO_DATE(#{1},'%Y-%m-%d %H:%i:%s') and USER_ID = #{0} 
+  </select>
 </mapper>

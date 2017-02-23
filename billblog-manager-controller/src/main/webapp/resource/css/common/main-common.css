@@ -51,7 +51,10 @@
 		padding-top:20px;
 	}
 
-	
+	.innerForwardBottomDiv{
+		width:22%;
+		display:inline-block;
+	}
 	
 	/*手机设备*/
 	@media(max-width:450px){

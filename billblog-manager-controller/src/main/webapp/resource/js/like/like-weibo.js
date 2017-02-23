@@ -84,7 +84,12 @@
 			 },
 			 success:function(like){
 				alert("点赞成功！"); 
-				thisA.innerHTML="已赞";
+				$(thisA).children().css("color","red");
+				if($(thisA).next().text()==''){
+					$(thisA).next().text(1);
+				}else{
+					$(thisA).next().text(parseInt($(thisA).next().text())+1);
+				}
 				thisA.setAttribute("onclick","avoidLike("+belikeId+",this)");
 			 }
 		  });
@@ -112,7 +117,12 @@
 			 },
 			 success:function(like){
 				alert("取消点赞成功！"); 
-				thisA.innerHTML="点赞";
+				$(thisA).children().css("color","gray");
+				if(parseInt($(thisA).next().text())==1){
+					$(thisA).next().text('');
+				}else{
+					$(thisA).next().text(parseInt($(thisA).next().text())-1);
+				}
 				thisA.setAttribute("onclick","likeweibo("+belikeId+",this)");
 			 }
 		  });

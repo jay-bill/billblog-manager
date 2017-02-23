@@ -71,6 +71,7 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"BOOKMARK\" href=\"/billblog-manager-controller/resource/image/s_blog.ico\">\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/bootstrap.min.css\" />\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/plug-res/css/common.css\">\r\n");
+      out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/plug-res/css/lunbo.css\">\r\n");
       out.write("\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/common/common.css\"></link>\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/common/home-common.css\">\r\n");
@@ -107,32 +108,39 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-facetime-video\"></span>&nbsp;主页\r\n");
+      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-home\"></span>&nbsp;主页\r\n");
       out.write("\t                \t</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-eye-open\"></span>&nbsp;发现\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/imagecontroller/tophotopage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\" class=\"dropdown-toggle\">\r\n");
+      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-camera\"></span>&nbsp;相册\r\n");
       out.write("\t                \t</a>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-gift\"></span>&nbsp;游戏\r\n");
-      out.write("\t                \t</a>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
+      out.write("\t\t\t\t\t</div>\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right spe-nav-right\">\r\n");
       out.write("\t\t\t\t\t\t<span>\r\n");
-      out.write("\t\t\t\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-      out.write("\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userNickname}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\t\t\t\t\t\t\t<a id=\"mynicknameA\" href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\"\r\n");
+      out.write("\t\t\t\t\t\t\t class=\"dropdown-toggle\">\r\n");
+      out.write("\t\t\t\t\t\t\t ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userNickname}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
-      out.write("\t\t\t\t\t\t</span>\r\n");
+      out.write("\t\t\t\t\t\t</span>\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/logincontroller/loginout\" class=\"dropdown-toggle\">登出</a>\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/toreadinfo.do\" class=\"dropdown-toggle\">\r\n");
+      out.write("\t\t\t\t          @我\r\n");
+      out.write("\t\t\t\t\t\t  ");
+      if (_jspx_meth_c_005fif_005f0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("\t                \t</a>\r\n");
+      out.write("\t\t\t\t\t</div>\r\n");
+      out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/logincontroller/loginout\" class=\"dropdown-toggle\">注销</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t</div>\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -155,6 +163,21 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t<span class=\"\tglyphicon glyphicon-facetime-video\"></span>&nbsp;主页\r\n");
       out.write("\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t</li>\r\n");
+      out.write("\t\t\t\t\t<li role=\"presentation\">\r\n");
+      out.write("\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"javascript:void(0)\" onclick=\"showSearchDiv()\">\r\n");
+      out.write("\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open\"></span>&nbsp;搜索\r\n");
+      out.write("\t\t\t\t\t\t</a>\r\n");
+      out.write("\t\t\t\t\t</li>\r\n");
+      out.write("\t\t\t\t\t<li role=\"presentation\">\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t<a id=\"mynicknameA\" role=\"menuitem\" tabindex=\"-1\" \r\n");
+      out.write("\t\t\t\t\t\thref=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\">\r\n");
+      out.write("\t\t\t\t\t\t\t<span style=\"color:blue;\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userNickname}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("</span>\r\n");
+      out.write("\t\t\t\t\t\t</a>\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t</li>\r\n");
       out.write("\t\t\t\t\t<li role=\"presentation\" class=\"divider\"></li>\r\n");
       out.write("\t\t\t\t\t<li role=\"presentation\">\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/attentioncontroller/tofanslistpage.do?userId=");
@@ -175,7 +198,7 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t</a>\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t</li>\r\n");
       out.write("\t\t\t\t\t<li role=\"presentation\">\t\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/attentioncontroller/tohomepage.do?userId=");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\">\t\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t\t<span style=\"color:blue;\">微博");
@@ -183,12 +206,9 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</span>\r\n");
       out.write("\t\t\t\t\t\t</a>\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t</li>\r\n");
-      out.write("\t\t\t\t\t<li role=\"presentation\" class=\"divider\"></li>\r\n");
+      out.write("\t\t\t\t\t<li role=\"presentation\" class=\"divider\"></li>\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t<li role=\"presentation\">\r\n");
-      out.write("\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" \r\n");
-      out.write("\t\t\t\t\t\thref=\"/billblog-manager-controller/logincontroller/loginout\">\r\n");
-      out.write("\t\t\t\t\t\t\t登出\r\n");
-      out.write("\t\t\t\t\t\t</a>\r\n");
+      out.write("\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"/billblog-manager-controller/logincontroller/loginout\">登出</a>\r\n");
       out.write("\t\t\t\t\t</li>\r\n");
       out.write("\t\t\t\t</ul>\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -223,7 +243,7 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_info.userSignature }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("</p>\r\n");
       out.write("\t\t\t\t\t");
-      if (_jspx_meth_c_005fif_005f0(_jspx_page_context))
+      if (_jspx_meth_c_005fif_005f1(_jspx_page_context))
         return;
       out.write("\r\n");
       out.write("\t\t\t\t</div>\r\n");
@@ -294,6 +314,12 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t</nav>\r\n");
       out.write("\t\t</div>\r\n");
       out.write("\t\t\r\n");
+      out.write("\t\t<div class='row'>\r\n");
+      out.write("\t\t\t<div class=\"col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1\" style='background:white;padding-top:10px;'>\r\n");
+      out.write("\t\t\t\t<button class='btn'>批量删除</button>\t\t\t\t\r\n");
+      out.write("\t\t\t</div>\r\n");
+      out.write("\t\t</div>\r\n");
+      out.write("\t\t\r\n");
       out.write("\t\t<!-- 第四行，相片 -->\r\n");
       out.write("\t\t<div class=\"row\" id=\"photo-main-div\">\r\n");
       out.write("\t\t\t<div class=\"col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1\">\r\n");
@@ -303,7 +329,7 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t<div class=\"col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 dividePage\">\r\n");
       out.write("\t\t\t\t\r\n");
       out.write("\t\t\t\t");
-      if (_jspx_meth_c_005fif_005f1(_jspx_page_context))
+      if (_jspx_meth_c_005fif_005f2(_jspx_page_context))
         return;
       out.write("\r\n");
       out.write("\t\t\t</div>\r\n");
@@ -334,6 +360,9 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/bootstrap.min.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/photo/photo.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/photo/photo-ajax.js\" ></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js\" ></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js\" ></script>\r\n");
+      out.write("\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -355,24 +384,16 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fif_005f0.setParent(null);
-    // /WEB-INF/jsp/photo.jsp(136,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fif_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId ne user_id}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
+    // /WEB-INF/jsp/photo.jsp(67,8) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fif_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${no_read_sum > 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f0 = _jspx_th_c_005fif_005f0.doStartTag();
     if (_jspx_eval_c_005fif_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
-        out.write("\t\t\t\t\t\t<div>\r\n");
-        out.write("\t\t\t\t\t\t\t<button id=\"noticeAId\" onclick=\"notice(");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write(",this)\" class=\"btn btn-info\" style=\"display:none;\">关注</button>\r\n");
-        out.write("\t\t\t\t\t\t\t<button id=\"avoidNoticeAId\" onclick=\"avoidNotice(");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write(",this)\" class=\"btn btn-success\" style=\"display:none;\">已关注</button>\r\n");
-        out.write("\t\t\t\t\t\t\t<button id=\"avoidNoticeAIdEach\" onclick=\"avoidNotice(");
-        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-        out.write(",this)\" class=\"btn btn-default\" style=\"display:none;\">互相关注</button>\r\n");
-        out.write("\t\t\t\t\t\t</div>\r\n");
-        out.write("\t\t\t\t\t");
+        out.write("\t\t\t\t          \t<span style=\"font-weight:bold;color:red;font-family:'微软雅黑'\">");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${no_read_sum}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write("</span>\r\n");
+        out.write("\t\t\t\t          ");
         int evalDoAfterBody = _jspx_th_c_005fif_005f0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -394,27 +415,24 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f1 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f1.setPageContext(_jspx_page_context);
     _jspx_th_c_005fif_005f1.setParent(null);
-    // /WEB-INF/jsp/photo.jsp(213,4) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fif_005f1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum > 5 }", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
+    // /WEB-INF/jsp/photo.jsp(149,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fif_005f1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId ne user_id}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f1 = _jspx_th_c_005fif_005f1.doStartTag();
     if (_jspx_eval_c_005fif_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
-        out.write("\t\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"prePage()\">上一页</a>\r\n");
+        out.write("\t\t\t\t\t\t<div>\r\n");
+        out.write("\t\t\t\t\t\t\t<button id=\"noticeAId\" onclick=\"notice(");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write(",this)\" class=\"btn btn-info\" style=\"display:none;\">关注</button>\r\n");
+        out.write("\t\t\t\t\t\t\t<button id=\"avoidNoticeAId\" onclick=\"avoidNotice(");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write(",this)\" class=\"btn btn-success\" style=\"display:none;\">已关注</button>\r\n");
+        out.write("\t\t\t\t\t\t\t<button id=\"avoidNoticeAIdEach\" onclick=\"avoidNotice(");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${other_user_base_info.userId}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+        out.write(",this)\" class=\"btn btn-default\" style=\"display:none;\">互相关注</button>\r\n");
+        out.write("\t\t\t\t\t\t</div>\r\n");
         out.write("\t\t\t\t\t");
-        if (_jspx_meth_c_005fif_005f2(_jspx_th_c_005fif_005f1, _jspx_page_context))
-          return true;
-        out.write("\r\n");
-        out.write("\t\t\t\t\t");
-        if (_jspx_meth_c_005fif_005f3(_jspx_th_c_005fif_005f1, _jspx_page_context))
-          return true;
-        out.write("\r\n");
-        out.write("\t\t\t\t\t");
-        if (_jspx_meth_c_005fforEach_005f0(_jspx_th_c_005fif_005f1, _jspx_page_context))
-          return true;
-        out.write("\r\n");
-        out.write("\t\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"nextPage()\">下一页</a>\r\n");
-        out.write("\t\t\t\t");
         int evalDoAfterBody = _jspx_th_c_005fif_005f1.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -428,25 +446,35 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_005fif_005f2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f1, PageContext _jspx_page_context)
+  private boolean _jspx_meth_c_005fif_005f2(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:if
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f2 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f2.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fif_005f2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f1);
-    // /WEB-INF/jsp/photo.jsp(215,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fif_005f2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum%5 eq 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
+    _jspx_th_c_005fif_005f2.setParent(null);
+    // /WEB-INF/jsp/photo.jsp(232,4) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fif_005f2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum > 5 }", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f2 = _jspx_th_c_005fif_005f2.doStartTag();
     if (_jspx_eval_c_005fif_005f2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
-        out.write("\t\t\t\t\t\t");
-        if (_jspx_meth_c_005fset_005f0(_jspx_th_c_005fif_005f2, _jspx_page_context))
+        out.write("\t\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"prePage()\">上一页</a>\r\n");
+        out.write("\t\t\t\t\t");
+        if (_jspx_meth_c_005fif_005f3(_jspx_th_c_005fif_005f2, _jspx_page_context))
           return true;
         out.write("\r\n");
         out.write("\t\t\t\t\t");
+        if (_jspx_meth_c_005fif_005f4(_jspx_th_c_005fif_005f2, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("\t\t\t\t\t");
+        if (_jspx_meth_c_005fforEach_005f0(_jspx_th_c_005fif_005f2, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("\t\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"nextPage()\">下一页</a>\r\n");
+        out.write("\t\t\t\t");
         int evalDoAfterBody = _jspx_th_c_005fif_005f2.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
@@ -460,43 +488,22 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_005fset_005f0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f2, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:set
-    org.apache.taglibs.standard.tag.rt.core.SetTag _jspx_th_c_005fset_005f0 = (org.apache.taglibs.standard.tag.rt.core.SetTag) _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.get(org.apache.taglibs.standard.tag.rt.core.SetTag.class);
-    _jspx_th_c_005fset_005f0.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fset_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f2);
-    // /WEB-INF/jsp/photo.jsp(216,6) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fset_005f0.setVar("pageSum");
-    // /WEB-INF/jsp/photo.jsp(216,6) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-    _jspx_th_c_005fset_005f0.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/jsp/photo.jsp(216,6) '${defalut_image_sum/5}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${defalut_image_sum/5}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
-    int _jspx_eval_c_005fset_005f0 = _jspx_th_c_005fset_005f0.doStartTag();
-    if (_jspx_th_c_005fset_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.reuse(_jspx_th_c_005fset_005f0);
-      return true;
-    }
-    _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.reuse(_jspx_th_c_005fset_005f0);
-    return false;
-  }
-
-  private boolean _jspx_meth_c_005fif_005f3(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f1, PageContext _jspx_page_context)
+  private boolean _jspx_meth_c_005fif_005f3(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f2, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:if
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f3 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f3.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fif_005f3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f1);
-    // /WEB-INF/jsp/photo.jsp(218,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fif_005f3.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum%5 ne 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
+    _jspx_th_c_005fif_005f3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f2);
+    // /WEB-INF/jsp/photo.jsp(234,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fif_005f3.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum%5 eq 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f3 = _jspx_th_c_005fif_005f3.doStartTag();
     if (_jspx_eval_c_005fif_005f3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
         out.write("\t\t\t\t\t\t");
-        if (_jspx_meth_c_005fset_005f1(_jspx_th_c_005fif_005f3, _jspx_page_context))
+        if (_jspx_meth_c_005fset_005f0(_jspx_th_c_005fif_005f3, _jspx_page_context))
           return true;
         out.write("\r\n");
         out.write("\t\t\t\t\t");
@@ -513,18 +520,71 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_005fset_005f1(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f3, PageContext _jspx_page_context)
+  private boolean _jspx_meth_c_005fset_005f0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f3, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:set
+    org.apache.taglibs.standard.tag.rt.core.SetTag _jspx_th_c_005fset_005f0 = (org.apache.taglibs.standard.tag.rt.core.SetTag) _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.get(org.apache.taglibs.standard.tag.rt.core.SetTag.class);
+    _jspx_th_c_005fset_005f0.setPageContext(_jspx_page_context);
+    _jspx_th_c_005fset_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f3);
+    // /WEB-INF/jsp/photo.jsp(235,6) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fset_005f0.setVar("pageSum");
+    // /WEB-INF/jsp/photo.jsp(235,6) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fset_005f0.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/jsp/photo.jsp(235,6) '${defalut_image_sum/5}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${defalut_image_sum/5}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+    int _jspx_eval_c_005fset_005f0 = _jspx_th_c_005fset_005f0.doStartTag();
+    if (_jspx_th_c_005fset_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.reuse(_jspx_th_c_005fset_005f0);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.reuse(_jspx_th_c_005fset_005f0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_005fif_005f4(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f2, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f4 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_005fif_005f4.setPageContext(_jspx_page_context);
+    _jspx_th_c_005fif_005f4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f2);
+    // /WEB-INF/jsp/photo.jsp(237,5) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fif_005f4.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${defalut_image_sum%5 ne 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
+    int _jspx_eval_c_005fif_005f4 = _jspx_th_c_005fif_005f4.doStartTag();
+    if (_jspx_eval_c_005fif_005f4 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("\t\t\t\t\t\t");
+        if (_jspx_meth_c_005fset_005f1(_jspx_th_c_005fif_005f4, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("\t\t\t\t\t");
+        int evalDoAfterBody = _jspx_th_c_005fif_005f4.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_005fif_005f4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.reuse(_jspx_th_c_005fif_005f4);
+      return true;
+    }
+    _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.reuse(_jspx_th_c_005fif_005f4);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_005fset_005f1(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f4, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:set
     org.apache.taglibs.standard.tag.rt.core.SetTag _jspx_th_c_005fset_005f1 = (org.apache.taglibs.standard.tag.rt.core.SetTag) _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.get(org.apache.taglibs.standard.tag.rt.core.SetTag.class);
     _jspx_th_c_005fset_005f1.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fset_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f3);
-    // /WEB-INF/jsp/photo.jsp(219,6) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fset_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f4);
+    // /WEB-INF/jsp/photo.jsp(238,6) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fset_005f1.setVar("pageSum");
-    // /WEB-INF/jsp/photo.jsp(219,6) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-    _jspx_th_c_005fset_005f1.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/jsp/photo.jsp(219,6) '${1+defalut_image_sum/5}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${1+defalut_image_sum/5}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+    // /WEB-INF/jsp/photo.jsp(238,6) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fset_005f1.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/jsp/photo.jsp(238,6) '${1+defalut_image_sum/5}'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${1+defalut_image_sum/5}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
     int _jspx_eval_c_005fset_005f1 = _jspx_th_c_005fset_005f1.doStartTag();
     if (_jspx_th_c_005fset_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _005fjspx_005ftagPool_005fc_005fset_0026_005fvar_005fvalue_005fnobody.reuse(_jspx_th_c_005fset_005f1);
@@ -534,19 +594,19 @@ public final class photo_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_c_005fforEach_005f0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f1, PageContext _jspx_page_context)
+  private boolean _jspx_meth_c_005fforEach_005f0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fif_005f2, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  c:forEach
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvarStatus_005fend_005fbegin.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fforEach_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f1);
-    // /WEB-INF/jsp/photo.jsp(221,5) name = varStatus type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f2);
+    // /WEB-INF/jsp/photo.jsp(240,5) name = varStatus type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setVarStatus("num");
-    // /WEB-INF/jsp/photo.jsp(221,5) name = begin type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/photo.jsp(240,5) name = begin type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setBegin(1);
-    // /WEB-INF/jsp/photo.jsp(221,5) name = end type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/photo.jsp(240,5) name = end type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setEnd(((java.lang.Integer) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${pageSum}", java.lang.Integer.class, (PageContext)_jspx_page_context, null, false)).intValue());
     int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
     try {

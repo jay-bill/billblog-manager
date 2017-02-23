@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jaybill.billblog.exception.CantUpdateHeadImageException;
 import com.jaybill.billblog.exception.ImageFormatException;
+import com.jaybill.billblog.image.CompressImg;
 import com.jaybill.billblog.mapper.ImageMapper;
 import com.jaybill.billblog.pojo.Image;
 import com.jaybill.billblog.pojo.User;
@@ -93,18 +94,27 @@ public class ImageController {
 		String originalFilename = headImage.getOriginalFilename();//获取元素文件名
 		String [] splitedStr = StringUtils.split(originalFilename,".");//分隔
 		String suffixStr = splitedStr[splitedStr.length-1];//获取后缀
+		//压缩图片的图片名称，压缩
+		String compressStr = "billblog"+new Date().getTime();
 		//根据实际命名图片
-		String prefixStr = "billblog_headimage"+new Date().getTime();
+		String prefixStr = compressStr+"big";
 		//合并名称
+		//原图
 		String imageName = prefixStr+"."+suffixStr;
+		//压缩图
+		String compImageName = compressStr+"."+suffixStr;
 		//全路径，包括文件夹和文件名
 		String imagePathAndName = userImagesFilePath+"\\"+imageName;
 		//指向文件图片
 		File imageFile = new File(imagePathAndName);
 		//复制图片，保存了原图
 		headImage.transferTo(imageFile);
+		//再把原图进行压缩
+		CompressImg compressImg = new CompressImg();
+		//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
+		compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 		//获取相对路径存入数据库
-		String relativePath = request.getContextPath()+"/userImages/"+imageName;
+		String relativePath = request.getContextPath()+"/userImages/"+compImageName;
 		return relativePath;
 	}
 	
@@ -242,18 +252,27 @@ public class ImageController {
 					suffixStr.equals("fpx")||suffixStr.equals("svg")||suffixStr.equals("cdr")||suffixStr.equals("pcd")||
 					suffixStr.equals("dxf")||suffixStr.equals("ufo")||suffixStr.equals("eps")||suffixStr.equals("ai")||
 					suffixStr.equals("raw")){
-				//根据实际命名图片
-				String prefixStr = "billblog"+new Date().getTime()+""+i;
+				//压缩图片的图片名称，压缩
+				String compressStr = "billblog"+new Date().getTime()+""+i;
+				//实际图片的图片名称,原图
+				String prefixStr =compressStr +"big";
 				//合并名称
+				//原图
 				String imageName = prefixStr+"."+suffixStr;
+				//压缩图
+				String compImageName = compressStr+"."+suffixStr;
 				//全路径，包括文件夹和文件名
 				String imagePathAndName = userImagesFilePath+"\\"+imageName;
 				//指向文件图片
 				File imageFile = new File(imagePathAndName);
-				//赋值
+				//复制原图
 				images[i].transferTo(imageFile);
+				//再把原图进行压缩
+				CompressImg compressImg = new CompressImg();
+				//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
+				compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 				//获取相对路径存入数据库
-				String relativePath = request.getContextPath()+"/userImages/"+imageName;
+				String relativePath = request.getContextPath()+"/userImages/"+compImageName;
 				//构建Image对象
 				Image image = new Image();
 				image.setImageAlbum(imageAlbum);
@@ -319,6 +338,23 @@ public class ImageController {
 		objList.add(dividePageList);
 		return objList;
 	}
+	
+	/**
+	 * 逻辑删除图片
+	 * @param imageId
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="deleteimage.do",method=RequestMethod.POST)
+	public String[] deleteImage(@RequestParam("imageId")long imageId,HttpServletRequest request){
+		long userId = (long)request.getSession().getAttribute("user_id");
+		int res = imageService.deleteImage(userId, imageId);
+		if(res == 0)
+			return null;
+		return new String[]{};
+	}
+	
 	/**
 	 * 解析微博图片的路径，并且把他们相关信息放进image表中，这只是一个在调试中使用的方法，正式发布之后不会被使用。
 	 * @return

@@ -96,8 +96,13 @@
 	.nums-div{
 		overflow:hidden;
 	}
-	
-	.innerForwardBottomDiv{
-		width:22%;
+	#emojiDiv{
+		display:none;
+	}
+	#emojiDiv ul{
+		list-style:none;
+	}
+	#emojiDiv ul li{
 		display:inline-block;
+		padding:3px;
 	}

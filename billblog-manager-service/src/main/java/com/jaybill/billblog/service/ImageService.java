@@ -92,4 +92,11 @@ public interface ImageService {
 	 * @return
 	 */
 	public List<Integer> countAlbumImageGroupSum(long userId,String album);
+
+	/**
+	 * 获取最新六张图片
+	 * @param userId
+	 * @return
+	 */
+	List<Image> selectLastSix(long userId);
 }

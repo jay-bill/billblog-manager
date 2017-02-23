@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.jaybill.billblog.mapper.AttentionMapper;
 import com.jaybill.billblog.mapper.ImageMapper;
 import com.jaybill.billblog.mapper.InfoMapper;
+import com.jaybill.billblog.mapper.SharecountMapper;
 import com.jaybill.billblog.mapper.UserMapper;
 import com.jaybill.billblog.mapper.UserinfoMapper;
 import com.jaybill.billblog.mapper.WeiboMapper;
 import com.jaybill.billblog.pojo.Info;
+import com.jaybill.billblog.pojo.Sharecount;
 import com.jaybill.billblog.pojo.User;
 import com.jaybill.billblog.pojo.Userinfo;
 import com.jaybill.billblog.service.CommonService;
@@ -31,7 +33,8 @@ public class CommonServiceImf implements CommonService {
 	private ImageMapper imageMapper;
 	@Autowired
 	private InfoMapper infoReadMapper;
-	
+	@Autowired
+	private SharecountMapper shareMapper;
 	/**
 	 *选出用户的账户基本信息
 	 */
@@ -132,5 +135,19 @@ public class CommonServiceImf implements CommonService {
 	 */
 	public int updateInfoState(long beinfoId){
 		return infoReadMapper.updateInfoState(beinfoId);
+	}
+	
+	/**
+	 * 计算微博被转发的次数
+	 * @param weiboId
+	 * @return
+	 */
+	public int countForwardSum(long weiboId){
+		//返回转发总数
+		Sharecount s =  shareMapper.selectByPrimaryKey(weiboId);
+		if(s!=null){
+			return s.getShareCount();
+		}
+		return 0;
 	}
 }

@@ -25,7 +25,7 @@ public interface WeiboService {
 	 */
 	List<Weibo> getOneUserWeibo(long userId, long offset);
 
-	void broadcastWeibo(Weibo weibo);
+	void insertBroadcastWeibo(Weibo weibo);
 
 	/**
 	 * 逻辑删除微博

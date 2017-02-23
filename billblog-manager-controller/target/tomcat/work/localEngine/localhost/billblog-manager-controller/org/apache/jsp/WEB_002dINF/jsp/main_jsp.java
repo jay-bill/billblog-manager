@@ -65,8 +65,11 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"BOOKMARK\" href=\"/billblog-manager-controller/resource/image/s_blog.ico\">\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/bootstrap.min.css\" />\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/common/common.css\"></link>\r\n");
+      out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/plug-res/css/lunbo.css\">\r\n");
+      out.write("\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/main/main.css\">\r\n");
       out.write("<link rel=\"stylesheet\" href=\"/billblog-manager-controller/resource/css/common/main-common.css\">\r\n");
+      out.write("\r\n");
       out.write("<title>微博-随时随地发现新鲜事儿</title>\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
@@ -95,13 +98,17 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t               \t\t</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-facetime-video\"></span>&nbsp;视频\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\" class=\"dropdown-toggle\">\r\n");
+      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-home\"></span>&nbsp;主页\r\n");
       out.write("\t                \t</a>\r\n");
       out.write("\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right\">\r\n");
-      out.write("\t\t\t\t\t\t<a href=\"#\" class=\"dropdown-toggle\">\r\n");
-      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-eye-open\"></span>&nbsp;发现\r\n");
+      out.write("\t\t\t\t\t\t<a href=\"/billblog-manager-controller/imagecontroller/tophotopage.do?userId=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\" class=\"dropdown-toggle\">\r\n");
+      out.write("\t\t\t\t          <span class=\"\tglyphicon glyphicon-camera\"></span>&nbsp;相册\r\n");
       out.write("\t                \t</a>\r\n");
       out.write("\t\t\t\t\t</div>\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t<div class=\"col-md-2 nav-right spe-nav-right\">\r\n");
@@ -236,21 +243,21 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"/billblog-manager-controller/weibocontroller/tohomepage.do?userId=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open\"></span>&nbsp;我的主页\r\n");
+      out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-home\"></span>&nbsp;我的主页\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t\t</li>\r\n");
       out.write("\t\t\t\t\t\t<li>\r\n");
       out.write("\t\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"/billblog-manager-controller/imagecontroller/tophotopage.do?userId=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open\"></span>&nbsp;我的相册\r\n");
+      out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-camera\"></span>&nbsp;我的相册\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t\t</li>\r\n");
-      out.write("\t\t\t\t\t\t<li>\r\n");
+      out.write("\t\t\t\t\t\t<!-- <li>\r\n");
       out.write("\t\t\t\t\t\t\t<a role=\"menuitem\" tabindex=\"-1\" href=\"#\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-eye-open\"></span>&nbsp;热门微博\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
-      out.write("\t\t\t\t\t\t</li>\r\n");
+      out.write("\t\t\t\t\t\t</li> -->\r\n");
       out.write("\t\t\t\t\t\t<li></li>\r\n");
       out.write("\t\t\t\t\t</ul>\r\n");
       out.write("\t\t\t\t</div>\r\n");
@@ -260,23 +267,34 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t<form class=\"hidden-xs\" id=\"input-text-div\" action=\"broadcastweibo.do\" method=\"post\" enctype=\"multipart/form-data\">\r\n");
       out.write("\t\t\t\t\t\t<p>有什么新鲜事儿想告诉大家</p>\r\n");
       out.write("\t\t\t\t\t\t<div>\r\n");
-      out.write("\t\t\t\t\t\t\t<textarea name=\"weiboContent\"></textarea>\r\n");
+      out.write("\t\t\t\t\t\t\t<textarea id=\"weiboTextarea\" name=\"weiboContent\" style=\"border:1px solid gray;\"></textarea>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t<div class=\"container-fluid\" id=\"input-text-under\">\r\n");
       out.write("\t\t\t\t\t\t\t<div class=\"col-sm-10\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"javascript:void(0)\">表情</a>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"javascript:void(0)\">图片</a>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<a>视频</a>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<a>话题</a>\r\n");
+      out.write("\t\t\t\t\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"showEmoji(this)\">\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t <span class=\"glyphicon glyphicon-magnet\"></span>\r\n");
+      out.write("\t\t\t\t\t\t\t\t</a>\r\n");
+      out.write("\t\t\t\t\t\t\t\t&nbsp;\r\n");
+      out.write("\t\t\t\t\t\t\t\t<a href=\"javascript:void(0)\">\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-picture\"></span>\r\n");
+      out.write("\t\t\t\t\t\t\t\t</a>\r\n");
+      out.write("<!-- \t\t\t\t\t\t\t\t<a>视频</a>\r\n");
+      out.write("\t\t\t\t\t\t\t\t<a>话题</a> -->\r\n");
       out.write("\t\t\t\t\t\t\t\t<input name=\"weiboImages\" type=\"file\" multiple  id=\"uploadImages\" accept=\"image/*\" onchange=\"setImagePreview(this)\" style=\"display:none;\"/>\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t\t\t<div class=\"col-sm-2\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<input id=\"broadcast\" type=\"submit\" class=\"btn btn-sm btn-warning\" style=\"float:right;\" value=\"发布 \">\t\t\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
+      out.write("\t\t\t\t\t\t</div>\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t<!-- 预览栏 -->\r\n");
       out.write("\t\t\t\t\t\t<div id=\"previewDiv\">\r\n");
       out.write("\t\t\t\t\t\t\t<img id=\"previewImg\" src=\"\">\r\n");
+      out.write("\t\t\t\t\t\t</div>\r\n");
+      out.write("\t\t\t\t\t\t<!-- 表情栏 -->\r\n");
+      out.write("\t\t\t\t\t\t<div id=\"emojiDiv\">\r\n");
+      out.write("\t\t\t\t\t\t\t<ul>\r\n");
+      out.write("\t\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t\t</ul>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t</form>\r\n");
       out.write("\t\t\t\t\t\r\n");
@@ -285,6 +303,9 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t<input type=\"hidden\" value=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_id}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\" id=\"hiddenId\">\r\n");
+      out.write("\t\t\t\t\t\t<input type=\"hidden\" id=\"hidden-user-headimg\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${user_base_info.userHeadimage}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+      out.write("\"/>\r\n");
       out.write("\t\t\t\t\t\t<!-- 待填充 -->\r\n");
       out.write("\t\t\t\t\t</div>\t\t\t\r\n");
       out.write("\t\t\t\t</div>\r\n");
@@ -412,9 +433,18 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/jquery.min.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/bootstrap.min.js\" ></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/main/main.js\"></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/common/commonUse.js\"></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/common/image.js\"></script>\r\n");
+      out.write("\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/like/like-weibo.js\"></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/comments/comments-ajax.js\"></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/common/main-home.js\"></script>\r\n");
+      out.write("\r\n");
       out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/js/main/main-ajax.js\"></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js\" ></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js\" ></script>\r\n");
+      out.write("<script type=\"text/javascript\" src=\"/billblog-manager-controller/resource/plug-res/js/smohan.face.js\" ></script>\r\n");
+      out.write("\r\n");
       out.write("<script type=\"text/javascript\">\r\n");
       out.write("\t$(\"#searchImg\").click(function(){\r\n");
       out.write("\t\t$(\"#searchForm\").submit();\r\n");
@@ -445,6 +475,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\ttmp.removeClass(\"rotatoYLogoLeave\");\r\n");
       out.write("\t\t},600); \r\n");
       out.write("\t});\r\n");
+      out.write("\r\n");
       out.write("</script>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
@@ -467,7 +498,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fif_005f0.setParent(null);
-    // /WEB-INF/jsp/main.jsp(63,8) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/main.jsp(66,8) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fif_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${no_read_sum > 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f0 = _jspx_th_c_005fif_005f0.doStartTag();
     if (_jspx_eval_c_005fif_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -498,7 +529,7 @@ public final class main_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_005fif_005f1 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _005fjspx_005ftagPool_005fc_005fif_0026_005ftest.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
     _jspx_th_c_005fif_005f1.setPageContext(_jspx_page_context);
     _jspx_th_c_005fif_005f1.setParent(null);
-    // /WEB-INF/jsp/main.jsp(97,14) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/jsp/main.jsp(100,14) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fif_005f1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${no_read_sum > 0}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null, false)).booleanValue());
     int _jspx_eval_c_005fif_005f1 = _jspx_th_c_005fif_005f1.doStartTag();
     if (_jspx_eval_c_005fif_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {

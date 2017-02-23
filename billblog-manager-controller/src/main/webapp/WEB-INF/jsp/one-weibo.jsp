@@ -10,7 +10,9 @@
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
-<link rel="stylesheet" href="/billblog-manager-controller/resource/css/info/info.css"></link>
+<link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css"></link>
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/lunbo.css">
+
 <title>孙悟空的微博</title>
 </head>
 <body>
@@ -31,6 +33,7 @@
 				</div>
 			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
+			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
@@ -39,27 +42,30 @@
 	               		</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-home"></span>&nbsp;主页
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-camera"></span>&nbsp;相册
 	                	</a>
-					</div>
-					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
-	                	</a>
-					</div>
+					</div>					
 					<div class="col-md-2 nav-right spe-nav-right">
 						<span>
 							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
 							 class="dropdown-toggle">
 							 ${user_base_info.userNickname}
 							</a>
-						</span>
+						</span>					
+					</div>
+					<div class="col-md-2 nav-right">
+						<a href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+						  <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>
+	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
@@ -123,37 +129,60 @@
 		</div>
 	</div>
 	
-	<div class="container" id="main-div">
-		<input type="hidden" value="${weibo_id}" id="hidden-weibo-id">
-		<!-- 第一行 -->
-		<div class="row" id="top">
+			<!-- 主题内容 -->
+	<div class="container" id="main-outer">
+		<div class="container-fluid">
+			<div class="container-fluid" id="main-con">
+				<div class="col-md-2 hidden-xs col-sm-2">
+					<ul id="left-ul">
+						<li>
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tomainpage.do">
+								<span></span>&nbsp;首页
+							</a>
+						</li>
+						<li>
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}">
+								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的主页
+							</a>
+						</li>
+						<li>
+							<a role="menuitem" tabindex="-1" href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}">
+								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;我的相册
+							</a>
+						</li>
+						<li>
+							<a role="menuitem" tabindex="-1" href="#">
+								<span class="glyphicon glyphicon-eye-open"></span>&nbsp;热门微博
+							</a>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="col-md-7 col-sm-10 col-xs-12" id="center-div">	
+					<input type="hidden" id="hidden-weibo-id" value="${weibo_id}"/>
+					<input type="hidden" id="hidden-user-headimg" value="${user_base_info.userHeadimage}"/>				
+					<!-- 微博正文部分 -->
+					<div id="content-outer">
+						<input id="hiddenId" type="hidden" value="${user_info.userId }">
+						<input type="hidden" value="${user_id}" id="hiddenId">
+						<!-- 待填充 -->
+					</div>			
+				</div>		
+			</div>
 		</div>
 	</div>
-	
-	<!-- 页尾 -->
-	<footer class="hidden-xs hidden-sm">
-		<div>
-			<span>微博客服</span>
-			<span>意见反馈</span>
-			<span>舞弊举报</span>
-			<span>开方平台</span>
-			<span>微博招聘</span>
-			<span>服务大厅</span>
-			<p>
-				<span>粤ICP证100780号</span>
-				<span>大粤网201430260259号</span>
-				<span>Copyright © 2017-2018 WEIBO 广州标新科技网络技术有限公司</span>
-			</p>
-		</div>
-	</footer>
-	<input id="hiddenId" type="hidden" value="${user_info.userId }">
 </body>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/main-home.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/image.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/like/like-weibo.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/comments/comments-ajax.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/one-weibo/one-weibo.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js" ></script>
+
 <script type="text/javascript">
 	$(".comment-text-div").css("width",parseInt($(".comment-show-div").width())-30-30);
 </script>

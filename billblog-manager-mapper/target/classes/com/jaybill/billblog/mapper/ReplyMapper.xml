@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.ReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Reply" >
+    <id column="REPLY_ID" property="replyId" jdbcType="BIGINT" />
+    <result column="WEIBO_ID" property="weiboId" jdbcType="BIGINT" />
+    <result column="COMMENT_ID" property="commentId" jdbcType="BIGINT" />
+    <result column="REPLY_USERID" property="replyUserid" jdbcType="BIGINT" />
+    <result column="BEREPLY_ID" property="bereplyId" jdbcType="BIGINT" />
+    <result column="REPLY_CONTENT" property="replyContent" jdbcType="VARCHAR" />
+    <result column="REPLY_TIME" property="replyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REPLY_ID, WEIBO_ID, COMMENT_ID, REPLY_USERID, REPLY_CONTENT, REPLY_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from reply
+    where REPLY_ID = #{replyId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectById" resultMap="BaseResultMap">
+  	select * from reply where WEIBO_ID=#{0} and COMMENT_ID=#{1}
+  </select>
+ 
+  
+  <select id="selectReplyId" resultMap="BaseResultMap">
+  	select REPLY_ID from reply where REPLY_USERID = #{0} order by REPLY_TIME desc limit 0,1
+  </select>
+  
+  <select id="selectReplySum" resultType="int">
+  	select COUNT(*) from reply where WEIBO_ID=#{0} and COMMENT_ID=#{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from reply
+    where REPLY_ID = #{replyId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Reply" >
+    insert into reply (WEIBO_ID, COMMENT_ID, 
+      REPLY_USERID, BEREPLY_ID,REPLY_CONTENT, REPLY_TIME
+      )
+    values (#{weiboId,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, 
+      #{replyUserid,jdbcType=BIGINT},#{bereplyId}, #{replyContent,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jaybill.billblog.pojo.Reply" >
+    insert into reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        REPLY_ID,
+      </if>
+      <if test="weiboId != null" >
+        WEIBO_ID,
+      </if>
+      <if test="commentId != null" >
+        COMMENT_ID,
+      </if>
+      <if test="replyUserid != null" >
+        REPLY_USERID,
+      </if>
+      <if test="replyContent != null" >
+        REPLY_CONTENT,
+      </if>
+      <if test="replyTime != null" >
+        REPLY_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        #{replyId,jdbcType=BIGINT},
+      </if>
+      <if test="weiboId != null" >
+        #{weiboId,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null" >
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="replyUserid != null" >
+        #{replyUserid,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jaybill.billblog.pojo.Reply" >
+    update reply
+    <set >
+      <if test="weiboId != null" >
+        WEIBO_ID = #{weiboId,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null" >
+        COMMENT_ID = #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="replyUserid != null" >
+        REPLY_USERID = #{replyUserid,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        REPLY_TIME = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where REPLY_ID = #{replyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jaybill.billblog.pojo.Reply" >
+    update reply
+    set WEIBO_ID = #{weiboId,jdbcType=BIGINT},
+      COMMENT_ID = #{commentId,jdbcType=BIGINT},
+      REPLY_USERID = #{replyUserid,jdbcType=BIGINT},
+      REPLY_CONTENT = #{replyContent,jdbcType=VARCHAR},
+      REPLY_TIME = #{replyTime,jdbcType=TIMESTAMP}
+    where REPLY_ID = #{replyId,jdbcType=BIGINT}
+  </update>
+</mapper>

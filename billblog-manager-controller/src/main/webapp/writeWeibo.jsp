@@ -9,19 +9,15 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="SHORTCUT ICON" href="/billblog-manager-controller/resource/image/s_blog.ico">
 	<link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
-    <title>多图片上传</title>
+    <title>发微博</title>
 
     <style>
          * {
             margin: 0;
             padding: 0;
         }
-        /*图片上传*/
-        
-        html,
+        /*图片上传*/       
         body {
-            width: 100%;
-            height: 100%;
             background:#f6f6f6;
         }
         
@@ -148,6 +144,25 @@
 			float:right;
 			color:white;
 		}
+		.text-next-div{
+			width: 5rem;
+			margin:0px auto;
+			padding:0px;
+		}
+		#emojiDiv{
+			display:none;
+			width: 5rem;
+			margin:0px auto;
+			padding:0px;
+		}
+		#emojiDiv ul{
+			list-style:none;
+		}
+		#emojiDiv ul li{
+			display:inline-block;
+			padding:3px;
+			height:20px;
+		}
     </style>
 </head>
 
@@ -157,14 +172,26 @@
     	
     	<div class="top">
     		<a href="/billblog-manager-controller/weibocontroller/tomainpage.do">取消</a>
+    		<a href="javascript:void(0)" onclick="showEmoji(this)" style="font-size:13px;">
+				表情
+			</a>
     		<input type="submit" value="发表">
     		<div style="clear:both;"></div>
     	</div>
     	
     	<!-- 写微博 -->
     	<div class="text-div">    		
-    		<textarea name="weiboContent" placeholder="有什么想说的分享给大家吧..."></textarea>
+    		<textarea id="weiboTextarea" name="weiboContent" placeholder="有什么想说的分享给大家吧..."></textarea> 	  
     	</div>
+    	<div class="text-next-div">    		
+    				
+    	</div>
+    	<!-- 表情栏 -->
+		<div id="emojiDiv">
+			<ul>
+			
+			</ul>
+		</div>
         <!--    照片添加    -->
         <div class="z_photo">
             <div class="z_file">
@@ -186,8 +213,8 @@
     </form>
 </body>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
-	<script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
-	
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/main/main.js"></script>
     <script type="text/javascript">
         //px转换为rem
         (function(doc, win) {

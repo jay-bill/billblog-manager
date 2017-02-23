@@ -52,9 +52,16 @@ public class ImageServiceImf implements ImageService {
 		return 0;
 	}
 
+	/**
+	 * 逻辑删除图片
+	 */
 	@Override
 	public int deleteImage(long userId, long imageId) {
-		// TODO Auto-generated method stub
+		Image img = imageMapper.selectByPrimaryKey(imageId);
+		if(img.getUserId()==userId){//如果是照片的主人执行的删除操作
+			int res = imageMapper.deleteImage(imageId);
+			return res;
+		}
 		return 0;
 	}
 
@@ -174,5 +181,14 @@ public class ImageServiceImf implements ImageService {
 	public List<Integer> countAlbumImageGroupSum(long userId,String album){
 		List<Integer> im = imageMapper.countAlbumImageGroupSum(userId, album);
 		return im;
+	}
+
+	/**
+	 * 获取最新六张图片
+	 */
+	@Override
+	public List<Image> selectLastSix(long userId) {
+		List<Image> imgList = imageMapper.selectLastSix(userId);
+		return imgList;
 	}
 }

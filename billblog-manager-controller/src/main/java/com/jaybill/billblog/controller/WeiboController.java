@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jaybill.billblog.exception.CantFindThisIdException;
 import com.jaybill.billblog.exception.ImageFormatException;
+import com.jaybill.billblog.image.CompressImg;
 import com.jaybill.billblog.mapper.LikeitMapper;
 import com.jaybill.billblog.pojo.Comments;
+import com.jaybill.billblog.pojo.Image;
 import com.jaybill.billblog.pojo.Info;
 import com.jaybill.billblog.pojo.Likeit;
 import com.jaybill.billblog.pojo.User;
@@ -34,6 +36,7 @@ import com.jaybill.billblog.pojo.Userinfo;
 import com.jaybill.billblog.pojo.Weibo;
 import com.jaybill.billblog.service.CommentService;
 import com.jaybill.billblog.service.CommonService;
+import com.jaybill.billblog.service.ImageService;
 import com.jaybill.billblog.service.LikeService;
 import com.jaybill.billblog.service.WeiboService;
 
@@ -54,6 +57,8 @@ public class WeiboController {
 	private LikeService likeService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ImageService imageService;
 
 	public WeiboController(){
 		System.out.println("weibo控制器实例化啦！");
@@ -105,9 +110,12 @@ public class WeiboController {
 		User otherUserBaseInfo = commonService.getUserBaseInfo(userId);
 		//详细信息
 		Userinfo userInfo = commonService.getUserInfo(userId);
+		//获取用户最新6张图片
+		List<Image> imgList = imageService.selectLastSix(userId);
 		//共享到页面
 		map.put("user_info", userInfo);
 		map.put("other_user_base_info", otherUserBaseInfo);
+		map.put("img_list", imgList);
 		return "home";
 	}
 	
@@ -165,7 +173,8 @@ public class WeiboController {
 		List<Integer> isLikedList = new ArrayList<Integer>();
 		//存放每条微博的评论总数的list
 		List<Integer> comSumList = new ArrayList<Integer>();
-		
+		//存放每个微博转发数量的list
+		List<Integer> shareList = new ArrayList<Integer>();
 		Iterator<Weibo> it = weiboList.iterator();
 		while(it.hasNext()){
 			Weibo weibo = it.next();
@@ -177,10 +186,13 @@ public class WeiboController {
 						int isLike = likeService.selectIsAlreadyLike(userId, weibo.getWeiboId());
 						//评论数
 						int commentSum = commentService.getCommentSum(weibo.getWeiboId());
+						//转发数
+						int shareCount = commonService.countForwardSum(weibo.getWeiboId());
 						//添加
 						likeSumList.add(sum);
 						isLikedList.add(isLike);
 						comSumList.add(commentSum);
+						shareList.add(shareCount);
 						break;
 				case 1://删除状态
 						break;
@@ -207,10 +219,13 @@ public class WeiboController {
 						int isLike2 = likeService.selectIsAlreadyLike(userId, weibo.getWeiboId());
 						//评论数
 						int commentSum2 = commentService.getCommentSum(weibo.getWeiboId());
+						//转发数
+						int shareCount2 = commonService.countForwardSum(weibo.getWeiboId());
 						//添加
 						likeSumList.add(sum2);
 						isLikedList.add(isLike2);
 						comSumList.add(commentSum2);
+						shareList.add(shareCount2);
 						break;
 				default:break;
 			}
@@ -221,23 +236,27 @@ public class WeiboController {
 		list.add(likeSumList);
 		list.add(isLikedList);
 		list.add(comSumList);
+		list.add(shareList);
 		return list;
 	}
 	/**
-	 * 解析微博
+	 * 解析微博：递归获取最深层的微博，并把转发链内的转发者的名称拼进StringBuilder里面，用@_@隔开
 	 * @param weiboContent
 	 * @return
 	 */
 	private String getOriWeibo(String weiboContent,HttpServletRequest request) {
-		String [] res = StringUtils.split(weiboContent, "@_@");
+		String [] res = StringUtils.splitByWholeSeparator(weiboContent, "@_@");
 		StringBuilder sb = new StringBuilder();
 		if(res.length==2){
 			//根据id获取微博
 			Weibo weibo = weiboService.getOneWeiboById(Long.parseLong(res[1]));
+			//如果获取到的微博为空，说明转发链中一个环节出错（可能转发链中某个用户已经将微博删除），则不再沿着转发链继续获取数据，而是直接返回页面“原微博已删除”
 			if(weibo==null){
 				return "##$$%&$*&##";
 			}
+			//递归获取转发链里的微博
 			String resStr = getOriWeibo(weibo.getWeiboContent(),request);
+			//如果返回值不为null而且不包含##$$%&$*&##
 			if(resStr!=null && resStr.contains("##$$%&$*&##")){
 				return "##$$%&$*&##";
 			}else if(!resStr.contains("@_@")){ 
@@ -250,13 +269,17 @@ public class WeiboController {
 							myId = (long)request.getSession().getAttribute("user_id");
 						}
 					}
+					//是否点赞
 					int isLikeOri = likeService.selectIsAlreadyLike(myId, weibo.getWeiboId());
+					//评论总数
 					int commentSumOri = commentService.getCommentSum(weibo.getWeiboId());
+					//转发总数
+					int shareCount = commonService.countForwardSum(weibo.getWeiboId());
 					sb.insert(0,"@_@"+weibo.getUserHeadimage()+"@_@"+weibo.getUserNickname()+
 							"@_@"+weibo.getWeiboPublishtime()+"@_@"+weibo.getWeiboContent()+
 							"@_@"+weibo.getWeiboImage()+
 							"@_@"+weibo.getUserId()+"@_@"+weibo.getWeiboId()+"@_@"+likeSumOri+
-							"@_@"+isLikeOri+"@_@"+commentSumOri);
+							"@_@"+isLikeOri+"@_@"+commentSumOri+"@_@"+shareCount);
 			}else{
 				sb.insert(0, "@"+weibo.getUserNickname()+":"+
 								weibo.getWeiboContent().split("@_@")[0]+resStr);
@@ -298,7 +321,7 @@ public class WeiboController {
 							weiboContent,(byte)0,imagesPath);
 		}
 		//插入数据库
-		weiboService.broadcastWeibo(weibo);
+		weiboService.insertBroadcastWeibo(weibo);
 		//返回main
 		return "redirect:tomainpage.do";
 	}
@@ -333,18 +356,27 @@ public class WeiboController {
 					suffixStr.equals("fpx")||suffixStr.equals("svg")||suffixStr.equals("cdr")||suffixStr.equals("pcd")||
 					suffixStr.equals("dxf")||suffixStr.equals("ufo")||suffixStr.equals("eps")||suffixStr.equals("ai")||
 					suffixStr.equals("raw")){
-				//根据实际命名图片
-				String prefixStr = "billblog"+new Date().getTime()+""+i;
+				//压缩图片的图片名称，压缩
+				String compressStr = "billblog"+new Date().getTime()+""+i;
+				//实际图片的图片名称,原图
+				String prefixStr =compressStr +"big";
 				//合并名称
+				//原图
 				String imageName = prefixStr+"."+suffixStr;
+				//压缩图
+				String compImageName = compressStr+"."+suffixStr;
 				//全路径，包括文件夹和文件名
 				String imagePathAndName = userImagesFilePath+"\\"+imageName;
 				//指向文件图片
 				File imageFile = new File(imagePathAndName);
-				//赋值
+				//复制原图
 				images[i].transferTo(imageFile);
+				//再把原图进行压缩
+				CompressImg compressImg = new CompressImg();
+				//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
+				compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 				//获取相对路径存入数据库
-				String relativePath = request.getContextPath()+"/userImages/"+imageName;
+				String relativePath = request.getContextPath()+"/userImages/"+compImageName;
 				sb.append(relativePath+"%%");
 			}else{
 				throw new ImageFormatException("必须为图片！");
@@ -390,7 +422,7 @@ public class WeiboController {
 						new Timestamp(new Date().getTime()),userBaseInfo.getUserHeadimage(),
 						weiboContent,(byte)2,null);
 		//插入数据库
-		weiboService.broadcastWeibo(weibo);
+		weiboService.insertBroadcastWeibo(weibo);
 		//为了防止重新提交表单，重新向到首页
 		return "redirect:tomainpage.do";
 	}
@@ -418,13 +450,23 @@ public class WeiboController {
 			Info info = it.next();
 			//获取通知里面的消息
 			String infoContent = info.getInfoContent();
+			//如果是微博
 			//因为他的格式为 id@_@XXXX，即已@_@为分割
 			long oriContentId = Long.parseLong(StringUtils.split(infoContent, "@_@")[0]);
 			//设置Info的内容
 			info.setInfoContent(StringUtils.split(infoContent, "@_@")[1]);
 			//根据oriContentId从数据库获取原始内容
-			if(oriContentId!=0){
+			if(oriContentId!=0){//是微博
 				Weibo weibo = weiboService.getOneWeiboById(oriContentId);
+				if(weibo==null){//如果微博已经被删除
+					//共享到页面
+					map.put("infoList", infoList);
+					map.put("info_weiboList", weiboList);
+					map.put("other_user_base_info", userList);
+					//浏览过这些通知之后，把数据库的通知状态列为已阅读
+					commonService.updateInfoState(userId);
+					continue;
+				}
 				//取出第一张图片
 				if(weibo.getWeiboImage()!=null){
 					weibo.setWeiboImage(StringUtils.split(weibo.getWeiboImage(),"%%")[0]);
@@ -433,7 +475,7 @@ public class WeiboController {
 					weibo.setWeiboContent(StringUtils.split(weibo.getWeiboContent(), "@_@")[0]);
 				}
 				weiboList.add(weibo);
-			}else{
+			}else{//如果是关注
 				weiboList.add(new Weibo());
 			}
 			//根据通知者的id获取通知者的信息
@@ -456,29 +498,6 @@ public class WeiboController {
 	 */
 	@RequestMapping("tooneweibopage.do")
 	public String toOneWeiboPage(@RequestParam("weiboId") long weiboId,Map<String,Object>map){
-//		//根据weibo发id获取微博
-//		Weibo weibo = weiboService.getOneWeiboById(weiboId);
-//		//将图片单独取出来
-//		String imgPath = weibo.getWeiboImage();
-//		String [] images = StringUtils.split(imgPath,"%%");
-//		weibo.setWeiboImage(null);
-//		//评论总数，点赞总数
-//		int likeSum = likeService.getLikeSum(weiboId);
-//		int cmtSum = commentService.getCommentSum(weiboId);
-//		//评论内容
-//		List<Comments> commentList= commentService.getComments(weiboId, 0);
-//		//评论者的基本信息
-//		List<User> userList = new ArrayList<User>();
-//		//获取评论者的头像、昵称
-//		for(int i=0;i<commentList.size();i++){
-//			userList.add(commonService.getUserBaseInfo(commentList.get(i).getCommentReviewerid()));
-//		}
-//		map.put("one_weibo", weibo);
-//		map.put("one_weibo_images", images);
-//		map.put("comment_list",commentList);
-//		map.put("like_sum", likeSum);
-//		map.put("comment_sum", cmtSum);
-//		map.put("other_user_base_info_list", userList);
 		map.put("weibo_id", weiboId);
 		return "one-weibo";
 	}
@@ -497,21 +516,57 @@ public class WeiboController {
 		long userId = (long)request.getSession().getAttribute("user_id");
 		//根据weibo发id获取微博
 		Weibo weibo = weiboService.getOneWeiboById(weiboId);
-		if(weibo.getWeiboContent().contains("@_@")){
-			String str = weibo.getWeiboContent();
-			weibo.setWeiboContent(StringUtils.split(str,"@_@")[0]);
+		if(weibo.getWeiboState()==0){
+			//评论总数，点赞总数
+			int likeSum = likeService.getLikeSum(weiboId);
+			//自己是否点赞
+			int isLike = likeService.selectIsAlreadyLike(userId, weiboId);
+			//评论总数
+			int cmtSum = commentService.getCommentSum(weiboId);
+			//转发总数
+			int shareCount = commonService.countForwardSum(weiboId);
+			//装配成List
+			List<Object> objList = new ArrayList<Object>();
+			objList.add(weibo);
+			objList.add(likeSum);
+			objList.add(isLike);
+			objList.add(cmtSum);
+			objList.add(shareCount);
+			return objList;
+		}else if(weibo.getWeiboState()==2){//转发状态时
+			String weiboAllContent = weibo.getWeiboContent(); 
+			/*
+			 * 解析后的微博内容
+			 */
+			String newContent = getOriWeibo(weiboAllContent,request);
+			//修正新内容
+			String fixNewContent;
+			if(newContent.equals("##$$%&$*&##")){
+				fixNewContent = weiboAllContent.split("@_@")[0]+"<br>原微博已被删除";
+			}else{
+				fixNewContent = weiboAllContent.split("@_@")[0]+newContent;
+			}
+			
+			//赋值给weibo
+			weibo.setWeiboContent(fixNewContent);
+			//评论总数，点赞总数
+			int likeSum = likeService.getLikeSum(weiboId);
+			//自己是否点赞
+			int isLike = likeService.selectIsAlreadyLike(userId, weiboId);
+			//评论总数
+			int cmtSum = commentService.getCommentSum(weiboId);
+			//转发总数
+			int shareCount = commonService.countForwardSum(weiboId);
+			//装配成List
+			List<Object> objList = new ArrayList<Object>();
+			objList.add(weibo);
+			objList.add(likeSum);
+			objList.add(isLike);
+			objList.add(cmtSum);
+			objList.add(shareCount);
+			return objList;
 		}
-		//评论总数，点赞总数
-		int likeSum = likeService.getLikeSum(weiboId);
-		//自己是否点赞
-		int isLike = likeService.selectIsAlreadyLike(userId, weiboId);
-		int cmtSum = commentService.getCommentSum(weiboId);
-		//装配成List
-		List<Object> objList = new ArrayList<Object>();
-		objList.add(weibo);
-		objList.add(likeSum);
-		objList.add(isLike);
-		objList.add(cmtSum);
-		return objList;
+		return null;
+		
 	}
 }

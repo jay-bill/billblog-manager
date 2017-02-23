@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jaybill.billblog.mapper.AttentionMapper;
+import com.jaybill.billblog.mapper.InfoMapper;
 import com.jaybill.billblog.pojo.Attention;
 import com.jaybill.billblog.pojo.AttentionKey;
+import com.jaybill.billblog.pojo.Info;
 import com.jaybill.billblog.pojo.User;
 import com.jaybill.billblog.pojo.Userinfo;
 import com.jaybill.billblog.service.AttentionService;
@@ -23,7 +25,8 @@ public class AttentionServiceImf implements AttentionService {
 
 	@Autowired
 	private AttentionMapper attMapper;
-	
+	@Autowired
+	private InfoMapper infoMapper;
 	/**
 	 * 关注
 	 */
@@ -32,6 +35,14 @@ public class AttentionServiceImf implements AttentionService {
 		//装配bean
 		Attention attention = new Attention(noticerId,beNoticedId,new Timestamp(new Date().getTime()));
 		int result = attMapper.insert(attention);//插入数据库
+		//通知
+		Info info = new Info();
+		info.setBeinfoId(beNoticedId);
+		info.setInfoId(noticerId);
+		info.setInfoState((byte)0);
+		info.setInfoTime(new Timestamp(new Date().getTime()));
+		info.setInfoContent("0@_@关注了你！");
+		infoMapper.insert(info);
 		return result;//结果为0，失败，为1成功
 	}
 

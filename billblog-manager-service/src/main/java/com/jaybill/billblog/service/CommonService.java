@@ -48,24 +48,31 @@ public interface CommonService {
 	 */
 	 List<Integer> getDefaultImageGroupSum(long userId);
 	 
-	 /**
-		 * 获取未读的通知数目
-		 * @param beinfoId
-		 * @return
-		 */
-		public int selectSumNoRead(long beinfoId);
-		
-		/**
-		 * 通过被通知者的id获取通知的信息
-		 * @param beinfoId
-		 * @return
-		 */
-		public List<Info> selectByBeinfoId(long beinfoId);
-		
-		/**
-		 * 已读后，将通知状态改为1
-		 * @param beinfoId
-		 * @return
-		 */
-		public int updateInfoState(long beinfoId);
+	/**
+	 * 获取未读的通知数目
+	 * @param beinfoId
+	 * @return
+	 */
+	public int selectSumNoRead(long beinfoId);
+	
+	/**
+	 * 通过被通知者的id获取通知的信息
+	 * @param beinfoId
+	 * @return
+	 */
+	public List<Info> selectByBeinfoId(long beinfoId);
+	
+	/**
+	 * 已读后，将通知状态改为1
+	 * @param beinfoId
+	 * @return
+	 */
+	public int updateInfoState(long beinfoId);
+	
+	/**
+	 * 计算微博被转发的次数
+	 * @param weiboId
+	 * @return
+	 */
+	public int countForwardSum(long weiboId);
 }

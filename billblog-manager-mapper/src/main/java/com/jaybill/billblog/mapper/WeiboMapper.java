@@ -1,5 +1,6 @@
 package com.jaybill.billblog.mapper;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.jaybill.billblog.pojo.Weibo;
@@ -58,4 +59,12 @@ public interface WeiboMapper {
 	 * @return
 	 */
 	List<Weibo> selectContainImages();
+	
+	/**
+	 * 根据微博的作者和事件，选出weiboId
+	 * @param userId
+	 * @param t
+	 * @return
+	 */
+	Weibo selectWeiboIdByTimeAndUserid(long userId,String t);
 }

@@ -9,6 +9,8 @@
 <link rel="SHORTCUT ICON" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="BOOKMARK" href="/billblog-manager-controller/resource/image/s_blog.ico">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/lunbo.css">
+
 <link rel="stylesheet" href="/billblog-manager-controller/resource/plug-res/css/common.css">
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/common.css"></link>
 <link rel="stylesheet" href="/billblog-manager-controller/resource/css/common/main-common.css">
@@ -40,6 +42,7 @@
 				</div>
 			</form>
 			<!-- 右边的菜单,中等屏幕时显示 -->
+			<!-- 右边的菜单,中等屏幕时显示 -->
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="container-fluid">
 					<div class="col-md-2 nav-right">
@@ -48,27 +51,30 @@
 	               		</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-facetime-video"></span>&nbsp;视频
+						<a href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-home"></span>&nbsp;主页
 	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-eye-open"></span>&nbsp;发现
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${user_id}" class="dropdown-toggle">
+				          <span class="	glyphicon glyphicon-camera"></span>&nbsp;相册
 	                	</a>
-					</div>
-					<div class="col-md-2 nav-right">
-						<a href="#" class="dropdown-toggle">
-				          <span class="	glyphicon glyphicon-gift"></span>&nbsp;游戏
-	                	</a>
-					</div>
+					</div>					
 					<div class="col-md-2 nav-right spe-nav-right">
 						<span>
 							<a id="mynicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_id}"
 							 class="dropdown-toggle">
 							 ${user_base_info.userNickname}
 							</a>
-						</span>
+						</span>					
+					</div>
+					<div class="col-md-2 nav-right">
+						<a href="/billblog-manager-controller/weibocontroller/toreadinfo.do" class="dropdown-toggle">
+				          @我
+						  <c:if test="${no_read_sum > 0}">
+				          	<span style="font-weight:bold;color:red;font-family:'微软雅黑'">${no_read_sum}</span>
+				          </c:if>
+	                	</a>
 					</div>
 					<div class="col-md-2 nav-right">
 						<a href="/billblog-manager-controller/logincontroller/loginout" class="dropdown-toggle">注销</a>
@@ -330,27 +336,32 @@
 					</div>
 					<div class="row">
 						<!-- 放一张大图 -->
-						<div class="col-xs-8"><img src="/billblog-manager-controller/resource/test/20140622214745_tNe8v.thumb.700_0.jpeg"></div>
+						<div class="col-xs-8"><img src="${img_list[0].imagePath}"class='weiboImage'  onclick="showBigImageCanScroll(this)"></div>
 						<!-- 放小图 -->
 						<div class="col-xs-4">
-							<img src="/billblog-manager-controller/resource/test/318768-15032013295555.jpg"></img>
-							<img src="/billblog-manager-controller/resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
+							<img src="${img_list[1].imagePath}" class='weiboImage' onclick="showBigImageCanScroll(this)"></img>
+							<img src="${img_list[2].imagePath}" class='weiboImage' onclick="showBigImageCanScroll(this)"></img>
 						</div>
 						<!-- 放小图 -->
 						<div class="col-xs-12" style="font-size:0px;">
-							<img src="/billblog-manager-controller/resource/test/318768-15032013295555.jpg"></img>
-							<img src="/billblog-manager-controller/resource/test/aec379310a55b3196238c7f441a98226cefc1769.jpg"></img>
-							<img alt="" src="/billblog-manager-controller/resource/test/90.jpg">
-						</div>
+							<img src="${img_list[3].imagePath}" class='weiboImage'  onclick="showBigImageCanScroll(this)"></img>
+							<img src="${img_list[4].imagePath}" class='weiboImage'  onclick="showBigImageCanScroll(this)"></img>
+							<img src="${img_list[5].imagePath}" class='weiboImage'  onclick="showBigImageCanScroll(this)">
+						</div>						
+					</div>
+					<!-- 查看大图 -->
+					<div style="text-align:center;">
+						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${other_user_base_info.userId }">查看更多</a>
 					</div>
 				</div>
 			</div>
 			
 			<!-- 主体内容 -->
-			<div class="col-md-7 col-sm-7" id="main-div">
+			<div class="col-md-7 col-sm-7" id="center-div">
 				<!-- 微博正文部分 -->
 				<div id="content-outer">
 					<!-- 待填充 -->
+					<input type="hidden" id="hidden-user-headimg" value="${user_base_info.userHeadimage}"/>
 				</div>		
 			</div>
 		</div>
@@ -378,10 +389,18 @@
 </body>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/jquery.min.js" ></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/commonUse.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/image.js"></script>
+
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/like/like-weibo.js"></script>
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/comments/comments-ajax.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/js/common/main-home.js"></script>
+
 <script type="text/javascript" src="/billblog-manager-controller/resource/js/home/home-ajax.js"></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.event.drag.js" ></script>
+<script type="text/javascript" src="/billblog-manager-controller/resource/plug-res/js/jquery.touchSlider.js" ></script>
+
 <script type="text/javascript">
 	$("#searchImg").click(function(){
 		$("#searchForm").submit();

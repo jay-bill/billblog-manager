@@ -32,7 +32,7 @@
   </insert>
   <!--根据被通知者用户id， 判断是否有或有几条未读消息 -->
   <select id="selectSumNoRead" parameterType="long" resultType="int">
-  	select COUNT(*) from info where INFO_STATE = 0 and BEINFO_ID=#{beinfoId} order by INFO_TIME desc
+  	select COUNT(*) from info where INFO_STATE = 0 and BEINFO_ID=#{beinfoId} order by INFO_TIME desc limit 0,10
   </select>
   <!-- 通过被通知者的id获取通知的信息 -->
   <select id="selectByBeinfoId" parameterType="long" resultMap="BaseResultMap">
