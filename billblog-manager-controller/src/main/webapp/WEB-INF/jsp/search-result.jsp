@@ -142,7 +142,7 @@
 		</div>
 		<!-- 第二行 -->
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+			<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 tmp">
 				<div class="col-md-8 col-sm-9 person-id">
 					<div id="head-div">
 						<a id="nicknameA" href="/billblog-manager-controller/weibocontroller/tohomepage.do?userId=${user_base_info_bysearch.userId}">
@@ -214,6 +214,23 @@
 <script type="text/javascript">
 	$("#searchImg").click(function(){
 		$("#searchForm").submit();
+	});
+
+	var val = "${keyword}";
+	$.ajax({
+		url:"http://localhost:8080/billblog-solr/search/queryOnCondition",
+		data:{keyword:encodeURI(val)},
+		type:"get",
+		dataType:"json",
+		error:function(){
+			alert("失败了");
+		},
+		success:function(data){
+			for(var i=0;i<data.length;i++){
+				$(".tmp").append("<div class='col-md-8 col-sm-9' style='background:white;padding:10px;margin-top:10px;border-radius:5px;'>"+data[i].weiboContent+"</div>");
+			}
+		},
+		
 	});
 </script>
 </html>

@@ -136,4 +136,7 @@
 		}
 	 	updateWeiboContent(0);	//获取数据
 	 	isNoticed();//判断是否关注;
-	    setInterval(calTextWidth,80);//强制运行这个函数
+	    var c = setInterval(calTextWidth,80);//强制运行这个函数
+	    setTimeout(function(){
+	    	clearInterval(c);
+	    },2000);

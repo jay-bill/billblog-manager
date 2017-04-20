@@ -95,15 +95,53 @@ public class WeiboController {
 	}
 	
 	/**
+	 * 获取ip地址
+	 * @param request
+	 * @return
+	 */
+	private String getIp(HttpServletRequest request){
+        String ip = request.getHeader("x-forwarded-for");  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_CLIENT_IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }  
+        return ip;  
+	}
+	/**
 	 * 根据用户传进来的id，获取相关信息
 	 * @param request
 	 * @param userId
 	 * @return
 	 */
 	@RequestMapping(value="tohomepage.do")
-	public String toHomePage(@RequestParam(value="userId",required=true) long userId,Map<String,Object> map){
-		if(userId==0)
-			throw new CantFindThisIdException("鏃犳硶鎵撳紑鐢ㄦ埛涓婚〉");
+	public String toHomePage(@RequestParam(value="userId",required=true) long userId,Map<String,Object> map,
+			HttpServletRequest request){
+		//为了防止在url中胡乱拼接用户id，先判断该id是否存在
+		User tmpUser = commonService.getUserBaseInfo(userId);
+		if(userId<=0||tmpUser==null)
+			throw new CantFindThisIdException("此用户不存在！");
+		//记录请求者的ip地址，访问时间等等
+		//先判断session中是否有用户id
+		Object obj = request.getSession().getAttribute("user_id");
+		//分别调用重载方法，一个是不传入visitorid，另一个传入
+		String visitorIp = getIp(request);
+		if(obj==null){			
+			weiboService.insertVisitor(visitorIp, userId);
+		}else{
+			long visitorId = (long)obj;
+			weiboService.insertVisitor(visitorId, userId,visitorIp);
+		}
 		//获取一些信息
 		getSomeInfo(map,userId);
 		//基本信息
@@ -112,10 +150,13 @@ public class WeiboController {
 		Userinfo userInfo = commonService.getUserInfo(userId);
 		//获取用户最新6张图片
 		List<Image> imgList = imageService.selectLastSix(userId);
+		//获取本页面访问总量
+		long visits = weiboService.getVisits(userId);
 		//共享到页面
 		map.put("user_info", userInfo);
 		map.put("other_user_base_info", otherUserBaseInfo);
 		map.put("img_list", imgList);
+		map.put("visits", visits);
 		return "home";
 	}
 	
@@ -366,7 +407,7 @@ public class WeiboController {
 				//压缩图
 				String compImageName = compressStr+"."+suffixStr;
 				//全路径，包括文件夹和文件名
-				String imagePathAndName = userImagesFilePath+"\\"+imageName;
+				String imagePathAndName = userImagesFilePath+File.separator+imageName;
 				//指向文件图片
 				File imageFile = new File(imagePathAndName);
 				//复制原图
@@ -376,7 +417,7 @@ public class WeiboController {
 				//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
 				compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 				//获取相对路径存入数据库
-				String relativePath = request.getContextPath()+"/userImages/"+compImageName;
+				String relativePath = request.getContextPath()+File.separator+"userImages"+File.separator+compImageName;
 				sb.append(relativePath+"%%");
 			}else{
 				throw new ImageFormatException("必须为图片！");
@@ -452,9 +493,9 @@ public class WeiboController {
 			String infoContent = info.getInfoContent();
 			//如果是微博
 			//因为他的格式为 id@_@XXXX，即已@_@为分割
-			long oriContentId = Long.parseLong(StringUtils.split(infoContent, "@_@")[0]);
+			long oriContentId = Long.parseLong(StringUtils.splitByWholeSeparator(infoContent, "@_@")[0]);
 			//设置Info的内容
-			info.setInfoContent(StringUtils.split(infoContent, "@_@")[1]);
+			info.setInfoContent(StringUtils.splitByWholeSeparator(infoContent, "@_@")[1]);
 			//根据oriContentId从数据库获取原始内容
 			if(oriContentId!=0){//是微博
 				Weibo weibo = weiboService.getOneWeiboById(oriContentId);

@@ -1,5 +1,7 @@
 package com.jaybill.billblog.serviceimf;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

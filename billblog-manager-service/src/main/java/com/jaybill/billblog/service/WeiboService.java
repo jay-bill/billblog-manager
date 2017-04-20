@@ -40,4 +40,26 @@ public interface WeiboService {
 	 * @return
 	 */
 	Weibo getOneWeiboById(long oriWeiboId);
+	
+	/**
+	 * 插入访问者，新增访问量
+	 * @param visitorId
+	 * @param userId
+	 */
+	void insertVisitor(String visitoIp,long userId);
+	
+	/**
+	 * 插入访问者，新增访问量
+	 * @param visitorId
+	 * @param userId
+	 * @param visitoIp
+	 */
+	void insertVisitor(long visitorId,long userId,String visitoIp);
+	
+	/**
+	 * 获取页面访问量
+	 * @param userId
+	 * @return
+	 */
+	long getVisits(long userId);
 }

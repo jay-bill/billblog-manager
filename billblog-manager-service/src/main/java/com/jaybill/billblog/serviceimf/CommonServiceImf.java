@@ -3,8 +3,10 @@ package com.jaybill.billblog.serviceimf;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.jaybill.billblog.mapper.AttentionMapper;
 import com.jaybill.billblog.mapper.ImageMapper;
 import com.jaybill.billblog.mapper.InfoMapper;
@@ -35,6 +37,8 @@ public class CommonServiceImf implements CommonService {
 	private InfoMapper infoReadMapper;
 	@Autowired
 	private SharecountMapper shareMapper;
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 	/**
 	 *选出用户的账户基本信息
 	 */
@@ -50,7 +54,13 @@ public class CommonServiceImf implements CommonService {
 	 */
 	@Override
 	public User getUserBaseInfo(long userId) {
+//		Object val = redisTemplate.opsForHash().get("userbase"+userId, "userbase"+userId);
+//		if(val!=null){
+//			return new Gson().fromJson(""+val, User.class);
+//		}
 		User userBeSelected = userMapper.selectByPrimaryKey(userId);
+		//存入redis
+//		redisTemplate.opsForHash().put("userbase"+userId, "userbase"+userId, new Gson().toJson(userBeSelected));
 		return userBeSelected;
 	}
 	
@@ -59,16 +69,29 @@ public class CommonServiceImf implements CommonService {
 	 */
 	@Override
 	public Userinfo getUserInfo(long userId) {
+		Object val = redisTemplate.opsForHash().get("userinfo"+userId, "userinfo"+userId);
+		if(val!=null){
+			return new Gson().fromJson(""+val, Userinfo.class);
+		}
 		Userinfo userInfo = infoMapper.selectByPrimaryKey(userId);
+		//存入redis
+		redisTemplate.opsForHash().put("userinfo"+userId, "userinfo"+userId, new Gson().toJson(userInfo));
 		return userInfo;
 	}
 
 	/**
 	 * 计算粉丝的数目.传入用户的id，查看他的粉丝数
+	 * 先去redis中查找，如果值不存在，再到mysql中搜寻
 	 */
 	@Override
 	public int getFansSum(long userId) {
+		Object val= redisTemplate.opsForHash().get("fansSum"+userId, "fansSum"+userId);
+		if(val!=null){
+			return Integer.valueOf(val.toString());
+		}		
 		int sum = attentionMapper.selectFansSum(userId);
+		//存到redis中
+		redisTemplate.opsForHash().put("fansSum"+userId, "fansSum"+userId, sum+"");
 		return sum;
 	}
 
@@ -77,7 +100,13 @@ public class CommonServiceImf implements CommonService {
 	 */
 	@Override
 	public int getBeNoticeSum(long userId) {
+		Object val = redisTemplate.opsForHash().get("notiSum"+userId, "notiSum"+userId);
+		if(val!=null){
+			return Integer.valueOf(val.toString());
+		}
 		int sum = attentionMapper.selectBenoticedSum(userId);
+		//存到redis中
+		redisTemplate.opsForHash().put("notiSum"+userId, "notiSum"+userId, sum+"");
 		return sum;
 	}
 
@@ -86,7 +115,13 @@ public class CommonServiceImf implements CommonService {
 	 */
 	@Override
 	public int getWeiboSum(long userId) {
+		Object val = redisTemplate.opsForHash().get("wbSum"+userId, "wbSum"+userId);
+		if(val!=null){
+			return Integer.valueOf(val.toString());
+		}
 		int sum = weiboMapper.selectWeiboSum(userId);
+		//存到redis中
+		redisTemplate.opsForHash().put("wbSum"+userId, "wbSum"+userId, sum+"");
 		return sum;
 	}
 
@@ -99,6 +134,9 @@ public class CommonServiceImf implements CommonService {
 		userMapper.updateByPrimaryKeySelective(user);
 		//更新weibo表中的用户昵称
 		weiboMapper.updateNicknameCauseBySaveUpateInfo(user.getUserId(),user.getUserNickname());
+		//更新redis缓存
+		//存入redis
+		redisTemplate.opsForHash().put("userinfo"+user.getUserId(), "userinfo"+user.getUserId(), new Gson().toJson(userInfo));		
 	}
 
 	/**

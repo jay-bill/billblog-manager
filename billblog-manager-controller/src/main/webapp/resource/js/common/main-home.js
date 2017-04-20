@@ -439,6 +439,7 @@
 			 var counter1 = setInterval(calTextWidth,80);//强制运行这个函数
 		     setTimeout(function(){
 		    	clearInterval(counter1);//2s后停止运行
+		    	console.info("2S后停止运行？");
 		     },2000);
 		     //图片特效
 		     imageCss();
@@ -642,9 +643,9 @@
 			 });
 			 
 			 //css定位
-			 var counter1 = setInterval(calTextWidth,100);//强制运行这个函数
+			 var counte = setInterval(calTextWidth,100);//强制运行这个函数
 		     setTimeout(function(){
-		    	clearInterval(counter1);//2s后停止运行
+		    	clearInterval(counte);//2s后停止运行
 		     },2000);
 		     //图片特效
 		     imageCss();

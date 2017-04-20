@@ -44,28 +44,26 @@ public class SearchController {
 		String userNicknameEncode = new String(userNickname.getBytes("ISO-8859-1"),"utf-8");
 		//获取基本信息
 		User userBySearch = searchService.selectUserByNickname(userNicknameEncode);		
-		if(userBySearch==null){
-			throw new UserCantFound("该用户不存在，请确认您的关键词");
+		if(userBySearch!=null){
+			//如果能获取到信息		
+			long userId = userBySearch.getUserId();
+			//获取详细信息
+			Userinfo userInfo = commonService.getUserInfo(userId);
+			//计算粉丝数
+			int userFansSum = commonService.getFansSum(userId);
+			//计算关注数
+			int userNoticedSum = commonService.getBeNoticeSum(userId);
+			//计算微博总数
+			int weiboSum = commonService.getWeiboSum(userId);
+			//共享到页面
+			map.put("user_base_info_bysearch", userBySearch);
+			map.put("user_fans_sum", userFansSum);
+			map.put("user_noticed_sum", userNoticedSum);
+			map.put("weibo_sum", weiboSum);
+			map.put("user_info", userInfo);
 		}
-		//如果能获取到信息		
-		long userId = userBySearch.getUserId();
-		//获取详细信息
-		Userinfo userInfo = commonService.getUserInfo(userId);
-		//计算粉丝数
-		int userFansSum = commonService.getFansSum(userId);
-		//计算关注数
-		int userNoticedSum = commonService.getBeNoticeSum(userId);
-		//计算微博总数
-		int weiboSum = commonService.getWeiboSum(userId);
-		//共享到页面
-		map.put("user_base_info_bysearch", userBySearch);
-		map.put("user_fans_sum", userFansSum);
-		map.put("user_noticed_sum", userNoticedSum);
-		map.put("weibo_sum", weiboSum);
-		map.put("user_info", userInfo);
+		map.put("keyword", userNicknameEncode);
 		//返回查询结果页面
 		return "search-result";	
 	}
-	
-	
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jaybill.billblog.mapper.VisitsMapper" >
+  <resultMap id="BaseResultMap" type="com.jaybill.billblog.pojo.Visits" >
+    <id column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="TIMES" property="times" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, TIMES
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    TIMES
+    from visits
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="com.jaybill.billblog.pojo.Visits" >
+    insert into visits (USER_ID, TIMES)
+    values (#{userId,jdbcType=BIGINT}, #{times,jdbcType=INTEGER})
+  </insert>
+ 
+  <update id="updateByPrimaryKey" parameterType="long" >
+    update visits
+    set TIMES = TIMES+1
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -7,16 +7,21 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.jaybill.billblog.mapper.ImageMapper;
 import com.jaybill.billblog.mapper.InfoMapper;
 import com.jaybill.billblog.mapper.LikeitMapper;
 import com.jaybill.billblog.mapper.SharecountMapper;
+import com.jaybill.billblog.mapper.VisitorMapper;
+import com.jaybill.billblog.mapper.VisitsMapper;
 import com.jaybill.billblog.mapper.WeiboMapper;
 import com.jaybill.billblog.pojo.Image;
 import com.jaybill.billblog.pojo.Info;
 import com.jaybill.billblog.pojo.Sharecount;
+import com.jaybill.billblog.pojo.Visitor;
+import com.jaybill.billblog.pojo.Visits;
 import com.jaybill.billblog.pojo.Weibo;
 import com.jaybill.billblog.service.WeiboService;
 import com.jaybill.billblog.time.TimeUtils;
@@ -32,6 +37,12 @@ public class WeiboServiceImf implements WeiboService {
 	private InfoMapper infoMapper;
 	@Autowired
 	private SharecountMapper shareMapper;
+	@Autowired
+	private VisitorMapper vorMapper;
+	@Autowired
+	private VisitsMapper vMapper;
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 	/**
 	 * 每次最多选出20条
 	 */
@@ -160,5 +171,71 @@ public class WeiboServiceImf implements WeiboService {
 	public Weibo getOneWeiboById(long oriWeiboId) {
 		Weibo weibo = weiboMapper.selectByPrimaryKey(oriWeiboId);
 		return weibo;
+	}
+	@Override
+	public void insertVisitor(String visitoIp, long userId) {
+		Visitor visitor = new Visitor();
+		visitor.setUserId(userId);
+		visitor.setVisitorIp(visitoIp);
+		visitor.setVisitTime(new Timestamp(new Date().getTime()));
+		vorMapper.insertSelective(visitor);
+		//访问数量存入redis
+		//先获取访问量
+		Object obj = redisTemplate.opsForHash().get("visits"+userId, "visits"+userId);
+		if(obj!=null){
+			int value = Integer.valueOf(obj.toString())+1;
+			//访问量+1
+			redisTemplate.opsForHash().put("visits"+userId, "visits"+userId, ""+value);
+			return;//如果存在redis中了，直接返回
+		}else{//如果redis没存有，,先从mysql获取值，再存入
+			long v = getVisits(userId)+1;
+			redisTemplate.opsForHash().put("visits"+userId, "visits"+userId, ""+v);
+		}
+		Visits vs = vMapper.selectByPrimaryKey(userId);
+		if(vs==null){
+			vMapper.insert(new Visits(userId,0));
+		}else{
+			vMapper.updateByPrimaryKey(userId);
+		}
+	}
+	@Override
+	public void insertVisitor(long visitorId, long userId, String visitoIp) {
+		Visitor visitor = new Visitor();
+		visitor.setUserId(userId);
+		visitor.setVisitorIp(visitoIp);
+		visitor.setVisitTime(new Timestamp(new Date().getTime()));
+		visitor.setVisitorId(visitorId);
+		vorMapper.insertSelective(visitor);
+		Visits vs = vMapper.selectByPrimaryKey(userId);
+		//访问数量存入redis
+		//先获取访问量
+		Object obj = redisTemplate.opsForHash().get("visits"+userId, "visits"+userId);
+		if(obj!=null){
+			int value = Integer.valueOf(obj.toString())+1;
+			//访问量+1
+			redisTemplate.opsForHash().put("visits"+userId, "visits"+userId, ""+value);
+			return;//如果存在redis中了，直接返回
+		}else{//如果redis没存有，,先从mysql获取值，再存入
+			long v = getVisits(userId)+1;
+			redisTemplate.opsForHash().put("visits"+userId, "visits"+userId, ""+v);
+		}
+		if(vs==null){
+			vMapper.insert(new Visits(userId,0));
+		}else{
+			vMapper.updateByPrimaryKey(userId);
+		}
+	}
+	
+	@Override
+	public long getVisits(long userId) {
+		//获取访问量
+		Object obj = redisTemplate.opsForHash().get("visits"+userId, "visits"+userId);
+		if(obj!=null){
+			return Long.parseLong(obj.toString());
+		}
+		Visits vs = vMapper.selectByPrimaryKey(userId);
+		if(vs!=null)
+			return vs.getTimes();
+		return 0;
 	}
 }

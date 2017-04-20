@@ -104,7 +104,7 @@ public class ImageController {
 		//压缩图
 		String compImageName = compressStr+"."+suffixStr;
 		//全路径，包括文件夹和文件名
-		String imagePathAndName = userImagesFilePath+"\\"+imageName;
+		String imagePathAndName = userImagesFilePath+File.separator+imageName;
 		//指向文件图片
 		File imageFile = new File(imagePathAndName);
 		//复制图片，保存了原图
@@ -114,7 +114,7 @@ public class ImageController {
 		//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
 		compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 		//获取相对路径存入数据库
-		String relativePath = request.getContextPath()+"/userImages/"+compImageName;
+		String relativePath = request.getContextPath()+File.separator+"userImages"+File.separator+compImageName;
 		return relativePath;
 	}
 	
@@ -262,7 +262,7 @@ public class ImageController {
 				//压缩图
 				String compImageName = compressStr+"."+suffixStr;
 				//全路径，包括文件夹和文件名
-				String imagePathAndName = userImagesFilePath+"\\"+imageName;
+				String imagePathAndName = userImagesFilePath+File.separator+imageName;
 				//指向文件图片
 				File imageFile = new File(imagePathAndName);
 				//复制原图
@@ -272,7 +272,7 @@ public class ImageController {
 				//参数依次为：原图所在目录，压缩图所在目录，原图名称，压缩图名称，压缩图宽，压缩图高，是否按比例压缩
 				compressImg.compressPic(userImagesFilePath, userImagesFilePath, imageName, compImageName, 200, 200, false);
 				//获取相对路径存入数据库
-				String relativePath = request.getContextPath()+"/userImages/"+compImageName;
+				String relativePath = request.getContextPath()+File.separator+"userImages"+File.separator+compImageName;
 				//构建Image对象
 				Image image = new Image();
 				image.setImageAlbum(imageAlbum);

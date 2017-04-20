@@ -354,6 +354,14 @@
 						<a href="/billblog-manager-controller/imagecontroller/tophotopage.do?userId=${other_user_base_info.userId }">查看更多</a>
 					</div>
 				</div>
+				
+				<!-- 浏览次数 -->
+				<div style="border-radius:4px;margin-top:20px;padding:10px;background:#fff;">
+					<h5>访问量</h5>
+					<p style="border-top:1px #888 solid">
+						${visits}次
+					</p>
+				</div>
 			</div>
 			
 			<!-- 主体内容 -->

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.jaybill.billblog.mapper.AttentionMapper;
@@ -27,6 +28,8 @@ public class AttentionServiceImf implements AttentionService {
 	private AttentionMapper attMapper;
 	@Autowired
 	private InfoMapper infoMapper;
+	@Autowired
+	private StringRedisTemplate redisTemplate;
 	/**
 	 * 关注
 	 */
@@ -35,6 +38,22 @@ public class AttentionServiceImf implements AttentionService {
 		//装配bean
 		Attention attention = new Attention(noticerId,beNoticedId,new Timestamp(new Date().getTime()));
 		int result = attMapper.insert(attention);//插入数据库
+		//更新redis缓存的值,关注的人数多了一个，粉丝的人数也多了一个
+		//先获取关注的人数
+		Object obj = redisTemplate.opsForHash().get("notiSum"+noticerId, "notiSum"+noticerId);
+		if(obj!=null){
+			int value = Integer.valueOf(obj.toString())+1;
+			//关注的人数加一
+			redisTemplate.opsForHash().put("notiSum"+noticerId, "notiSum"+noticerId, ""+value);
+		}
+		//再获取被关注者
+		Object obj2 = redisTemplate.opsForHash().get("notiSum"+noticerId, "notiSum"+noticerId);
+		if(obj2!=null){
+			int value = Integer.valueOf(obj2.toString())+1;
+			//粉丝的人数加一
+			redisTemplate.opsForHash().put("fansSum"+beNoticedId, "fansSum"+beNoticedId, ""+value);
+		}
+		
 		//通知
 		Info info = new Info();
 		info.setBeinfoId(beNoticedId);
@@ -55,6 +74,21 @@ public class AttentionServiceImf implements AttentionService {
 		AttentionKey key = new AttentionKey(noticerId,beNoticedId);
 		//从数据库中删除
 		int res = attMapper.deleteByPrimaryKey(key);
+		//更新redis缓存的值,关注的人数多了一个，粉丝的人数也多了一个
+		//先获取关注的人数
+		Object obj = redisTemplate.opsForHash().get("notiSum"+noticerId, "notiSum"+noticerId);
+		if(obj!=null){
+			int value = Integer.valueOf(obj.toString())-1;
+			//关注的人数加一
+			redisTemplate.opsForHash().put("notiSum"+noticerId, "notiSum"+noticerId, ""+value);
+		}
+		//再获取被关注者
+		Object obj2 = redisTemplate.opsForHash().get("notiSum"+noticerId, "notiSum"+noticerId);
+		if(obj2!=null){
+			int value = Integer.valueOf(obj2.toString())-1;
+			//粉丝的人数加一
+			redisTemplate.opsForHash().put("fansSum"+beNoticedId, "fansSum"+beNoticedId, ""+value);
+		}
 		if(res==0)
 			return 0;
 		return 1;
